@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -4493,7 +4494,7 @@ For the ad scene, if context is provided, use it. Make both prompts production-r
   const mediaType=imgpData.split(';')[0].split(':')[1];
 
   try{
-    const res=await fetch('https://YOUR_WORKER.workers.dev',{
+    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',max_tokens:1400,
@@ -4633,7 +4634,7 @@ async function submitAssignment(day){
   fbt.innerHTML=`<div style="display:flex;align-items:center;gap:10px;"><div class="loading-dots"><span></span><span></span><span></span></div><span style="color:var(--muted);font-size:13px;">AI instructor is reviewing your work...</span></div>`;
   const lesson=LESSONS[day];
   try{
-    const res=await fetch('https://YOUR_WORKER.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:lesson.assignment.systemPrompt,messages:[{role:'user',content:`Student submission for "${lesson.assignment.title}":\n\n${submission}`}]})});
+    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:lesson.assignment.systemPrompt,messages:[{role:'user',content:`Student submission for "${lesson.assignment.title}":\n\n${submission}`}]})});
     const data=await res.json();
     const text=data.content?.[0]?.text||'Great work! Keep going.';
     fbt.innerHTML=text.replace(/\n/g,'<br>');
@@ -4691,7 +4692,7 @@ async function submitImgFeedback(day){
   const mediaType=data.split(';')[0].split(':')[1];
   const lesson=LESSONS[day];
   try{
-    const res=await fetch('https://YOUR_WORKER.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:`You are a professional AI design instructor and creative director reviewing a student's AI-generated image. They are on Day ${day}: "${lesson.title}". Focus your visual feedback on: ${imgMode}. Structure your response: (1) What works well — be specific about visual elements, (2) Top 2-3 improvements — exact prompt changes to make, (3) One advanced technique to try next. Be encouraging but precise. Use design terminology. Max 230 words.`,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mediaType,data:base64}},{type:'text',text:`Please review this AI-generated image for my Day ${day} work.${note?' My specific question: '+note:''} Focus on: ${imgMode}`}]}]})});
+    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:`You are a professional AI design instructor and creative director reviewing a student's AI-generated image. They are on Day ${day}: "${lesson.title}". Focus your visual feedback on: ${imgMode}. Structure your response: (1) What works well — be specific about visual elements, (2) Top 2-3 improvements — exact prompt changes to make, (3) One advanced technique to try next. Be encouraging but precise. Use design terminology. Max 230 words.`,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mediaType,data:base64}},{type:'text',text:`Please review this AI-generated image for my Day ${day} work.${note?' My specific question: '+note:''} Focus on: ${imgMode}`}]}]})});
     const d=await res.json();
     const text=d.content?.[0]?.text||'Great image! Keep experimenting.';
     fbt.innerHTML=text.replace(/\n/g,'<br>');
