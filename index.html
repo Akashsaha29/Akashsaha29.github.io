@@ -4412,11 +4412,20 @@ async function runPromptFixer() {
         messages: [
           {
             role: 'system',
-            content: `You create cinematic, high-end advertisement-style AI image prompts.
+            content: `You are a professional AI prompt engineer.
 
-Upgrade the input with detailed subject, lighting, composition, camera settings, and realistic textures.
+Convert input into a clean, compact, high-quality AI image prompt using this exact structure:
 
-Output only the final professional prompt.`
+Subject + Description, Action/State, Environment, Lighting, Style + Camera
+
+Rules:
+- Keep it concise and short
+- No titles, no explanation
+- No paragraphs
+- No extra storytelling
+- Focus on visual clarity and realism
+
+Output only the final prompt.`
           },
           {
             role: 'user',
