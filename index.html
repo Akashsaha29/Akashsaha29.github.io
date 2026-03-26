@@ -4408,11 +4408,31 @@ async function runPromptFixer() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'mistralai/mistral-7b-instruct-v0.1',
+        model: 'openrouter/auto',
         messages: [
           {
             role: 'system',
-            content: `Rewrite this into a professional AI image prompt`
+            content: `You are a professional AI prompt engineer.
+
+Transform simple prompts into cinematic, highly detailed AI image prompts.
+
+Always:
+- Add subject details
+- Add lighting and environment
+- Add camera details
+- Make it visually rich and realistic
+
+Return in this format:
+
+<upgraded_prompt>
+[Detailed prompt]
+</upgraded_prompt>
+
+<explanation>
+• What was weak
+• What improved
+• Expected result
+</explanation>`
           },
           {
             role: 'user',
