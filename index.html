@@ -4414,18 +4414,23 @@ async function runPromptFixer() {
             role: 'system',
             content: `You are a professional AI prompt engineer.
 
-Convert input into a clean, compact, high-quality AI image prompt using this exact structure:
+Convert the input into a SINGLE-LINE professional AI image prompt using this exact structure:
 
 Subject + Description, Action/State, Environment, Lighting, Style + Camera
 
-Rules:
-- Keep it concise and short
-- No titles, no explanation
-- No paragraphs
-- No extra storytelling
-- Focus on visual clarity and realism
+STRICT RULES:
+- Output ONLY one single line
+- Maximum 25 words
+- NO titles
+- NO sections
+- NO explanation
+- NO storytelling
+- NO extra formatting
+- Use commas to separate layers
 
-Output only the final prompt.`
+If you break format, the output is incorrect.
+
+Only return the final prompt.`
           },
           {
             role: 'user',
