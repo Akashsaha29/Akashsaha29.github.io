@@ -4376,54 +4376,98 @@ function setFixerStyle(btn){
   fixerStyle=btn.dataset.style;
 }
 
-async function runPromptFixer(){
-  const input=document.getElementById('fixer-input').value.trim();
-  const btn=document.getElementById('fixer-btn');
-  const placeholder=document.getElementById('fixer-placeholder');
-  const output=document.getElementById('fixer-output');
-  const upgraded=document.getElementById('fixer-upgraded-text');
-  const explanation=document.getElementById('fixer-explanation');
+async function runPromptFixer() {
+  const input = document.getElementById('fixer-input').value.trim();
+  const btn = document.getElementById('fixer-btn');
+  const placeholder = document.getElementById('fixer-placeholder');
+  const output = document.getElementById('fixer-output');
+  const upgraded = document.getElementById('fixer-upgraded-text');
+  const explanation = document.getElementById('fixer-explanation');
 
-  if(!input||input.length<5){
-    alert('Please paste a prompt first.');return;
+  if (!input || input.length < 5) {
+    alert('Please paste a prompt first.');
+    return;
   }
-  btn.disabled=true;btn.textContent='🔧 Upgrading your prompt...';
-  placeholder.innerHTML=`<div style="display:flex;align-items:center;gap:10px;justify-content:center;"><div class="loading-dots"><span></span><span></span><span></span></div><span style="color:var(--muted);font-size:13px;">AI is rewriting your prompt professionally...</span></div>`;
-  placeholder.style.display='flex';output.style.display='none';
 
-  try{
-    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'meta-llama/llama-3.3-70b-instruct:free',max_tokens:1200,
-        system:`You are an expert AI prompt engineer specializing in ${fixerStyle} prompts. A student gives you a rough or beginner prompt. You must:
+  btn.disabled = true;
+  btn.textContent = '🔧 Upgrading your prompt...';
 
-1. OUTPUT THE UPGRADED PROMPT first — wrapped in <upgraded_prompt> tags. Make it professional, specific, and production-ready for ${fixerStyle}. Use proper ${fixerStyle} syntax, technical photography/film terms, style references, lighting vocabulary, camera specs, and negative prompts. The prompt should be 60-120 words.
+  placeholder.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+      <span style="color:var(--muted);font-size:13px;">
+        AI is rewriting your prompt professionally...
+      </span>
+    </div>`;
+    
+  placeholder.style.display = 'flex';
+  output.style.display = 'none';
 
-2. Then output an EXPLANATION wrapped in <explanation> tags. Use this structure:
-   • What was weak in the original (2-3 specific things)
-   • What you added and WHY each addition matters (use bold for key terms)
-   • What result they should expect now
+  try {
+    const res = await fetch('https://ai-proxy.akashsaha-rock666.workers.dev', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'openrouter/auto',
+        messages: [
+          {
+            role: 'system',
+            content: `You are an expert AI prompt engineer.
 
-Keep the explanation under 180 words. Be specific about prompt engineering technique.`,
-        messages:[{role:'user',content:`Please upgrade this prompt for ${fixerStyle}:\n\n"${input}"`}]
+Return output STRICTLY in this format:
+
+<upgraded_prompt>
+[improved prompt here]
+</upgraded_prompt>
+
+<explanation>
+• What was weak
+• What improved
+• Expected result
+</explanation>`
+          },
+          {
+            role: 'user',
+            content: `Upgrade this prompt:\n\n"${input}"`
+          }
+        ]
       })
     });
-    const data=await res.json();
-    const text=data.content?.[0]?.text||'';
-    const promptMatch=text.match(/<upgraded_prompt>([\s\S]*?)<\/upgraded_prompt>/);
-    const explainMatch=text.match(/<explanation>([\s\S]*?)<\/explanation>/);
-    const promptText=promptMatch?promptMatch[1].trim():text;
-    const explainText=explainMatch?explainMatch[1].trim():'';
 
-    upgraded.textContent=promptText;
-    explanation.innerHTML=explainText.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/•/g,'<br>•').replace(/\n/g,'<br>');
-    placeholder.style.display='none';output.style.display='block';
-    window._fixedPrompt=promptText;
-  }catch(e){
-    placeholder.innerHTML='<span style="color:var(--red)">Connection error. Try again.</span>';
+    const data = await res.json();
+    console.log("API RESPONSE:", data);
+
+    // ✅ FIXED PARSING
+    const text = data?.choices?.[0]?.message?.content || '';
+
+    if (!text) throw new Error("No response from AI");
+
+    // Extract sections
+    const promptMatch = text.match(/<upgraded_prompt>([\s\S]*?)<\/upgraded_prompt>/);
+    const explainMatch = text.match(/<explanation>([\s\S]*?)<\/explanation>/);
+
+    const promptText = promptMatch ? promptMatch[1].trim() : text;
+    const explainText = explainMatch ? explainMatch[1].trim() : '';
+
+    upgraded.textContent = promptText;
+
+    explanation.innerHTML = explainText
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/•/g, '<br>•')
+      .replace(/\n/g, '<br>');
+
+    placeholder.style.display = 'none';
+    output.style.display = 'block';
+
+    window._fixedPrompt = promptText;
+
+  } catch (e) {
+    console.error(e);
+    placeholder.innerHTML = '<span style="color:var(--red)">❌ Connection error. Try again.</span>';
   }
-  btn.textContent='🔧 Fix & Upgrade My Prompt';btn.disabled=false;
+
+  btn.textContent = '🔧 Fix & Upgrade My Prompt';
+  btn.disabled = false;
 }
 
 function copyFixedPrompt(){
