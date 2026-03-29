@@ -1137,7 +1137,7 @@ body {
 
 /* Fixer & ImgPrompt shared layout */
 .fixer-layout, .imgp-layout {
-  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items: start;
 }
 .fixer-card, .fixer-result-card {
   background:var(--white); border:1.5px solid var(--border);
@@ -1931,7 +1931,7 @@ The AI will rewrite this into a professional-grade prompt."></textarea>
           <button class="fixer-btn" id="imgp-btn" onclick="generateImagePrompt()" style="background:linear-gradient(135deg,var(--purple),#a855f7);">🖼 Generate Prompt from Image</button>
         </div>
       </div>
-      <<div class="imgp-right">
+      <div class="imgp-right">
       <div class="fixer-result-card" id="imgp-result-card">
 
     <!-- HEADER -->
@@ -4527,7 +4527,7 @@ async function generateImagePrompt() {
 Generate a high-quality AI image prompt using:
 Subject + Action + Environment + Lighting + Style + Camera.
 
-Keep it clean, concise, and production-ready.
+Keep it clean, use 5 layer principal of Prompting, concise, and production-ready.
 No explanation.`
           },
           {
