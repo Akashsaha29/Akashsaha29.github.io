@@ -4473,7 +4473,20 @@ Output rules:
 }
 
 async function generateImagePrompt() {
-  const fileInput = document.getElementById("image-input");
+  const fileInput = document.getElementById("imgp-btn");
+//
+if (!fileInput) {
+  console.error("Image input not found");
+  return;
+}
+
+const file = fileInput.files?.[0];
+
+if (!file) {
+  alert("Please upload an image");
+  return;
+}
+//
   const file = fileInput.files[0];
 
   const output = document.getElementById("image-prompt-output");
