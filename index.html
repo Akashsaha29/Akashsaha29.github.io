@@ -1940,10 +1940,12 @@ The AI will rewrite this into a professional-grade prompt."></textarea>
               <div class="fixer-sub">Ready to paste into Midjourney, FLUX, or Kling</div>
             </div>
              <div id="imgp-result">
-             <div class="fixer-placeholder">
-               Upload an image on the left
             </div>
-            </div>
+             #imgp-result
+             {
+              margin-top: 16px;
+              width: 100%;
+             }
           </div>
           <div class="fixer-placeholder" id="imgp-placeholder">
             <div style="font-size:36px;margin-bottom:12px;">🖼</div>
@@ -4552,9 +4554,9 @@ Keep it concise and production-ready. No explanation.`
 
     // ✅ Final UI Output (RIGHT BOX)
     output.innerHTML = `
-      <div class="imgp-output-label">Generated Prompt</div>
-      <div class="imgp-output-prompt">${prompt}</div>
-    `;
+  <div class="imgp-output-label">Generated Prompt</div>
+  <div class="imgp-output-prompt">${prompt}</div>
+`;
 
   } catch (err) {
     console.error(err);
