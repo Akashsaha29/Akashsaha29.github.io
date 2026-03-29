@@ -1928,7 +1928,7 @@ The AI will rewrite this into a professional-grade prompt."></textarea>
             <textarea class="submit-textarea" id="imgp-context" style="min-height:60px;" placeholder="e.g. This is a Boat headphone product. I want it in a desert cinematic scene like The Mummy movie. Target: luxury outdoor ad."></textarea>
           </div>
 
-          <button class="fixer-btn" id="imgp-btn" onclick="runImgToPrompt()" style="background:linear-gradient(135deg,var(--purple),#a855f7);">🖼 Generate Prompt from Image</button>
+          <button class="fixer-btn" id="imgp-btn" onclick="generateImagePrompt()" style="background:linear-gradient(135deg,var(--purple),#a855f7);">🖼 Generate Prompt from Image</button>
         </div>
       </div>
       <div class="imgp-right">
@@ -4472,6 +4472,89 @@ Output rules:
   btn.disabled = false;
 }
 
+async function generateImagePrompt() {
+  const fileInput = document.getElementById("image-input");
+  const file = fileInput.files[0];
+
+  const output = document.getElementById("image-prompt-output");
+  const btn = document.getElementById("image-prompt-btn");
+
+  if (!file) {
+    alert("Please upload an image");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Analyzing image...";
+
+  try {
+    // Convert image → base64
+    const base64 = await toBase64(file);
+
+    const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "openai/gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: `You are a professional AI prompt engineer.
+
+Analyze the given image and generate a clean, high-quality AI image prompt.
+
+- Identify subject, environment, lighting, composition, and style
+- Keep output concise and production-ready
+- No explanation, only final prompt`
+          },
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: "Generate a professional prompt for this image"
+              },
+              {
+                type: "image_url",
+                image_url: {
+                  url: base64
+                }
+              }
+            ]
+          }
+        ]
+      })
+    });
+
+    const data = await res.json();
+    console.log("IMAGE RESPONSE:", data);
+
+    const result = data?.choices?.[0]?.message?.content;
+
+    if (!result) throw new Error("No response");
+
+    output.innerText = result;
+
+  } catch (err) {
+    console.error(err);
+    output.innerText = "❌ Error analyzing image.";
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Generate Prompt";
+}
+
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
 function copyFixedPrompt(){
   if(!window._fixedPrompt)return;
   navigator.clipboard.writeText(window._fixedPrompt).then(()=>{
@@ -4514,88 +4597,88 @@ function rmImgP(){
   document.getElementById('imgp-fi').value='';
 }
 
-async function runImgToPrompt(){
-  if(!imgpData){alert('Please upload an image first.');return;}
-  const context=document.getElementById('imgp-context').value.trim();
-  const btn=document.getElementById('imgp-btn');
-  const placeholder=document.getElementById('imgp-placeholder');
-  const output=document.getElementById('imgp-output');
-  const outputContent=document.getElementById('imgp-output-content');
+// async function runImgToPrompt(){
+//   if(!imgpData){alert('Please upload an image first.');return;}
+//   const context=document.getElementById('imgp-context').value.trim();
+//   const btn=document.getElementById('imgp-btn');
+//   const placeholder=document.getElementById('imgp-placeholder');
+//   const output=document.getElementById('imgp-output');
+//   const outputContent=document.getElementById('imgp-output-content');
 
-  btn.disabled=true;btn.textContent='Analyzing image...';
-  placeholder.innerHTML=`<div style="display:flex;align-items:center;gap:10px;justify-content:center;"><div class="loading-dots"><span></span><span></span><span></span></div><span style="color:var(--muted);font-size:13px;">AI is analyzing your image...</span></div>`;
-  placeholder.style.display='flex';output.style.display='none';
+//   btn.disabled=true;btn.textContent='Analyzing image...';
+//   placeholder.innerHTML=`<div style="display:flex;align-items:center;gap:10px;justify-content:center;"><div class="loading-dots"><span></span><span></span><span></span></div><span style="color:var(--muted);font-size:13px;">AI is analyzing your image...</span></div>`;
+//   placeholder.style.display='flex';output.style.display='none';
 
-  const modeInstructions={
-    recreate:`Write ONE professional Midjourney prompt that would recreate this image as closely as possible. Include all visual details: subject description, lighting, camera/lens, style reference, mood, color palette, and negative prompts. Wrap in <prompt_recreate> tags.`,
-    adscene:`Write ONE professional Midjourney/Kling prompt that takes THIS product/character and places it in a creative cinematic ad scene. Make it dramatic and commercial-ready. If there's context provided, use it. Wrap in <prompt_adscene> tags. Also briefly explain the creative scene you chose.`,
-    both:`Write TWO prompts:
-1. A RECREATE prompt (wrapped in <prompt_recreate> tags) — to reproduce the image as-is
-2. AN AD SCENE prompt (wrapped in <prompt_adscene> tags) — to place this product/character in a dramatic cinematic ad scenario
-For the ad scene, if context is provided, use it. Make both prompts production-ready.`,
-    vocab:`Analyze this image and identify the professional photography/design vocabulary terms that describe it. For each term, explain what it is and how it creates the effect seen. Wrap your analysis in <vocab_analysis> tags. Format: [TERM]: [what it is] — [what it does in this image]. Cover: lighting type, camera/lens style, color mood, atmosphere, composition technique. 8-12 terms.`
-  };
+//   const modeInstructions={
+//     recreate:`Write ONE professional Midjourney prompt that would recreate this image as closely as possible. Include all visual details: subject description, lighting, camera/lens, style reference, mood, color palette, and negative prompts. Wrap in <prompt_recreate> tags.`,
+//     adscene:`Write ONE professional Midjourney/Kling prompt that takes THIS product/character and places it in a creative cinematic ad scene. Make it dramatic and commercial-ready. If there's context provided, use it. Wrap in <prompt_adscene> tags. Also briefly explain the creative scene you chose.`,
+//     both:`Write TWO prompts:
+// 1. A RECREATE prompt (wrapped in <prompt_recreate> tags) — to reproduce the image as-is
+// 2. AN AD SCENE prompt (wrapped in <prompt_adscene> tags) — to place this product/character in a dramatic cinematic ad scenario
+// For the ad scene, if context is provided, use it. Make both prompts production-ready.`,
+//     vocab:`Analyze this image and identify the professional photography/design vocabulary terms that describe it. For each term, explain what it is and how it creates the effect seen. Wrap your analysis in <vocab_analysis> tags. Format: [TERM]: [what it is] — [what it does in this image]. Cover: lighting type, camera/lens style, color mood, atmosphere, composition technique. 8-12 terms.`
+//   };
 
-  const base64=imgpData.split(',')[1];
-  const mediaType=imgpData.split(';')[0].split(':')[1];
+//   const base64=imgpData.split(',')[1];
+//   const mediaType=imgpData.split(';')[0].split(':')[1];
 
-  try{
-    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'meta-llama/llama-3.3-70b-instruct:free',max_tokens:1400,
-        system:`You are a world-class AI prompt engineer and creative director. Analyze images with extreme precision and produce professional-grade prompts. Use photography and cinematography vocabulary: lighting terms, camera specs, style references, mood vocabulary, aspect ratios, negative prompts. Always use Midjourney syntax (--ar, --no) for image prompts. For video prompts use Kling/Runway terminology (camera movements, physics, duration).`,
-        messages:[{role:'user',content:[
-          {type:'image',source:{type:'base64',media_type:mediaType,data:base64}},
-          {type:'text',text:`${modeInstructions[imgpMode]}${context?'\n\nAdditional context: '+context:''}`}
-        ]}]
-      })
-    });
-    const data=await res.json();
-    const text=data.content?.[0]?.text||'';
+//   try{
+//     const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{
+//       method:'POST',headers:{'Content-Type':'application/json'},
+//       body:JSON.stringify({
+//         model:'meta-llama/llama-3.3-70b-instruct:free',max_tokens:1400,
+//         system:`You are a world-class AI prompt engineer and creative director. Analyze images with extreme precision and produce professional-grade prompts. Use photography and cinematography vocabulary: lighting terms, camera specs, style references, mood vocabulary, aspect ratios, negative prompts. Always use Midjourney syntax (--ar, --no) for image prompts. For video prompts use Kling/Runway terminology (camera movements, physics, duration).`,
+//         messages:[{role:'user',content:[
+//           {type:'image',source:{type:'base64',media_type:mediaType,data:base64}},
+//           {type:'text',text:`${modeInstructions[imgpMode]}${context?'\n\nAdditional context: '+context:''}`}
+//         ]}]
+//       })
+//     });
+//     const data=await res.json();
+//     const text=data.content?.[0]?.text||'';
 
-    let html='';
-    const recreateMatch=text.match(/<prompt_recreate>([\s\S]*?)<\/prompt_recreate>/);
-    const adsceneMatch=text.match(/<prompt_adscene>([\s\S]*?)<\/prompt_adscene>/);
-    const vocabMatch=text.match(/<vocab_analysis>([\s\S]*?)<\/vocab_analysis>/);
+//     let html='';
+//     const recreateMatch=text.match(/<prompt_recreate>([\s\S]*?)<\/prompt_recreate>/);
+//     const adsceneMatch=text.match(/<prompt_adscene>([\s\S]*?)<\/prompt_adscene>/);
+//     const vocabMatch=text.match(/<vocab_analysis>([\s\S]*?)<\/vocab_analysis>/);
 
-    if(recreateMatch){
-      const p=recreateMatch[1].trim();
-      html+=`<div class="imgp-output-label">🔁 Recreate Prompt — Midjourney</div>
-        <div class="imgp-output-prompt">${p}</div>
-        <button class="ref-copy" style="width:100%;padding:8px;margin-bottom:4px;" onclick="navigator.clipboard.writeText(\`${p.replace(/`/g,"'")}\`);this.textContent='✅ Copied!';setTimeout(()=>{this.textContent='📋 Copy Recreate Prompt';},2000)">📋 Copy Recreate Prompt</button>`;
-    }
-    if(adsceneMatch){
-      const p=adsceneMatch[1].trim();
-      // Extract any explanation after the prompt
-      const remaining=text.replace(/<prompt_recreate>[\s\S]*?<\/prompt_recreate>/,'').replace(/<prompt_adscene>[\s\S]*?<\/prompt_adscene>/,'').trim();
-      html+=`<div class="imgp-output-label">🎬 Ad Scene Prompt — Midjourney/Kling</div>
-        <div class="imgp-output-prompt">${p}</div>
-        <button class="ref-copy" style="width:100%;padding:8px;margin-bottom:4px;" onclick="navigator.clipboard.writeText(\`${p.replace(/`/g,"'")}\`);this.textContent='✅ Copied!';setTimeout(()=>{this.textContent='📋 Copy Ad Scene Prompt';},2000)">📋 Copy Ad Scene Prompt</button>`;
-      if(remaining&&remaining.length>10){
-        html+=`<div class="fixer-explanation" style="margin-top:10px;">${remaining.replace(/\n/g,'<br>')}</div>`;
-      }
-    }
-    if(vocabMatch){
-      const vlines=vocabMatch[1].trim().split('\n').filter(function(l){return l.trim();});
-      const vocabTags=vlines.map(function(l){
-        const term=l.split(':')[0].replace(/[\[\]•\-]/g,'').trim();
-        if(!term) return '';
-        return '<span class="imgp-vocab-tag" onclick="navigator.clipboard.writeText(\''+term.replace(/'/g,"\\'")+'\')">'+ term+'</span>';
-      }).join('');
-      html+='<div class="imgp-output-label">📚 Vocabulary Terms Identified</div>'+
-        '<div class="imgp-vocab-list">'+vocabTags+'</div>'+
-        '<div class="fixer-explanation">'+vlines.map(function(l){return l.replace(/\[/g,'<strong>').replace(/\]/g,'</strong>');}).join('<br>')+'</div>';
-    }
-    if(!html){html=`<div class="imgp-output-label">📋 Generated Prompt</div><div class="imgp-output-prompt">${text.replace(/<\/?[^>]+>/g,'').trim()}</div>`;}
+//     if(recreateMatch){
+//       const p=recreateMatch[1].trim();
+//       html+=`<div class="imgp-output-label">🔁 Recreate Prompt — Midjourney</div>
+//         <div class="imgp-output-prompt">${p}</div>
+//         <button class="ref-copy" style="width:100%;padding:8px;margin-bottom:4px;" onclick="navigator.clipboard.writeText(\`${p.replace(/`/g,"'")}\`);this.textContent='✅ Copied!';setTimeout(()=>{this.textContent='📋 Copy Recreate Prompt';},2000)">📋 Copy Recreate Prompt</button>`;
+//     }
+//     if(adsceneMatch){
+//       const p=adsceneMatch[1].trim();
+//       // Extract any explanation after the prompt
+//       const remaining=text.replace(/<prompt_recreate>[\s\S]*?<\/prompt_recreate>/,'').replace(/<prompt_adscene>[\s\S]*?<\/prompt_adscene>/,'').trim();
+//       html+=`<div class="imgp-output-label">🎬 Ad Scene Prompt — Midjourney/Kling</div>
+//         <div class="imgp-output-prompt">${p}</div>
+//         <button class="ref-copy" style="width:100%;padding:8px;margin-bottom:4px;" onclick="navigator.clipboard.writeText(\`${p.replace(/`/g,"'")}\`);this.textContent='✅ Copied!';setTimeout(()=>{this.textContent='📋 Copy Ad Scene Prompt';},2000)">📋 Copy Ad Scene Prompt</button>`;
+//       if(remaining&&remaining.length>10){
+//         html+=`<div class="fixer-explanation" style="margin-top:10px;">${remaining.replace(/\n/g,'<br>')}</div>`;
+//       }
+//     }
+//     if(vocabMatch){
+//       const vlines=vocabMatch[1].trim().split('\n').filter(function(l){return l.trim();});
+//       const vocabTags=vlines.map(function(l){
+//         const term=l.split(':')[0].replace(/[\[\]•\-]/g,'').trim();
+//         if(!term) return '';
+//         return '<span class="imgp-vocab-tag" onclick="navigator.clipboard.writeText(\''+term.replace(/'/g,"\\'")+'\')">'+ term+'</span>';
+//       }).join('');
+//       html+='<div class="imgp-output-label">📚 Vocabulary Terms Identified</div>'+
+//         '<div class="imgp-vocab-list">'+vocabTags+'</div>'+
+//         '<div class="fixer-explanation">'+vlines.map(function(l){return l.replace(/\[/g,'<strong>').replace(/\]/g,'</strong>');}).join('<br>')+'</div>';
+//     }
+//     if(!html){html=`<div class="imgp-output-label">📋 Generated Prompt</div><div class="imgp-output-prompt">${text.replace(/<\/?[^>]+>/g,'').trim()}</div>`;}
 
-    outputContent.innerHTML=html;
-    placeholder.style.display='none';output.style.display='block';
-  }catch(e){
-    placeholder.innerHTML='<span style="color:var(--red)">Connection error. Try again.</span>';
-  }
-  btn.textContent='🖼 Generate Prompt from Image';btn.disabled=false;
-}
+//     outputContent.innerHTML=html;
+//     placeholder.style.display='none';output.style.display='block';
+//   }catch(e){
+//     placeholder.innerHTML='<span style="color:var(--red)">Connection error. Try again.</span>';
+//   }
+//   btn.textContent='🖼 Generate Prompt from Image';btn.disabled=false;
+// }
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  TOOLS VIEW                                                      ║
