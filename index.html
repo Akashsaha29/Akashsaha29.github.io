@@ -1927,8 +1927,9 @@ The AI will rewrite this into a professional-grade prompt."></textarea>
             <div class="submit-label">Additional context (optional)</div>
             <textarea class="submit-textarea" id="imgp-context" style="min-height:60px;" placeholder="e.g. This is a Boat headphone product. I want it in a desert cinematic scene like The Mummy movie. Target: luxury outdoor ad."></textarea>
           </div>
-
+         <input type="file" id="image-input" accept="image/*" />
           <button class="fixer-btn" id="imgp-btn" onclick="generateImagePrompt()" style="background:linear-gradient(135deg,var(--purple),#a855f7);">🖼 Generate Prompt from Image</button>
+        <div id="image-prompt-output"></div>   
         </div>
       </div>
       <div class="imgp-right">
@@ -4477,7 +4478,7 @@ async function generateImagePrompt() {
   const file = fileInput.files[0];
 
   const output = document.getElementById("image-prompt-output");
-  const btn = document.getElementById("image-prompt-btn");
+  const btn = document.getElementById("imgp-btn");
 
   if (!file) {
     alert("Please upload an image");
