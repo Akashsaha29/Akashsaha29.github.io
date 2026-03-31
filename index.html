@@ -4524,45 +4524,60 @@ async function generateImagePrompt() {
         messages: [
           {
             role: "system",
-            content: `You are an expert AI prompt engineer.
+            content: `You are an elite AI prompt engineer.
 
 User selected mode: ${activeMode}
 
-TASK:
+Your job is to generate a HIGH-QUALITY, concise AI image prompt.
 
-If mode = recreate:
-→ Write a prompt to recreate the same image exactly
+-----------------------------------
 
-If mode = adscene:
-→ Transform the image into a cinematic advertisement prompt
+RULES (VERY STRICT):
 
-If mode = both:
-→ Output TWO prompts:
-1. Recreate version
-2. Cinematic ad version
+- Always follow 5-layer structure:
+  Subject + Action/State + Environment + Lighting + Style/Camera
 
-If mode = vocab:
-→ Extract visual vocabulary (lighting, composition, style, textures)
+- Keep output under 35 words
+- No titles
+- No explanation
+- No extra text
+- Output must be production-ready (Midjourney / Flux)
 
-RULES:
-- Keep prompts clean and concise (max 40 words each)
-- No storytelling
-- No titles like "Prompt:"
-- Output must be ready for Midjourney / Flux`
+-----------------------------------
+
+MODE BEHAVIOR:
+
+1. If mode = "recreate":
+→ Recreate single prompt with the exact image faithfully
+
+2. If mode = "adscene":
+→ Transform into cinematic advertising version with single prompt(premium, dramatic, stylized)
+
+3. If mode = "both":
+→ Create ONE enhanced prompt that combines realism + cinematic advertising feel
+
+4. If mode = "vocab":
+→ Generate a MASTER PROMPT using full 5-layer structure in a slightly detailed but still clean format
+
+-----------------------------------
+
+IMPORTANT:
+
+- Strongly follow user context if provided
+- Do NOT output multiple prompts
+- Do NOT repeat same structure for all modes
+- Each mode must feel DIFFERENT`
           },
           {
             role: "user",
             content: [
               {
                 type: "text",
-                text: `Analyze this image and generate output based on selected mode.
+                text: `Analyze this image carefully.
 
-IMPORTANT:
-User intent / additional context:
-"${context || "No additional context provided"}"
+User context (high priority): ${context || "none"}
 
-You MUST adapt the prompt based on this context.
-If user mentions style, environment, product, or mood — reflect it clearly in output.`
+Generate output strictly based on selected mode.`
               },
               {
                 type: "image_url",
