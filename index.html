@@ -4480,6 +4480,8 @@ async function generateImagePrompt() {
   const fileInput = document.getElementById("imgp-fi");
   const file = fileInput.files[0];
 
+  const activeMode = document.querySelector(".imgp-mode-card.active")?.dataset.mode || "both";
+  const context = document.getElementById("imgp-context").value.trim();
   const output = document.getElementById("imgp-result");
   const placeholder = document.getElementById("imgp-placeholder");
   const btn = document.getElementById("imgp-btn");
@@ -4522,20 +4524,45 @@ async function generateImagePrompt() {
         messages: [
           {
             role: "system",
-            content: `You are a professional AI prompt engineer.
+            content: `You are an expert AI prompt engineer.
 
-Generate a high-quality AI image prompt by using:
-Subject + Action + Environment + Lighting + Style + Camera.
+User selected mode: ${activeMode}
 
-Keep it clean, concise, and production-ready prompt.
-No explanation.`
+TASK:
+
+If mode = recreate:
+→ Write a prompt to recreate the same image exactly
+
+If mode = adscene:
+→ Transform the image into a cinematic advertisement prompt
+
+If mode = both:
+→ Output TWO prompts:
+1. Recreate version
+2. Cinematic ad version
+
+If mode = vocab:
+→ Extract visual vocabulary (lighting, composition, style, textures)
+
+RULES:
+- Keep prompts clean and concise (max 40 words each)
+- No storytelling
+- No titles like "Prompt:"
+- Output must be ready for Midjourney / Flux`
           },
           {
             role: "user",
             content: [
               {
                 type: "text",
-                text: "Generate a professional prompt for this image"
+                text: `Analyze this image and generate output based on selected mode.
+
+IMPORTANT:
+User intent / additional context:
+"${context || "No additional context provided"}"
+
+You MUST adapt the prompt based on this context.
+If user mentions style, environment, product, or mood — reflect it clearly in output.`
               },
               {
                 type: "image_url",
