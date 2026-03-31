@@ -3905,7 +3905,7 @@ function buildLesson(day){
         <div class="deliverables-grid">${delivs}</div>
         <div class="submit-label">Your Written Submission</div>
         <textarea class="submit-textarea" id="sub-${day}" placeholder="${lesson.assignment.placeholder}"></textarea>
-        <button class="submit-btn" id="sbtn-${day}" onclick="submitAssignment(${day})">✦ Submit for AI Instructor Feedback</button>
+        <button class="submit-btn" id="sbtn-${day}" onclick="submitAssignment(this)">✦ Submit for AI Instructor Feedback</button>
         <div class="feedback-card" id="fb-${day}">
           <div class="feedback-from">🤖 AI Instructor Feedback</div>
           <div class="feedback-text" id="fbt-${day}"></div>
@@ -4831,9 +4831,40 @@ async function submitAssignment(day){
   fbt.innerHTML=`<div style="display:flex;align-items:center;gap:10px;"><div class="loading-dots"><span></span><span></span><span></span></div><span style="color:var(--muted);font-size:13px;">AI instructor is reviewing your work...</span></div>`;
   const lesson=LESSONS[day];
   try{
-    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'meta-llama/llama-3.3-70b-instruct:free',max_tokens:1000,system:lesson.assignment.systemPrompt,messages:[{role:'user',content:`Student submission for "${lesson.assignment.title}":\n\n${submission}`}]})});
+    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({
+  model: "openai/gpt-4o-mini",
+  messages: [
+    {
+      role: "system",
+      content: `You are a senior AI design instructor.
+
+Give sharp, structured, no-fluff feedback.
+
+STRICT FORMAT:
+
+Strengths:
+- ...
+
+Weaknesses:
+- ...
+
+Improvements:
+- ...
+
+Score: X/10
+
+Be practical, honest, and actionable.`
+    },
+    {
+      role: "user",
+      content: `Assignment: ${lesson.assignment.title}
+
+Student Submission:
+${submission}`}]})});
+     
     const data=await res.json();
-    const text=data.content?.[0]?.text||'Great work! Keep going.';
+    const text = data?.choices?.[0]?.message?.content || "Great work! Keep going.";
     fbt.innerHTML=text.replace(/\n/g,'<br>');
     btn.textContent='✦ Resubmit for More Feedback'; btn.disabled=false;
     if(!state.completedDays.includes(day)){state.completedDays.push(day);saveState();buildSidebar();}
