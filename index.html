@@ -3905,7 +3905,7 @@ function buildLesson(day){
         <div class="deliverables-grid">${delivs}</div>
         <div class="submit-label">Your Written Submission</div>
         <textarea class="submit-textarea" id="sub-${day}" placeholder="${lesson.assignment.placeholder}"></textarea>
-        <button class="submit-btn" id="sbtn-${day}" onclick="submitAssignment(this)">✦ Submit for AI Instructor Feedback</button>
+        <button class="submit-btn" id="sbtn-${day}" onclick="submitAssignment(${day})">✦ Submit for AI Instructor Feedback</button>
         <div class="feedback-card" id="fb-${day}">
           <div class="feedback-from">🤖 AI Instructor Feedback</div>
           <div class="feedback-text" id="fbt-${day}"></div>
@@ -4817,24 +4817,42 @@ function buildSavedView(){
 // ║  ASSIGNMENT SUBMISSION                                           ║
 // ╚══════════════════════════════════════════════════════════════════╝
 async function submitAssignment(day){
-  const input=document.getElementById(`sub-${day}`);
-  const btn=document.getElementById(`sbtn-${day}`);
-  const fb=document.getElementById(`fb-${day}`);
-  const fbt=document.getElementById(`fbt-${day}`);
-  const submission=input.value.trim();
-  if(!submission||submission.length<20){
-    fbt.innerHTML='<span style="color:var(--red)">Please write a more detailed submission.</span>';
-    fb.classList.add('show'); return;
+  const input = document.getElementById(`sub-${day}`);
+  const btn   = document.getElementById(`sbtn-${day}`);
+  const fb    = document.getElementById(`fb-${day}`);
+  const fbt   = document.getElementById(`fbt-${day}`);
+
+  const submission = input.value.trim();
+
+  if (!submission || submission.length < 20) {
+    fbt.innerHTML = '<span style="color:var(--red)">Please write a more detailed submission.</span>';
+    fb.classList.add('show');
+    return;
   }
-  btn.disabled=true; btn.textContent='Getting feedback...';
+
+  btn.disabled = true;
+  btn.textContent = 'Getting feedback...';
+
   fb.classList.add('show');
-  fbt.innerHTML=`<div style="display:flex;align-items:center;gap:10px;"><div class="loading-dots"><span></span><span></span><span></span></div><span style="color:var(--muted);font-size:13px;">AI instructor is reviewing your work...</span></div>`;
-  const lesson=LESSONS[day];
-  try{
-    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({
-  model: "openai/gpt-4o-mini",
-  messages: [
+
+  fbt.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="loading-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <span style="color:var(--muted);font-size:13px;">
+        AI instructor is reviewing your work...
+      </span>
+    </div>
+  `;
+
+  try {
+    const res = await fetch('https://ai-proxy.akashsaha-rock666.workers.dev', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: "openai/gpt-4o-mini",
+        messages: [
     {
       role: "system",
       content: `You are a senior AI design instructor.
@@ -4863,14 +4881,22 @@ Be practical, honest, and actionable.`
 Student Submission:
 ${submission}`}]})});
      
-    const data=await res.json();
-    const text = data?.choices?.[0]?.message?.content || "Great work! Keep going.";
-    fbt.innerHTML=text.replace(/\n/g,'<br>');
-    btn.textContent='✦ Resubmit for More Feedback'; btn.disabled=false;
-    if(!state.completedDays.includes(day)){state.completedDays.push(day);saveState();buildSidebar();}
-  }catch(e){
-    fbt.innerHTML='<span style="color:var(--red)">Could not connect to AI instructor. Check your internet connection.</span>';
-    btn.textContent='✦ Retry'; btn.disabled=false;
+    const data = await res.json();
+
+    const text = data?.choices?.[0]?.message?.content;
+
+    if (!text) throw new Error("Invalid AI response");
+
+    fbt.innerHTML = text.replace(/\n/g, '<br>');
+
+    btn.textContent = '✦ Resubmit for More Feedback';
+    btn.disabled = false;
+
+  } catch (e) {
+    console.error(e);
+    fbt.innerHTML = '<span style="color:var(--red)">❌ AI error. Check console.</span>';
+    btn.textContent = '✦ Retry';
+    btn.disabled = false;
   }
 }
 
