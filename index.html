@@ -4751,22 +4751,50 @@ function rmImgP(){
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  TOOLS VIEW                                                      ║
 // ╚══════════════════════════════════════════════════════════════════╝
-let toolsFilter='All';
+let toolsFilter = 'All';
+
 function buildToolsView(){
-  const cats=['All','Image','Video','Audio','Design'];
-  document.getElementById('tools-filter').innerHTML=cats.map(c=>`<button class="tf-btn ${c===toolsFilter?'active':''}" onclick="filterTools('${c}')">${c}</button>`).join('');
-  const filtered=toolsFilter==='All'?TOOLS_DATA:TOOLS_DATA.filter(t=>t.cat===toolsFilter);
-  document.getElementById('tools-grid').innerHTML=filtered.map(t=>`
-    <div class="tool-card">
-      <div class="tc-top"><div class="tc-emoji">${t.emoji}</div><div><div class="tc-info-name">${t.name}</div><div class="tc-info-cat">${t.cat}</div></div></div>
-      <div class="tc-desc">${t.desc}</div>
-      <div class="tc-footer">
-        <span class="tc-badge ${t.cost}">${t.cost==='both'?'Free + Paid':t.cost==='free'?'Free ✓':'Paid'}</span>
-        <span class="tc-day" onclick="goToDay(${t.day})" style="cursor:pointer;color:var(--primary);">→ Day ${t.day}</span>
+
+  const cats = ['All','Image','Video','Audio','Design'];
+
+  document.getElementById('tools-filter').innerHTML =
+    cats.map(c => `
+      <button class="tf-btn ${c===toolsFilter?'active':''}" onclick="filterTools('${c}')">
+        ${c}
+      </button>
+    `).join('');
+
+  const filtered = toolsFilter === 'All'
+    ? TOOLS_DATA
+    : TOOLS_DATA.filter(t => t.cat === toolsFilter);
+
+  document.getElementById('tools-grid').innerHTML =
+    filtered.map(t => `
+      <div class="tool-card">
+        <div class="tc-top">
+          <div class="tc-emoji">${t.emoji}</div>
+          <div>
+            <div class="tc-info-name">${t.name}</div>
+            <div class="tc-info-cat">${t.cat}</div>
+          </div>
+        </div>
+        <div class="tc-desc">${t.desc}</div>
+        <div class="tc-footer">
+          <span class="tc-badge ${t.cost}">
+            ${t.cost==='both'?'Free + Paid':t.cost==='free'?'Free ✓':'Paid'}
+          </span>
+          <span class="tc-day" onclick="goToDay(${t.day})" style="cursor:pointer;color:var(--primary);">
+            → Day ${t.day}
+          </span>
+        </div>
       </div>
-    </div>`).join('');
+    `).join('');
 }
-function filterTools(cat){toolsFilter=cat;buildToolsView();}
+
+function filterTools(cat){
+  toolsFilter = cat;
+  buildToolsView();
+}
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  PROJECTS VIEW                                                   ║
