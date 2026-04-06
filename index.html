@@ -882,7 +882,18 @@ body {
 /* ════════════════════════════════
    TOOLS VIEW
 ════════════════════════════════ */
-#tools-view { display:none; padding:40px 40px 100px; max-width:1100px; }
+.btool, #tools-view, #projects-view, #saved-view {
+  width: 100%;
+}
+   
+#tools-view {
+  display: none;
+  padding: 40px;
+  max-width: 1100px;
+  background: rgba(255,0,0,0.03);
+  margin: 0 auto;              /* ✅ CENTER CONTENT */
+  min-height: 100vh;           /* ✅ FORCE HEIGHT */
+}
 
 .tools-filter { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
 .tf-btn {
@@ -5025,33 +5036,86 @@ async function submitImgFeedback(day){
 // ║  NAVIGATION                                                      ║
 // ╚══════════════════════════════════════════════════════════════════╝
 const VIEWS=['dashboard','learn','vocab','builder','tools','projects','saved'];
+
 function showView(view){
-  state.currentView=view;
-  VIEWS.forEach(v=>{const el=document.getElementById(`${v}-view`);if(el)el.style.display='none';});
-  // bottom nav
-  ['home','learn','vocab','builder','tools'].forEach(b=>{const el=document.getElementById(`bnav-${b}`);if(el)el.classList.remove('active');});
-  // top nav
-  ['dashboard','learn','vocab','builder','tools','projects','saved'].forEach(b=>{const el=document.getElementById(`tnav-${b}`);if(el)el.classList.remove('active');});
 
-  const viewMap={dashboard:'dashboard-view',learn:'learn-view',vocab:'vocab-view',builder:'builder-view',tools:'tools-view',projects:'projects-view',saved:'saved-view'};
-  const bnavMap={dashboard:'home',learn:'learn',vocab:'vocab',builder:'builder',tools:'tools'};
+  console.log("🔄 Switching to view:", view);
 
-  const el=document.getElementById(viewMap[view]);
-  if(el){el.style.display='block';}
-  // activate bottom nav
-  const b=document.getElementById(`bnav-${bnavMap[view]}`);
-  if(b)b.classList.add('active');
-  // activate top nav
-  const tn=document.getElementById(`tnav-${view}`);
-  if(tn)tn.classList.add('active');
+  state.currentView = view;
 
-  if(view==='dashboard')buildDashboard();
-  else if(view==='learn'){buildLesson(state.currentDay);}
-  else if(view==='vocab'){buildVocab();}
-  else if(view==='builder'){buildBuilderUI();}
-  else if(view==='tools'){buildToolsView();}
-  else if(view==='projects'){buildProjectsView();}
-  else if(view==='saved'){buildSavedView();}
+  // 🔥 Hide all views
+  VIEWS.forEach(v => {
+    const el = document.getElementById(`${v}-view`);
+    if(el){
+      el.style.display = 'none';
+    } else {
+      console.warn(`❌ Missing view: ${v}-view`);
+    }
+  });
+
+  // 🔥 Activate current view
+  const viewMap = {
+    dashboard:'dashboard-view',
+    learn:'learn-view',
+    vocab:'vocab-view',
+    builder:'builder-view',
+    tools:'tools-view',
+    projects:'projects-view',
+    saved:'saved-view'
+  };
+
+  const currentViewEl = document.getElementById(viewMap[view]);
+
+  if(currentViewEl){
+    currentViewEl.style.display = 'block';
+    console.log("✅ View shown:", viewMap[view]);
+  } else {
+    console.error("❌ View element NOT FOUND:", viewMap[view]);
+  }
+
+  // 🔥 NAV ACTIVE STATES
+  ['home','learn','vocab','builder','tools'].forEach(b=>{
+    const el=document.getElementById(`bnav-${b}`);
+    if(el) el.classList.remove('active');
+  });
+
+  ['dashboard','learn','vocab','builder','tools','projects','saved'].forEach(b=>{
+    const el=document.getElementById(`tnav-${b}`);
+    if(el) el.classList.remove('active');
+  });
+
+  const bnavMap = {
+    dashboard:'home',
+    learn:'learn',
+    vocab:'vocab',
+    builder:'builder',
+    tools:'tools'
+  };
+
+  const b = document.getElementById(`bnav-${bnavMap[view]}`);
+  if(b) b.classList.add('active');
+
+  const tn = document.getElementById(`tnav-${view}`);
+  if(tn) tn.classList.add('active');
+
+  // 🔥 BUILD CONTENT (VERY IMPORTANT ORDER)
+  try {
+    if(view==='dashboard') buildDashboard();
+    else if(view==='learn') buildLesson(state.currentDay);
+    else if(view==='vocab') buildVocab();
+    else if(view==='builder') buildBuilderUI();
+    else if(view==='tools') buildToolsView();
+    else if(view==='projects') buildProjectsView();
+    else if(view==='saved') buildSavedView();
+  } catch(e){
+    console.error("❌ Error building view:", view, e);
+  }
+
+  // 🔥 SCROLL AFTER RENDER
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 100);
+
   saveState();
 }
 
