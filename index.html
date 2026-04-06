@@ -4756,21 +4756,50 @@ let toolsFilter = 'All';
 
 function buildToolsView(){
 
-  const cats = ['All','Image','Video','Audio','Design'];
+  console.log("🔥 buildToolsView triggered");
 
-  document.getElementById('tools-filter').innerHTML =
-    cats.map(c => `
+  try {
+
+    const filterEl = document.getElementById('tools-filter');
+    const gridEl = document.getElementById('tools-grid');
+
+    console.log("Filter Element:", filterEl);
+    console.log("Grid Element:", gridEl);
+
+    if (!filterEl || !gridEl) {
+      console.error("❌ tools-filter or tools-grid not found in HTML");
+      return;
+    }
+
+    if (!window.TOOLS_DATA) {
+      console.error("❌ TOOLS_DATA is undefined");
+      gridEl.innerHTML = "❌ TOOLS_DATA not found";
+      return;
+    }
+
+    console.log("TOOLS_DATA:", TOOLS_DATA);
+
+    const cats = ['All','Image','Video','Audio','Design'];
+
+    filterEl.innerHTML = cats.map(c => `
       <button class="tf-btn ${c===toolsFilter?'active':''}" onclick="filterTools('${c}')">
         ${c}
       </button>
     `).join('');
 
-  const filtered = toolsFilter === 'All'
-    ? TOOLS_DATA
-    : TOOLS_DATA.filter(t => t.cat === toolsFilter);
+    const filtered = toolsFilter === 'All'
+      ? TOOLS_DATA
+      : TOOLS_DATA.filter(t => t.cat === toolsFilter);
 
-  document.getElementById('tools-grid').innerHTML =
-    filtered.map(t => `
+    console.log("Filtered Tools:", filtered);
+
+    if (!filtered.length) {
+      console.warn("⚠️ No tools found for filter:", toolsFilter);
+      gridEl.innerHTML = "No tools found.";
+      return;
+    }
+
+    gridEl.innerHTML = filtered.map(t => `
       <div class="tool-card">
         <div class="tc-top">
           <div class="tc-emoji">${t.emoji}</div>
@@ -4790,9 +4819,17 @@ function buildToolsView(){
         </div>
       </div>
     `).join('');
+
+    console.log("✅ Tools rendered successfully");
+
+  } catch (e) {
+    console.error("❌ ERROR in buildToolsView:", e);
+    document.getElementById('tools-grid').innerHTML = "❌ Error loading tools. Check console.";
+  }
 }
 
 function filterTools(cat){
+  console.log("🔁 Filter clicked:", cat);
   toolsFilter = cat;
   buildToolsView();
 }
