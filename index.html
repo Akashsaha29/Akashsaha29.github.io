@@ -3653,7 +3653,7 @@ const BUILDER_STEPS = [
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  TOOLS DATA                                                      ║
 // ╚══════════════════════════════════════════════════════════════════╝
-const TOOLS_DATA = [
+window.TOOLS_DATA = [
   {emoji:'🎨',name:'Midjourney v7',cat:'Image',desc:'Unbeaten artistic quality. Primary tool for campaigns, editorial, brand visuals. Soulful lighting in v7.',cost:'paid',day:1},
   {emoji:'✍️',name:'Ideogram 2.0',cat:'Image',desc:'Solves the text-in-image problem. Accurate typography for posters, ads, logos. Magic Prompt feature.',cost:'both',day:5},
   {emoji:'🔥',name:'Adobe Firefly',cat:'Image',desc:'Built from licensed content. Safe for client work. Integrates into Photoshop & Illustrator.',cost:'paid',day:9},
@@ -4788,7 +4788,7 @@ function buildToolsView(){
     `).join('');
 
     const filtered = toolsFilter === 'All'
-      ? TOOLS_DATA
+      ? window.TOOLS_DATA
       : TOOLS_DATA.filter(t => t.cat === toolsFilter);
 
     console.log("Filtered Tools:", filtered);
