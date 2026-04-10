@@ -5482,27 +5482,110 @@ function rmImg(day){
 }
 
 async function submitImgFeedback(day){
-  const data=imgData[day];
-  const note=document.getElementById(`inote-${day}`).value.trim();
-  const btn=document.getElementById(`isbtn-${day}`);
-  const fb=document.getElementById(`ifb-${day}`);
-  const fbt=document.getElementById(`ifbt-${day}`);
-  if(!data){fb.classList.add('show');fbt.innerHTML='<span style="color:var(--red)">Please upload an image first.</span>';return;}
-  btn.disabled=true;btn.textContent='Analyzing...';
+
+  const data = imgData[day];
+  const note = document.getElementById(`inote-${day}`).value.trim();
+  const btn  = document.getElementById(`isbtn-${day}`);
+  const fb   = document.getElementById(`ifb-${day}`);
+  const fbt  = document.getElementById(`ifbt-${day}`);
+
+  if(!data){
+    fb.classList.add('show');
+    fbt.innerHTML = '<span style="color:var(--red)">Please upload an image first.</span>';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Analyzing...';
+
   fb.classList.add('show');
-  fbt.innerHTML=`<div style="display:flex;align-items:center;gap:10px;"><div class="loading-dots"><span></span><span></span><span></span></div><span style="color:var(--muted);font-size:13px;">AI instructor is analyzing your image...</span></div>`;
-  const base64=data.split(',')[1];
-  const mediaType=data.split(';')[0].split(':')[1];
-  const lesson=LESSONS[day];
+
+  fbt.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+      <span style="color:var(--muted);font-size:13px;">
+        AI instructor is analyzing your image...
+      </span>
+    </div>
+  `;
+
   try{
-    const res=await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'meta-llama/llama-3.3-70b-instruct:free',max_tokens:1000,system:`You are a professional AI design instructor and creative director reviewing a student's AI-generated image. They are on Day ${day}: "${lesson.title}". Focus your visual feedback on: ${imgMode}. Structure your response: (1) What works well — be specific about visual elements, (2) Top 2-3 improvements — exact prompt changes to make, (3) One advanced technique to try next. Be encouraging but precise. Use design terminology. Max 230 words.`,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mediaType,data:base64}},{type:'text',text:`Please review this AI-generated image for my Day ${day} work.${note?' My specific question: '+note:''} Focus on: ${imgMode}`}]}]})});
-    const d=await res.json();
-    const text=d.content?.[0]?.text||'Great image! Keep experimenting.';
-    fbt.innerHTML=text.replace(/\n/g,'<br>');
-    btn.textContent='🔍 Analyze Another Image'; btn.disabled=false;
+
+    const base64 = data; // already full base64 string
+
+    const res = await fetch('https://ai-proxy.akashsaha-rock666.workers.dev',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: "openrouter/Free",
+        messages:[
+          {
+            role:"system",
+            content: `You are a senior AI visual design instructor.
+
+User selected focus: ${imgMode}
+
+Analyze the uploaded image and give feedback based ONLY on selected focus.
+
+MODES:
+
+- Composition → layout, framing, balance, subject placement
+- Color & Mood → color harmony, grading, emotional tone
+- Brand Fit → consistency, target audience, commercial appeal
+- Prompt Quality → reverse-engineer prompt and improve it
+
+STRUCTURE:
+
+What works:
+- ...
+
+Improvements:
+- ...
+
+Fix Prompt:
+- (improved prompt suggestion)
+
+Advanced Tip:
+- ...
+
+Score: X/10
+
+IMPORTANT:
+- Keep under 180 words
+- Be specific and actionable
+- If user provided question, prioritize it`
+          },
+          {
+            role:"user",
+            content:[
+              {
+                type:"text",
+                text:`User question: ${note || "none"}`
+              },
+              {
+                type:"image_url",
+                image_url:{ url: base64 }
+              }
+            ]
+          }
+        ]
+      })
+    });
+
+    const d = await res.json();
+
+    const text = d?.choices?.[0]?.message?.content || 'Great image! Keep experimenting.';
+
+    fbt.innerHTML = text.replace(/\n/g,'<br>');
+
+    btn.textContent = '🔍 Analyze Another Image';
+    btn.disabled = false;
+
   }catch(e){
-    fbt.innerHTML='<span style="color:var(--red)">Connection error. Try again.</span>';
-    btn.textContent='🔍 Retry'; btn.disabled=false;
+    console.error(e);
+    fbt.innerHTML = '<span style="color:var(--red)">❌ AI error. Check console.</span>';
+    btn.textContent = '🔍 Retry';
+    btn.disabled = false;
   }
 }
 
