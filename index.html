@@ -4537,10 +4537,8 @@ async function generateImagePrompt() {
   btn.disabled = true;
   btn.textContent = "Analyzing image...";
 
-  // ✅ Hide placeholder
   placeholder.style.display = "none";
 
-  // ✅ Show loading
   output.innerHTML = `
     <div class="fixer-placeholder">
       <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
@@ -4557,8 +4555,15 @@ async function generateImagePrompt() {
   try {
     const base64 = await toBase64(file);
 
-    const res = await aiCall({
-        model: "meta-llama/llama-3.3-70b-instruct:free",
+    const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // 🔥 FIXED MODEL (VISION SUPPORT)
+        model: "openrouter/free",
+
         messages: [
           {
             role: "system",
@@ -4626,14 +4631,14 @@ Generate output strictly based on selected mode.`
             ]
           }
         ]
-      });
+      })
+    });
 
-    const data = res;
+    const data = await res.json();
     console.log("IMAGE RESPONSE:", data);
 
     const prompt = data.choices?.[0]?.message?.content || "No result";
 
-    // ✅ Show final result
     output.innerHTML = `
       <div class="imgp-output-label">Generated Prompt</div>
       <div class="imgp-output-prompt">${prompt}</div>
