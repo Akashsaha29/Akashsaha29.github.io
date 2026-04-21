@@ -4466,60 +4466,49 @@ async function runPromptFixer() {
   output.style.display = 'none';
 
   try {
-    const res = await aiCall({
-        model: 'openrouter/auto',
-        messages: [
-          {
-            role: 'system',
-            content: `You are a professional AI prompt engineer.
+    // ✅ USE ONLY ONE FUNCTION
+    const data = await aiCall({
+      model: 'openrouter/auto',
+      messages: [
+        {
+          role: 'system',
+          content: `You are a professional AI prompt engineer.
 
 Your job is to understand the user's intent and convert it into a high-quality, visually strong AI image prompt.
 
 Guidelines:
-- First understand what the user wants (product shot, portrait, cinematic scene, etc.)
-- Then enhance it with relevant details (subject, environment, lighting, composition, camera)
-- Keep it concise but impactful (not too long, not too short)
-- Make it realistic, visually rich, and production-ready
+- First understand what the user wants
+- Enhance with subject, environment, lighting, composition, camera
+- Keep it concise but impactful
+- Make it realistic and production-ready
 
 Output rules:
-- Single clean prompt (no explanation)
-- No titles, no sections
-- Use natural descriptive phrasing
-- Keep it sharp and usable for AI tools`
-          },
-          {
-            role: 'user',
-            content: `Upgrade this prompt:\n\n"${input}"`
-          }
-        ]
-      });
+- Single clean prompt
+- No explanation
+- No titles or sections`
+        },
+        {
+          role: 'user',
+          content: `Upgrade this prompt:\n\n"${input}"`
+        }
+      ]
+    });
 
-    const data = await res.json();
     console.log("API RESPONSE:", data);
 
-    // ✅ FIXED PARSING
+    // ✅ Correct parsing
     const text = data?.choices?.[0]?.message?.content || '';
 
     if (!text) throw new Error("No response from AI");
 
-    // Extract sections
-    const promptMatch = text.match(/<upgraded_prompt>([\s\S]*?)<\/upgraded_prompt>/);
-    const explainMatch = text.match(/<explanation>([\s\S]*?)<\/explanation>/);
+    upgraded.textContent = text;
 
-    const promptText = promptMatch ? promptMatch[1].trim() : text;
-    const explainText = explainMatch ? explainMatch[1].trim() : '';
-
-    upgraded.textContent = promptText;
-
-    explanation.innerHTML = explainText
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/•/g, '<br>•')
-      .replace(/\n/g, '<br>');
+    explanation.innerHTML = "✨ Prompt optimized for better AI output";
 
     placeholder.style.display = 'none';
     output.style.display = 'block';
 
-    window._fixedPrompt = promptText;
+    window._fixedPrompt = text;
 
   } catch (e) {
     console.error(e);
