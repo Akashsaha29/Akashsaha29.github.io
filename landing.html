@@ -99,60 +99,6 @@ nav{
 }
 .proof-avatar:first-child{margin-left:0;}
 
-/* ── PRODUCT PREVIEW ── */
-.preview-wrap{
-  max-width:1100px;margin:0 auto;padding:0 24px 100px;
-}
-.preview-browser{
-  border-radius:20px;box-shadow:var(--shadow-lg),0 0 0 1px var(--border);
-  overflow:hidden;background:var(--bg);
-}
-.browser-bar{
-  background:var(--white);border-bottom:1px solid var(--border);
-  padding:14px 20px;display:flex;align-items:center;gap:8px;
-}
-.browser-dots{display:flex;gap:6px;}
-.browser-dot{width:12px;height:12px;border-radius:50%;}
-.browser-dot:nth-child(1){background:#ff5f57;}
-.browser-dot:nth-child(2){background:#ffbd2e;}
-.browser-dot:nth-child(3){background:#28ca41;}
-.browser-url{
-  flex:1;background:var(--bg);border-radius:6px;padding:6px 12px;
-  font-size:12px;color:var(--muted);margin-left:12px;
-}
-.preview-inner{
-  display:grid;grid-template-columns:220px 1fr;min-height:400px;
-}
-.preview-sidebar{
-  background:var(--white);border-right:1px solid var(--border);
-  padding:16px;
-}
-.preview-sidebar-item{
-  padding:8px 12px;border-radius:8px;font-size:12px;font-weight:500;
-  color:var(--muted);margin-bottom:2px;cursor:default;
-}
-.preview-sidebar-item.active{background:#eff6ff;color:var(--primary);font-weight:700;}
-.preview-sidebar-phase{
-  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;
-  color:var(--muted);padding:12px 12px 4px;
-}
-.preview-content{padding:24px;background:var(--bg);}
-.preview-stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
-.preview-stat{background:var(--white);border-radius:10px;padding:14px;border:1px solid var(--border);}
-.preview-stat-num{font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:var(--text);}
-.preview-stat-label{font-size:10px;color:var(--muted);font-weight:500;}
-.preview-hero-card{
-  background:linear-gradient(135deg,#1e3a8a,#2563eb,#7c3aed);
-  border-radius:14px;padding:24px;color:#fff;margin-bottom:16px;
-}
-.preview-hero-title{font-family:'Fraunces',serif;font-size:20px;font-weight:900;margin-bottom:6px;}
-.preview-hero-sub{font-size:12px;opacity:0.8;}
-.preview-blur{
-  filter:blur(6px);user-select:none;pointer-events:none;
-  background:var(--white);border-radius:10px;border:1px solid var(--border);
-  padding:16px;height:80px;
-}
-
 /* ── STATS BAR ── */
 .stats-bar{
   background:linear-gradient(135deg,#1e3a8a,#2563eb);
@@ -389,13 +335,6 @@ footer{
   .btn-primary,.btn-outline{width:100%;max-width:320px;text-align:center;justify-content:center;padding:14px 24px;font-size:15px;}
   .hero-social-proof{flex-direction:column;gap:8px;font-size:12px;}
 
-  /* Preview */
-  .preview-wrap{padding:0 16px 60px;}
-  .preview-stat-row{grid-template-columns:1fr 1fr;gap:8px;}
-  .preview-stat{padding:10px 12px;}
-  .preview-stat-num{font-size:18px;}
-  .browser-url{display:none;}
-
   /* Stats */
   .stats-bar{padding:32px 16px;}
   .stats-inner{grid-template-columns:1fr 1fr;gap:16px;}
@@ -469,19 +408,6 @@ footer{
   .btn-primary,.btn-outline{font-size:14px;padding:13px 20px;}
   .proof-avatars .proof-avatar{width:28px;height:28px;}
 
-  /* Preview browser */
-  .preview-wrap{padding:0 14px 48px;}
-  .preview-browser{border-radius:14px;}
-  .browser-bar{padding:10px 14px;}
-  .browser-dot{width:10px;height:10px;}
-  .preview-content{padding:16px;}
-  .preview-stat-row{gap:6px;margin-bottom:14px;}
-  .preview-stat{padding:8px 10px;border-radius:8px;}
-  .preview-stat-num{font-size:16px;}
-  .preview-stat-label{font-size:9px;}
-  .preview-hero-card{padding:16px;border-radius:10px;}
-  .preview-hero-title{font-size:15px;}
-
   /* Stats bar */
   .stats-inner{grid-template-columns:1fr 1fr;gap:12px;}
   .stat-big{font-size:28px;}
@@ -544,7 +470,6 @@ footer{
   .hero-sub{font-size:13px;}
   .btn-primary,.btn-outline{font-size:13px;padding:12px 16px;}
 
-  .preview-wrap{padding:0 12px 40px;}
   .preview-stat-row{grid-template-columns:1fr 1fr;gap:5px;}
   .preview-stat-num{font-size:14px;}
 
@@ -603,44 +528,6 @@ footer{
     <span>Join designers already learning AI prompting</span>
   </div>
 </section>
-
-<!-- PRODUCT PREVIEW -->
-<div class="preview-wrap">
-  <div class="preview-browser">
-    <div class="browser-bar">
-      <div class="browser-dots">
-        <div class="browser-dot"></div>
-        <div class="browser-dot"></div>
-        <div class="browser-dot"></div>
-      </div>
-      <div class="browser-url">aidesignmastery.com/dashboard</div>
-    </div>
-    <div class="preview-inner">
-      <div class="preview-sidebar">
-        <div class="preview-sidebar-phase">Phase 1 · Prompts</div>
-        <div class="preview-sidebar-item active">1. 5-Layer Prompt Formula</div>
-        <div class="preview-sidebar-item">2. Style Language</div>
-        <div class="preview-sidebar-item">3. Negative Prompts</div>
-        <div class="preview-sidebar-phase">Phase 2 · Images</div>
-        <div class="preview-sidebar-item">8. Midjourney v7</div>
-        <div class="preview-sidebar-item">9. FLUX & Firefly</div>
-      </div>
-      <div class="preview-content">
-        <div class="preview-stat-row">
-          <div class="preview-stat"><div class="preview-stat-num">7</div><div class="preview-stat-label">Days Done</div></div>
-          <div class="preview-stat"><div class="preview-stat-num">16%</div><div class="preview-stat-label">Progress</div></div>
-          <div class="preview-stat"><div class="preview-stat-num">258</div><div class="preview-stat-label">Vocab Terms</div></div>
-          <div class="preview-stat"><div class="preview-stat-num">4</div><div class="preview-stat-label">AI Tools</div></div>
-        </div>
-        <div class="preview-hero-card">
-          <div class="preview-hero-title">Continue: Day 8 — Midjourney v7</div>
-          <div class="preview-hero-sub">Phase 2: Image & Posters · 45 min</div>
-        </div>
-        <div class="preview-blur"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- STATS -->
 <div class="stats-bar">
