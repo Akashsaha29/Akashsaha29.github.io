@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -344,6 +345,16 @@ footer{
 .footer-copy{font-size:12px;}
 
 /* ── RESPONSIVE ── */
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE SYSTEM — LANDING.HTML
+   Breakpoints: 900 → 600 → 480 → 360
+═══════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────
+   ≤ 900px  Tablet
+───────────────────────────────────────────────── */
 @media(max-width:900px){
   .features-grid{grid-template-columns:1fr 1fr;}
   .phases-grid{grid-template-columns:1fr 1fr;}
@@ -354,20 +365,202 @@ footer{
   .preview-inner{grid-template-columns:1fr;}
   .preview-sidebar{display:none;}
   .preview-stat-row{grid-template-columns:1fr 1fr;}
+  .hero{padding:120px 24px 80px;}
+  .section,.section-alt{padding:64px 24px;}
+  .final-cta{padding:80px 24px;}
+  .nav-links .nav-link{display:none;}
 }
+
+
+/* ─────────────────────────────────────────────────
+   ≤ 600px  Mobile landscape / large phone
+───────────────────────────────────────────────── */
 @media(max-width:600px){
+  /* Nav */
   nav{padding:0 16px;}
   .nav-links .nav-link{display:none;}
+  .nav-name{font-size:15px;}
+
+  /* Hero */
   .hero{padding:100px 16px 60px;}
   .hero h1{font-size:32px;}
-  .hero-actions{flex-direction:column;align-items:center;}
-  .btn-primary,.btn-outline{width:100%;max-width:320px;text-align:center;justify-content:center;}
-  .features-grid{grid-template-columns:1fr;}
-  .phases-grid{grid-template-columns:1fr 1fr;}
-  .stats-inner{grid-template-columns:1fr 1fr;}
+  .hero-sub{font-size:15px;margin-bottom:28px;}
+  .hero-actions{flex-direction:column;align-items:center;gap:10px;margin-bottom:36px;}
+  .btn-primary,.btn-outline{width:100%;max-width:320px;text-align:center;justify-content:center;padding:14px 24px;font-size:15px;}
+  .hero-social-proof{flex-direction:column;gap:8px;font-size:12px;}
+
+  /* Preview */
+  .preview-wrap{padding:0 16px 60px;}
+  .preview-stat-row{grid-template-columns:1fr 1fr;gap:8px;}
+  .preview-stat{padding:10px 12px;}
+  .preview-stat-num{font-size:18px;}
+  .browser-url{display:none;}
+
+  /* Stats */
+  .stats-bar{padding:32px 16px;}
+  .stats-inner{grid-template-columns:1fr 1fr;gap:16px;}
   .stat-big{font-size:32px;}
-  .section,.section-alt{padding:60px 16px;}
-  .pricing-grid{max-width:100%;}
+  .stat-desc{font-size:12px;}
+
+  /* Sections */
+  .section,.section-alt{padding:56px 16px;}
+  .section-title{font-size:28px;}
+  .section-sub{font-size:14px;}
+
+  /* Features */
+  .features-grid{grid-template-columns:1fr;}
+  .feature-card{padding:22px 20px;}
+  .feature-title{font-size:15px;}
+  .feature-desc{font-size:13px;}
+
+  /* Phases */
+  .phases-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .phase-item{padding:16px 12px;}
+  .phase-emoji{font-size:24px;margin-bottom:8px;}
+  .phase-name{font-size:12px;}
+  .phase-days{font-size:10px;}
+
+  /* Tools showcase */
+  .tools-showcase{grid-template-columns:1fr;}
+  .tool-item{padding:14px 16px;gap:12px;}
+  .tool-name{font-size:13px;}
+  .tool-desc{font-size:11px;}
+  .tools-demo{padding:18px;}
+
+  /* Testimonials */
+  .testimonials-grid{grid-template-columns:1fr;}
+  .testimonial{padding:20px;}
+  .t-text{font-size:13px;}
+
+  /* Pricing */
+  .pricing-grid{grid-template-columns:1fr;max-width:100%;}
+  .pricing-card{padding:24px 20px;}
+  .pricing-price{font-size:40px;}
+
+  /* Final CTA */
+  .final-cta{padding:64px 16px;}
+  .final-cta h2{font-size:28px;}
+  .final-cta p{font-size:15px;margin-bottom:28px;}
+  .final-cta .btn-white{padding:14px 28px;font-size:15px;}
+
+  /* Footer */
+  footer{padding:40px 16px;}
+  .footer-links{gap:16px;}
+}
+
+
+/* ─────────────────────────────────────────────────
+   ≤ 480px  iPhone / small phones
+───────────────────────────────────────────────── */
+@media(max-width:480px){
+  /* Nav — just logo + CTA */
+  nav{height:56px;padding:0 14px;}
+  .nav-login{display:none;}
+  .nav-cta{padding:7px 14px;font-size:13px;}
+  .nav-name{font-size:14px;}
+  .nav-logo{width:28px;height:28px;font-size:14px;}
+
+  /* Hero */
+  .hero{padding:86px 14px 48px;}
+  .hero-badge{font-size:11px;padding:5px 12px;margin-bottom:18px;}
+  .hero h1{font-size:clamp(24px,7vw,30px);line-height:1.1;margin-bottom:12px;}
+  .hero-sub{font-size:14px;margin-bottom:22px;}
+  .hero-actions{gap:8px;margin-bottom:28px;}
+  .btn-primary,.btn-outline{font-size:14px;padding:13px 20px;}
+  .proof-avatars .proof-avatar{width:28px;height:28px;}
+
+  /* Preview browser */
+  .preview-wrap{padding:0 14px 48px;}
+  .preview-browser{border-radius:14px;}
+  .browser-bar{padding:10px 14px;}
+  .browser-dot{width:10px;height:10px;}
+  .preview-content{padding:16px;}
+  .preview-stat-row{gap:6px;margin-bottom:14px;}
+  .preview-stat{padding:8px 10px;border-radius:8px;}
+  .preview-stat-num{font-size:16px;}
+  .preview-stat-label{font-size:9px;}
+  .preview-hero-card{padding:16px;border-radius:10px;}
+  .preview-hero-title{font-size:15px;}
+
+  /* Stats bar */
+  .stats-inner{grid-template-columns:1fr 1fr;gap:12px;}
+  .stat-big{font-size:28px;}
+
+  /* Sections */
+  .section,.section-alt{padding:48px 14px;}
+  .section-label{font-size:11px;}
+  .section-title{font-size:24px;margin-bottom:10px;}
+  .section-sub{font-size:13px;}
+
+  /* Features — 1 col */
+  .features-grid{grid-template-columns:1fr;gap:12px;margin-top:28px;}
+  .feature-card{padding:20px 18px;}
+  .feature-icon{width:42px;height:42px;font-size:18px;margin-bottom:12px;}
+
+  /* Phases */
+  .phases-grid{grid-template-columns:1fr 1fr;gap:8px;margin-top:24px;}
+  .phase-item{padding:14px 10px;}
+
+  /* Tools */
+  .tools-list{gap:8px;}
+  .tool-item{padding:12px 14px;gap:10px;border-radius:10px;}
+
+  /* Testimonials */
+  .testimonials-grid{gap:12px;margin-top:24px;}
+  .testimonial{padding:18px;}
+
+  /* Pricing */
+  .pricing-grid{margin-top:28px;}
+  .pricing-card{padding:22px 18px;}
+  .pricing-name{font-size:18px;}
+  .pricing-price{font-size:36px;}
+  .pricing-price span{font-size:16px;}
+  .pricing-features li{font-size:12px;}
+
+  /* Final CTA */
+  .final-cta{padding:56px 14px;}
+  .final-cta h2{font-size:24px;margin-bottom:12px;}
+  .final-cta p{font-size:14px;margin-bottom:24px;}
+  .final-cta .btn-white{padding:13px 24px;font-size:14px;}
+
+  /* Footer */
+  footer{padding:32px 14px;}
+  .footer-brand{font-size:18px;}
+  .footer-links{gap:12px;}
+  .footer-links a{font-size:12px;}
+}
+
+
+/* ─────────────────────────────────────────────────
+   ≤ 360px  Very small phones
+───────────────────────────────────────────────── */
+@media(max-width:360px){
+  nav{padding:0 12px;}
+  .nav-name{font-size:13px;}
+  .nav-cta{font-size:12px;padding:6px 12px;}
+
+  .hero{padding:78px 12px 40px;}
+  .hero h1{font-size:22px;}
+  .hero-sub{font-size:13px;}
+  .btn-primary,.btn-outline{font-size:13px;padding:12px 16px;}
+
+  .preview-wrap{padding:0 12px 40px;}
+  .preview-stat-row{grid-template-columns:1fr 1fr;gap:5px;}
+  .preview-stat-num{font-size:14px;}
+
+  .stats-inner{gap:10px;}
+  .stat-big{font-size:26px;}
+
+  .section,.section-alt{padding:40px 12px;}
+  .section-title{font-size:22px;}
+  .features-grid,.phases-grid{gap:8px;}
+  .feature-card{padding:16px 14px;}
+  .phase-item{padding:12px 8px;}
+  .phase-emoji{font-size:20px;}
+  .phase-name{font-size:11px;}
+
+  .pricing-card{padding:18px 14px;}
+  .final-cta .btn-white{font-size:13px;padding:12px 20px;}
 }
 </style>
 </head>
