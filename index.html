@@ -5514,33 +5514,47 @@ async function submitImgFeedback(day){
 
   fb.classList.add('show');
 
-  // 🔄 SAME LOADING STYLE
-  fbt.innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div class="loading-dots"><span></span><span></span><span></span></div>
-      <span style="color:var(--muted);font-size:13px;">
-        AI is evaluating your image... please wait
-      </span>
-    </div>
-  `;
+  let messages = [
+    "Analyzing your image...",
+    "Understanding assignment intent...",
+    "Evaluating composition and details...",
+    "Generating professional feedback...",
+    "Almost done..."
+  ];
+
+  let messageIndex = 0;
+
+  // 🔄 Dynamic loading text
+  const loadingInterval = setInterval(() => {
+    fbt.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+        <span style="color:var(--muted);font-size:13px;">
+          ${messages[messageIndex % messages.length]}
+        </span>
+      </div>
+    `;
+    messageIndex++;
+  }, 2000);
 
   try {
 
     let result = null;
     let attempts = 0;
-    const maxAttempts = 3;
+    const maxAttempts = 8; // safe limit (not infinite freeze)
 
     while(!result && attempts < maxAttempts){
 
-      const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev",{
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({
-          model: attempts === 0 ? "openrouter/free" : "openai/gpt-4o-mini",
-          messages:[
-            {
-              role:"system",
-              content:`You are a strict senior AI design instructor.
+      try{
+        const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev",{
+          method:"POST",
+          headers:{ "Content-Type":"application/json" },
+          body: JSON.stringify({
+            model:"openrouter/free",
+            messages:[
+              {
+                role:"system",
+                content:`You are a strict senior AI design instructor.
 
 Evaluate the uploaded image ONLY based on the assignment.
 
@@ -5574,53 +5588,59 @@ RULES:
 - No generic feedback
 - Focus on assignment match
 - Keep under 150 words`
-            },
-            {
-              role:"user",
-              content:[
-                {
-                  type:"image_url",
-                  image_url:{ url: imageUrl }
-                },
-                {
-                  type:"text",
-                  text:`Student note: ${note || "none"}`
-                }
-              ]
-            }
-          ]
-        })
-      });
+              },
+              {
+                role:"user",
+                content:[
+                  {
+                    type:"image_url",
+                    image_url:{ url: imageUrl }
+                  },
+                  {
+                    type:"text",
+                    text:`Student note: ${note || "none"}`
+                  }
+                ]
+              }
+            ]
+          })
+        });
 
-      // ❗ SAFE RESPONSE CHECK
-      if(!res.ok){
+        if(!res.ok){
+          attempts++;
+          await new Promise(r => setTimeout(r, 1200));
+          continue;
+        }
+
+        const dataRes = await res.json();
+        const text = dataRes?.choices?.[0]?.message?.content;
+
+        // ✅ strict validation
+        if(text && text.trim().length > 40){
+          result = text.trim();
+        } else {
+          attempts++;
+          await new Promise(r => setTimeout(r, 1200));
+        }
+
+      }catch(innerErr){
         attempts++;
-        await new Promise(r => setTimeout(r, 700));
-        continue;
-      }
-
-      const dataRes = await res.json();
-      const text = dataRes?.choices?.[0]?.message?.content;
-
-      // ✅ STRICT VALIDATION (same as your working tool)
-      if(text && text.trim().length > 30){
-        result = text.trim();
-      } else {
-        attempts++;
-        await new Promise(r => setTimeout(r, 700));
+        await new Promise(r => setTimeout(r, 1200));
       }
     }
 
+    clearInterval(loadingInterval);
+
     if(!result){
       fbt.innerHTML = `
-        <span style="color:var(--red)">
-          ⚠️ AI is busy right now. Please try again.
+        <span style="color:var(--muted)">
+          ⚠️ Server is busy right now. Please try again in a few seconds.
         </span>
       `;
       return;
     }
 
-    // ✅ CLEAN OUTPUT (same formatting style)
+    // ✅ FINAL OUTPUT
     fbt.innerHTML = `
       <div style="line-height:1.7;">
         ${result
@@ -5636,10 +5656,12 @@ RULES:
     `;
 
   } catch(e){
-    console.error("AI ERROR:", e);
+    clearInterval(loadingInterval);
+    console.error(e);
+
     fbt.innerHTML = `
-      <span style="color:var(--red)">
-        ❌ AI failed. Try again.
+      <span style="color:var(--muted)">
+        ⚠️ Temporary issue. Please try again.
       </span>
     `;
   }
@@ -5647,7 +5669,6 @@ RULES:
   btn.disabled = false;
   btn.textContent = "🔍 Analyze My Image — Get Expert Feedback";
 }
-
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  NAVIGATION                                                      ║
 // ╚══════════════════════════════════════════════════════════════════╝
