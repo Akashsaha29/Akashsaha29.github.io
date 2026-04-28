@@ -5486,73 +5486,76 @@ function rmImg(day){
   document.getElementById(`fi-${day}`).value='';
 }
 
-async function submitImgFeedback(day) {
+async function submitImgFeedback(day){
+
   const data = imgData?.[day];
   const note = document.getElementById(`inote-${day}`)?.value.trim() || "";
-  const btn = document.getElementById(`isbtn-${day}`);
-  const fb = document.getElementById(`ifb-${day}`);
-  const fbt = document.getElementById(`ifbt-${day}`);
+  const btn  = document.getElementById(`isbtn-${day}`);
+  const fb   = document.getElementById(`ifb-${day}`);
+  const fbt  = document.getElementById(`ifbt-${day}`);
   const lesson = LESSONS?.[day];
 
-  if (!data) {
-    fb?.classList.add("show");
-    if (fbt) fbt.innerHTML = '<span style="color:var(--red)">Please upload an image first.</span>';
+  if(!data){
+    fb.classList.add('show');
+    fbt.innerHTML = '<span style="color:var(--red)">Please upload an image first.</span>';
     return;
   }
 
-  if (!lesson || !lesson.assignment) {
-    fb?.classList.add("show");
-    if (fbt) fbt.innerHTML = '<span style="color:var(--red)">❌ Assignment data not found.</span>';
+  if(!lesson || !lesson.assignment){
+    fb.classList.add('show');
+    fbt.innerHTML = '<span style="color:var(--red)">❌ Assignment data missing.</span>';
     return;
   }
 
   const imageUrl = data.startsWith("data:") ? data : `data:image/png;base64,${data}`;
 
   btn.disabled = true;
-  btn.textContent = "Analyzing assignment match...";
-  fb.classList.add("show");
+  btn.textContent = "Analyzing...";
 
+  fb.classList.add('show');
+
+  // 🔄 SAME LOADING STYLE
   fbt.innerHTML = `
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="loading-dots"><span></span><span></span><span></span></div>
       <span style="color:var(--muted);font-size:13px;">
-        Please wait... AI is checking your image against the assignment brief.
+        AI is evaluating your image... please wait
       </span>
     </div>
   `;
 
   try {
-    let result = "";
+
+    let result = null;
+    let attempts = 0;
     const maxAttempts = 3;
 
-    for (let attempt = 0; attempt < maxAttempts; attempt++) {
-      const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+    while(!result && attempts < maxAttempts){
+
+      const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev",{
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
         body: JSON.stringify({
-          model: "openrouter/free",
-          messages: [
+          model:"openrouter/free",
+          messages:[
             {
-              role: "system",
-              content: `You are a strict senior AI design instructor.
+              role:"system",
+              content:`You are a strict senior AI design instructor.
 
-Evaluate the uploaded image only against the assignment brief.
+Evaluate the uploaded image ONLY based on the assignment.
 
-ASSIGNMENT TITLE:
+ASSIGNMENT:
 ${lesson.assignment.title}
 
-ASSIGNMENT BRIEF:
+DESCRIPTION:
 ${lesson.assignment.desc}
 
-STUDENT NOTE:
-${note || "none"}
+OUTPUT FORMAT:
 
-OUTPUT FORMAT (strict):
 Match Score: X/10
 
 Assignment Match:
-- Yes / Partially / No
-- Give a short reason
+- Yes / Partially / No (reason)
 
 What works:
 - ...
@@ -5564,21 +5567,24 @@ How to improve:
 - ...
 
 Improved Prompt:
-- Write one clean, professional prompt to fix this image.
+- (clean professional prompt)
 
-Rules:
-- Be strict and honest
-- Focus on assignment alignment
-- No generic praise
-- Keep it under 180 words
-- Improved prompt must be usable directly`
+RULES:
+- Be strict
+- No generic feedback
+- Focus on assignment match
+- Keep under 150 words`
             },
             {
-              role: "user",
-              content: [
+              role:"user",
+              content:[
                 {
-                  type: "image_url",
-                  image_url: { url: imageUrl }
+                  type:"image_url",
+                  image_url:{ url: imageUrl }
+                },
+                {
+                  type:"text",
+                  text:`Student note: ${note || "none"}`
                 }
               ]
             }
@@ -5586,37 +5592,60 @@ Rules:
         })
       });
 
-      const d = await res.json();
-      const text = d?.choices?.[0]?.message?.content?.trim() || "";
-
-      if (text.length > 20) {
-        result = text;
-        break;
+      // ❗ SAFE RESPONSE CHECK
+      if(!res.ok){
+        attempts++;
+        await new Promise(r => setTimeout(r, 700));
+        continue;
       }
 
-      await new Promise(r => setTimeout(r, 700));
+      const dataRes = await res.json();
+      const text = dataRes?.choices?.[0]?.message?.content;
+
+      // ✅ STRICT VALIDATION (same as your working tool)
+      if(text && text.trim().length > 30){
+        result = text.trim();
+      } else {
+        attempts++;
+        await new Promise(r => setTimeout(r, 700));
+      }
     }
 
-    if (!result) {
-      throw new Error("No usable AI response");
+    if(!result){
+      fbt.innerHTML = `
+        <span style="color:var(--red)">
+          ⚠️ AI is busy right now. Please try again.
+        </span>
+      `;
+      return;
     }
 
-    fbt.innerHTML = result
-      .replace(/\n/g, "<br>")
-      .replace(/Match Score:/g, '<br><strong style="color:#22c55e;font-size:16px;">Match Score:</strong>')
-      .replace(/Assignment Match:/g, "<br><strong>Assignment Match:</strong>")
-      .replace(/What works:/g, "<br><strong>What works:</strong>")
-      .replace(/What is missing:/g, "<br><strong>What is missing:</strong>")
-      .replace(/How to improve:/g, "<br><strong>How to improve:</strong>")
-      .replace(/Improved Prompt:/g, '<br><strong style="color:#7c3aed;">Improved Prompt:</strong>');
+    // ✅ CLEAN OUTPUT (same formatting style)
+    fbt.innerHTML = `
+      <div style="line-height:1.7;">
+        ${result
+          .replace(/\n/g,'<br>')
+          .replace(/Match Score:/g,'<br><strong style="color:#22c55e;">Match Score:</strong>')
+          .replace(/Assignment Match:/g,'<br><strong>Assignment Match:</strong>')
+          .replace(/What works:/g,'<br><strong>What works:</strong>')
+          .replace(/What is missing:/g,'<br><strong>What is missing:</strong>')
+          .replace(/How to improve:/g,'<br><strong>How to improve:</strong>')
+          .replace(/Improved Prompt:/g,'<br><strong style="color:#7c3aed;">Improved Prompt:</strong>')
+        }
+      </div>
+    `;
 
-  } catch (e) {
-    console.error(e);
-    fbt.innerHTML = '<span style="color:var(--red)">❌ AI failed. Try again.</span>';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "🔍 Analyze My Image — Get Expert Feedback";
+  } catch(e){
+    console.error("AI ERROR:", e);
+    fbt.innerHTML = `
+      <span style="color:var(--red)">
+        ❌ AI failed. Try again.
+      </span>
+    `;
   }
+
+  btn.disabled = false;
+  btn.textContent = "🔍 Analyze My Image — Get Expert Feedback";
 }
 
 // ╔══════════════════════════════════════════════════════════════════╗
