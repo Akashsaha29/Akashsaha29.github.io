@@ -4971,7 +4971,6 @@ async function generateImagePrompt(){
     let attempts = 0;
     const maxAttempts = 3;
 
-    // 🔁 RETRY LOOP (MAIN FIX)
     while(!result && attempts < maxAttempts){
 
       const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev",{
@@ -4982,33 +4981,39 @@ async function generateImagePrompt(){
           messages:[
             {
               role:"system",
-              content:`You are a senior AI visual prompt engineer and commercial creative director.
+              content:`You are a senior visual AI analyst and commercial prompt engineer.
 
-User selected mode: ${imgMode}
+You MUST deeply analyze the image and produce a HIGH-QUALITY result.
 
-You MUST strictly follow the selected mode.
+DO NOT leave anything blank.
+DO NOT give generic answers.
+DO NOT summarize.
+DO NOT be lazy.
 
------------------------------
-MODE DEFINITIONS:
+-------------------------------------
+MODE: ${imgMode}
+
+-------------------------------------
+MODE INSTRUCTIONS:
 
 1. recreate:
-- Recreate the exact same image
-- Focus on accuracy (subject, pose, lighting, composition, camera)
-- No creative changes
+- Recreate the exact image
+- Include subject details, material, color, position
+- Include environment, lighting direction, camera angle
+- Must be visually reconstructable
 
 2. adscene:
-- Keep subject identity
-- Transform into cinematic / commercial ad scene
-- Add dramatic lighting, atmosphere, storytelling
+- Keep same subject
+- Transform into cinematic ad scene
+- Add storytelling, dramatic lighting, premium composition
 
 3. both:
 - Keep original structure
-- Slightly enhance environment + lighting
-- Add subtle ad feel (not too dramatic)
+- Slightly enhance environment and lighting
+- Add subtle commercial feel without changing subject
 
 4. vocab:
-- DO NOT generate normal prompt
-- Extract 5-layer structure:
+- Extract FULL 5-layer structure:
 
 Subject:
 Action:
@@ -5016,17 +5021,26 @@ Environment:
 Lighting:
 Style & Camera:
 
------------------------------
-GLOBAL RULES:
+-------------------------------------
+STRICT RULES:
 
-- No explanation
-- No extra text
-- Only output final result
-- Keep prompts clean, realistic, professional
+- No empty fields
+- No placeholders
+- No generic words like “nice” or “beautiful”
+- Every line must describe real visual details
+- Be specific (e.g. “top-down angle”, “harsh sunlight from right”)
 
------------------------------
-User context:
-${context || "none"}`
+-------------------------------------
+USER CONTEXT:
+${context || "none"}
+
+-------------------------------------
+OUTPUT RULE:
+
+recreate / adscene / both → ONE clean professional prompt  
+vocab → structured format ONLY  
+
+NO EXTRA TEXT.`
             },
             {
               role:"user",
@@ -5040,29 +5054,30 @@ ${context || "none"}`
       });
 
       const data = await res.json();
-
       const text = data?.choices?.[0]?.message?.content;
 
-      // ✅ VALID RESULT CHECK
-      if(text && text.trim().length > 10){
+      // ✅ STRICT VALIDATION (IMPROVED)
+      if(text && text.trim().length > 30 && !text.includes("Subject:") && imgMode !== "vocab"){
         result = text.trim();
-      } else {
+      } 
+      else if(text && text.trim().length > 30 && imgMode === "vocab"){
+        result = text.trim();
+      } 
+      else {
         attempts++;
-        await new Promise(r => setTimeout(r, 800)); // small delay before retry
+        await new Promise(r => setTimeout(r, 700));
       }
     }
 
-    // ❌ If still no result
     if(!result){
       output.innerHTML = `
         <span style="color:var(--red)">
-          ⚠️ AI is busy right now. Please try again in a moment.
+          ⚠️ AI is busy or response was weak. Please try again.
         </span>
       `;
       return;
     }
 
-    // ✅ SUCCESS OUTPUT
     output.innerHTML = `
       <div class="imgp-output-label">
         ${imgMode === "vocab" ? "Prompt Breakdown" : "Generated Prompt"}
