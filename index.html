@@ -641,7 +641,7 @@ body {
 .feedback-text { font-size:14px; color:#064e3b; line-height:1.75; }
 
 /* ── IMAGE FEEDBACK DROP ── */
-.img-feedback-section {
+/* .img-feedback-section {
   margin-top:28px;
   background:var(--white); border:1px solid var(--border);
   border-radius:var(--radius-lg); padding:24px 28px;
@@ -718,7 +718,7 @@ body {
 .feedback-text {
   line-height:1.7;
   font-size:13px;
-}
+} */
 
 /* ── LOADING DOTS ── */
 .loading-dots { display:inline-flex; gap:4px; align-items:center; }
@@ -1630,14 +1630,14 @@ body {
   .submit-btn { font-size:13px; padding:14px; border-radius:8px; }
 
   /* Image feedback */
-  .img-feedback-section { padding:16px 16px; margin-top:18px; border-radius:12px; }
+  /* .img-feedback-section { padding:16px 16px; margin-top:18px; border-radius:12px; }
   .img-feedback-title { font-size:14px; font-weight:800; }
   .img-feedback-sub { font-size:12px; }
   .img-mode-tabs { gap:5px; margin-bottom:10px; }
   .img-mode-tab { font-size:11px; padding:5px 10px; }
   .drop-zone { padding:22px 14px; border-radius:10px; }
   .drop-title { font-size:14px; font-weight:700; }
-  .drop-sub { font-size:11px; }
+  .drop-sub { font-size:11px; } */
 
   /* Vocab */
   .vocab-grid { grid-template-columns:1fr; gap:10px; }
@@ -1762,9 +1762,9 @@ body {
   .feedback-text { font-size:13px; line-height:1.65; }
 
   /* ── Image feedback ── */
-  .img-preview-box { border-radius:8px; }
+  /* .img-preview-box { border-radius:8px; }
   .img-submit-btn { font-size:13px; padding:12px; border-radius:8px; }
-  .img-feedback-card { padding:12px 14px; border-radius:8px; margin-top:10px; }
+  .img-feedback-card { padding:12px 14px; border-radius:8px; margin-top:10px; } */
 
   /* ── Dashboard extras ── */
   .dash-badge { font-size:10px; padding:3px 10px; }
@@ -4375,64 +4375,64 @@ function buildLesson(day){
       </div>
 
       <!-- IMAGE FEEDBACK -->
-      <div class="img-feedback-section">
-        <div class="img-feedback-title">🖼 Drop Your Generated Image — Get Live Visual Feedback</div>
-        <div class="img-feedback-sub">Generated something in Midjourney, Firefly, or Kling? Drop it here for expert analysis from the AI instructor.</div>
-        <div class="img-mode-tabs">
-              <button class="img-mode-tab active" data-mode="composition" onclick="setImgMode(this)">🎨 Composition</button>
-              <button class="img-mode-tab" data-mode="color" onclick="setImgMode(this)">🌈 Color & Mood</button>
-              <button class="img-mode-tab" data-mode="brand" onclick="setImgMode(this)">💼 Brand Fit</button>
-              <button class="img-mode-tab" data-mode="prompt" onclick="setImgMode(this)">📝 Prompt Quality</button>
-        </div>
-        <div class="drop-zone" id="dz-${day}" ondragover="dzOver(event,${day})" ondragleave="dzLeave(${day})" ondrop="dzDrop(event,${day})">
-          <input type="file" id="fi-${day}" accept="image/*" onchange="dzFile(event,${day})" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;">
-          <div class="drop-icon">📥</div>
-          <div class="drop-title">Drop your AI-generated image here</div>
-          <div class="drop-sub">PNG, JPG, WEBP supported · Click or drag & drop</div>
-        </div>
-        <div class="img-preview-box" id="ipb-${day}">
-          <img id="ipr-${day}" src="" alt="Preview">
-          <button class="remove-img" onclick="rmImg(${day})">✕ Remove</button>
-        </div>
-        <div class="img-note">
-          <div class="submit-label">What do you want feedback on? (optional)</div>
-          <textarea class="submit-textarea" id="inote-${day}" style="min-height:56px;" placeholder="e.g. Is the lighting professional enough? Does the composition feel editorial?"></textarea>
-        </div>
-        <button class="img-submit-btn" id="isbtn-${day}" onclick="submitImgFeedback(${day})" type="button">
-        <div class="img-feedback-card" id="ifb-${day}">
-          <div class="feedback-from" style="color:var(--purple);">🎨 Visual Analysis</div>
-          <div class="feedback-text" id="ifbt-${day}" style="color:#4c1d95;"></div>
-        </div>
-      </div>
+//       <div class="img-feedback-section">
+//         <div class="img-feedback-title">🖼 Drop Your Generated Image — Get Live Visual Feedback</div>
+//         <div class="img-feedback-sub">Generated something in Midjourney, Firefly, or Kling? Drop it here for expert analysis from the AI instructor.</div>
+//         <div class="img-mode-tabs">
+//               <button class="img-mode-tab active" data-mode="composition" onclick="setImgMode(this)">🎨 Composition</button>
+//               <button class="img-mode-tab" data-mode="color" onclick="setImgMode(this)">🌈 Color & Mood</button>
+//               <button class="img-mode-tab" data-mode="brand" onclick="setImgMode(this)">💼 Brand Fit</button>
+//               <button class="img-mode-tab" data-mode="prompt" onclick="setImgMode(this)">📝 Prompt Quality</button>
+//         </div>
+//         <div class="drop-zone" id="dz-${day}" ondragover="dzOver(event,${day})" ondragleave="dzLeave(${day})" ondrop="dzDrop(event,${day})">
+//           <input type="file" id="fi-${day}" accept="image/*" onchange="dzFile(event,${day})" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;">
+//           <div class="drop-icon">📥</div>
+//           <div class="drop-title">Drop your AI-generated image here</div>
+//           <div class="drop-sub">PNG, JPG, WEBP supported · Click or drag & drop</div>
+//         </div>
+//         <div class="img-preview-box" id="ipb-${day}">
+//           <img id="ipr-${day}" src="" alt="Preview">
+//           <button class="remove-img" onclick="rmImg(${day})">✕ Remove</button>
+//         </div>
+//         <div class="img-note">
+//           <div class="submit-label">What do you want feedback on? (optional)</div>
+//           <textarea class="submit-textarea" id="inote-${day}" style="min-height:56px;" placeholder="e.g. Is the lighting professional enough? Does the composition feel editorial?"></textarea>
+//         </div>
+//         <button class="img-submit-btn" id="isbtn-${day}" onclick="submitImgFeedback(${day})" type="button">
+//         <div class="img-feedback-card" id="ifb-${day}">
+//           <div class="feedback-from" style="color:var(--purple);">🎨 Visual Analysis</div>
+//           <div class="feedback-text" id="ifbt-${day}" style="color:#4c1d95;"></div>
+//         </div>
+//       </div>
 
-      ${done?`<div style="text-align:center;padding:12px 16px;color:var(--green);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px;">✅ Day ${day} complete <button onclick="unmarkDone(${day})" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;border:1px solid #ef4444;background:none;color:#ef4444;cursor:pointer;margin-left:4px;">↩ Undo</button></div>`:''}
-    </div>`;
+//       ${done?`<div style="text-align:center;padding:12px 16px;color:var(--green);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px;">✅ Day ${day} complete <button onclick="unmarkDone(${day})" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;border:1px solid #ef4444;background:none;color:#ef4444;cursor:pointer;margin-left:4px;">↩ Undo</button></div>`:''}
+//     </div>`;
 
-  // Nav bar
-  document.getElementById('lesson-nav-bar').innerHTML=`
-    <button class="nav-btn" onclick="goToDay(${prevDay})" ${!prevDay?'disabled':''}>← Day ${prevDay||'-'}</button>
-    ${done?`<button class="nav-btn done-btn" onclick="unmarkDone(${day})" title="Click to undo">✅ Completed — Undo?</button>`:'<button class="nav-btn primary" onclick="markDone('+day+')">Mark Complete ✓</button>'}
-    <button class="nav-btn" onclick="goToDay(${nextDay})" ${!nextDay?'disabled':''}>Day ${nextDay||'-'} →</button>`;
+//   // Nav bar
+//   document.getElementById('lesson-nav-bar').innerHTML=`
+//     <button class="nav-btn" onclick="goToDay(${prevDay})" ${!prevDay?'disabled':''}>← Day ${prevDay||'-'}</button>
+//     ${done?`<button class="nav-btn done-btn" onclick="unmarkDone(${day})" title="Click to undo">✅ Completed — Undo?</button>`:'<button class="nav-btn primary" onclick="markDone('+day+')">Mark Complete ✓</button>'}
+//     <button class="nav-btn" onclick="goToDay(${nextDay})" ${!nextDay?'disabled':''}>Day ${nextDay||'-'} →</button>`;
 
-  document.title=`Day ${day} of 45 — ${lesson.title} | AI Design Pro`;
-  updateTopbar(); window.scrollTo(0,0);
-}
+//   document.title=`Day ${day} of 45 — ${lesson.title} | AI Design Pro`;
+//   updateTopbar(); window.scrollTo(0,0);
+// }
 
-function switchLearnTab(btn,panelId){
-  const day=panelId.split('-').pop();
-  document.querySelectorAll('#lesson-tabs-bar .ltab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.lesson-panel').forEach(p=>p.style.display='none');
-  btn.classList.add('active');
-  const el=document.getElementById(`panel-${panelId}`);
-  if(el) el.style.display='block';
-}
+// function switchLearnTab(btn,panelId){
+//   const day=panelId.split('-').pop();
+//   document.querySelectorAll('#lesson-tabs-bar .ltab').forEach(t=>t.classList.remove('active'));
+//   document.querySelectorAll('.lesson-panel').forEach(p=>p.style.display='none');
+//   btn.classList.add('active');
+//   const el=document.getElementById(`panel-${panelId}`);
+//   if(el) el.style.display='block';
+// }
 
-function switchCompare(id,which){
-  document.getElementById(`${id}-bad`).classList.toggle('active',which==='bad');
-  document.getElementById(`${id}-good`).classList.toggle('active',which==='good');
-  document.getElementById(`${id}-bad-panel`).classList.toggle('active',which==='bad');
-  document.getElementById(`${id}-good-panel`).classList.toggle('active',which==='good');
-}
+// function switchCompare(id,which){
+//   document.getElementById(`${id}-bad`).classList.toggle('active',which==='bad');
+//   document.getElementById(`${id}-good`).classList.toggle('active',which==='good');
+//   document.getElementById(`${id}-bad-panel`).classList.toggle('active',which==='bad');
+//   document.getElementById(`${id}-good-panel`).classList.toggle('active',which==='good');
+// }
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  VOCAB GLOSSARY                                                  ║
@@ -5454,170 +5454,170 @@ ${submission}`}]});
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  IMAGE FEEDBACK                                                  ║
 // ╚══════════════════════════════════════════════════════════════════╝
-const imgData={};
-let imgMode='overall composition, visual balance, and professional quality';
+// const imgData={};
+// let imgMode='overall composition, visual balance, and professional quality';
 
-function setImgMode(btn){
-  document.querySelectorAll('.img-mode-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  imgMode=btn.dataset.mode;
-}
-function dzOver(e,day){e.preventDefault();document.getElementById(`dz-${day}`).classList.add('over');}
-function dzLeave(day){document.getElementById(`dz-${day}`).classList.remove('over');}
-function dzDrop(e,day){e.preventDefault();dzLeave(day);const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))loadImg(f,day);}
-function dzFile(e,day){const f=e.target.files[0];if(f)loadImg(f,day);}
-function loadImg(file,day){
-  const r=new FileReader();
-  r.onload=ev=>{
-    imgData[day]=ev.target.result;
-    document.getElementById(`ipr-${day}`).src=ev.target.result;
-    document.getElementById(`ipb-${day}`).classList.add('show');
-    document.getElementById(`dz-${day}`).style.display='none';
-  };
-  r.readAsDataURL(file);
-}
-function rmImg(day){
-  delete imgData[day];
-  document.getElementById(`ipb-${day}`).classList.remove('show');
-  document.getElementById(`dz-${day}`).style.display='';
-  document.getElementById(`fi-${day}`).value='';
-}
+// function setImgMode(btn){
+//   document.querySelectorAll('.img-mode-tab').forEach(t=>t.classList.remove('active'));
+//   btn.classList.add('active');
+//   imgMode=btn.dataset.mode;
+// }
+// function dzOver(e,day){e.preventDefault();document.getElementById(`dz-${day}`).classList.add('over');}
+// function dzLeave(day){document.getElementById(`dz-${day}`).classList.remove('over');}
+// function dzDrop(e,day){e.preventDefault();dzLeave(day);const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))loadImg(f,day);}
+// function dzFile(e,day){const f=e.target.files[0];if(f)loadImg(f,day);}
+// function loadImg(file,day){
+//   const r=new FileReader();
+//   r.onload=ev=>{
+//     imgData[day]=ev.target.result;
+//     document.getElementById(`ipr-${day}`).src=ev.target.result;
+//     document.getElementById(`ipb-${day}`).classList.add('show');
+//     document.getElementById(`dz-${day}`).style.display='none';
+//   };
+//   r.readAsDataURL(file);
+// }
+// function rmImg(day){
+//   delete imgData[day];
+//   document.getElementById(`ipb-${day}`).classList.remove('show');
+//   document.getElementById(`dz-${day}`).style.display='';
+//   document.getElementById(`fi-${day}`).value='';
+// }
 
-async function submitImgFeedback(day){
+// async function submitImgFeedback(day){
 
-  const data = imgData[day];
-  const note = document.getElementById(`inote-${day}`).value.trim();
-  const btn  = document.getElementById(`isbtn-${day}`);
-  const fb   = document.getElementById(`ifb-${day}`);
-  const fbt  = document.getElementById(`ifbt-${day}`);
+//   const data = imgData[day];
+//   const note = document.getElementById(`inote-${day}`).value.trim();
+//   const btn  = document.getElementById(`isbtn-${day}`);
+//   const fb   = document.getElementById(`ifb-${day}`);
+//   const fbt  = document.getElementById(`ifbt-${day}`);
 
-  if(!data){
-    fb.classList.add('show');
-    fbt.innerHTML = '<span style="color:var(--red)">Please upload an image first.</span>';
-    return;
-  }
+//   if(!data){
+//     fb.classList.add('show');
+//     fbt.innerHTML = '<span style="color:var(--red)">Please upload an image first.</span>';
+//     return;
+//   }
 
-  btn.disabled = true;
-  btn.textContent = 'Analyzing...';
+//   btn.disabled = true;
+//   btn.textContent = 'Analyzing...';
 
-  fb.classList.add('show');
+//   fb.classList.add('show');
 
-  fbt.innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div class="loading-dots"><span></span><span></span><span></span></div>
-      <span style="color:var(--muted);font-size:13px;">
-        AI is scoring your image...
-      </span>
-    </div>
-  `;
+//   fbt.innerHTML = `
+//     <div style="display:flex;align-items:center;gap:10px;">
+//       <div class="loading-dots"><span></span><span></span><span></span></div>
+//       <span style="color:var(--muted);font-size:13px;">
+//         AI is scoring your image...
+//       </span>
+//     </div>
+//   `;
 
-  try{
+//   try{
 
-    let result = null;
-    let attempts = 0;
-    const maxAttempts = 3;
+//     let result = null;
+//     let attempts = 0;
+//     const maxAttempts = 3;
 
-    while(!result && attempts < maxAttempts){
+//     while(!result && attempts < maxAttempts){
 
-      const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev",{
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({
-          model:"openrouter/free",
-          messages:[
-            {
-              role:"system",
-              content:`You are a senior AI design critic and commercial creative director.
+//       const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev",{
+//         method:"POST",
+//         headers:{ "Content-Type":"application/json" },
+//         body: JSON.stringify({
+//           model:"openrouter/free",
+//           messages:[
+//             {
+//               role:"system",
+//               content:`You are a senior AI design critic and commercial creative director.
 
-You MUST analyze the given image deeply and provide a PROFESSIONAL SCORE and FEEDBACK.
+// You MUST analyze the given image deeply and provide a PROFESSIONAL SCORE and FEEDBACK.
 
--------------------------------------
-User focus: ${imgMode}
-User note: ${note || "none"}
+// -------------------------------------
+// User focus: ${imgMode}
+// User note: ${note || "none"}
 
--------------------------------------
-SCORING CRITERIA (0–10 internally):
+// -------------------------------------
+// SCORING CRITERIA (0–10 internally):
 
-- Composition
-- Lighting
-- Subject clarity
-- Commercial appeal
-- Overall quality
+// - Composition
+// - Lighting
+// - Subject clarity
+// - Commercial appeal
+// - Overall quality
 
--------------------------------------
-OUTPUT FORMAT (STRICT):
+// -------------------------------------
+// OUTPUT FORMAT (STRICT):
 
-Score: X/10
+// Score: X/10
 
-Strengths:
-- ...
+// Strengths:
+// - ...
 
-Weaknesses:
-- ...
+// Weaknesses:
+// - ...
 
-Improvements:
-- ...
+// Improvements:
+// - ...
 
-Advanced Tip:
-- ...
+// Advanced Tip:
+// - ...
 
--------------------------------------
-RULES:
+// -------------------------------------
+// RULES:
 
-- Score must be realistic (not always high)
-- Be specific (no generic words)
-- Use visual/design terms
-- No empty sections
-- Max 180 words`
-            },
-            {
-              role:"user",
-              content:[
-                {
-                  type:"image_url",
-                  image_url:{ url: data }
-                }
-              ]
-            }
-          ]
-        })
-      });
+// - Score must be realistic (not always high)
+// - Be specific (no generic words)
+// - Use visual/design terms
+// - No empty sections
+// - Max 180 words`
+//             },
+//             {
+//               role:"user",
+//               content:[
+//                 {
+//                   type:"image_url",
+//                   image_url:{ url: data }
+//                 }
+//               ]
+//             }
+//           ]
+//         })
+//       });
 
-      const d = await res.json();
-      const text = d?.choices?.[0]?.message?.content;
+//       const d = await res.json();
+//       const text = d?.choices?.[0]?.message?.content;
 
-      if(text && text.trim().length > 40){
-        result = text.trim();
-      } else {
-        attempts++;
-        await new Promise(r => setTimeout(r, 700));
-      }
-    }
+//       if(text && text.trim().length > 40){
+//         result = text.trim();
+//       } else {
+//         attempts++;
+//         await new Promise(r => setTimeout(r, 700));
+//       }
+//     }
 
-    if(!result){
-      fbt.innerHTML = '<span style="color:var(--red)">⚠️ AI could not analyze properly. Try again.</span>';
-      return;
-    }
+//     if(!result){
+//       fbt.innerHTML = '<span style="color:var(--red)">⚠️ AI could not analyze properly. Try again.</span>';
+//       return;
+//     }
 
-    // ✅ CLEAN UI FORMAT
-    fbt.innerHTML = result
-      .replace(/\n/g,'<br>')
-      .replace(/Score: ([0-9.]+\/10)/, '<div style="font-size:18px;font-weight:800;color:#22c55e;margin-bottom:8px;">Score: $1</div>')
-      .replace(/Strengths:/g,'<br><strong>Strengths:</strong>')
-      .replace(/Weaknesses:/g,'<br><strong>Weaknesses:</strong>')
-      .replace(/Improvements:/g,'<br><strong>Improvements:</strong>')
-      .replace(/Advanced Tip:/g,'<br><strong>Advanced Tip:</strong>');
+//     // ✅ CLEAN UI FORMAT
+//     fbt.innerHTML = result
+//       .replace(/\n/g,'<br>')
+//       .replace(/Score: ([0-9.]+\/10)/, '<div style="font-size:18px;font-weight:800;color:#22c55e;margin-bottom:8px;">Score: $1</div>')
+//       .replace(/Strengths:/g,'<br><strong>Strengths:</strong>')
+//       .replace(/Weaknesses:/g,'<br><strong>Weaknesses:</strong>')
+//       .replace(/Improvements:/g,'<br><strong>Improvements:</strong>')
+//       .replace(/Advanced Tip:/g,'<br><strong>Advanced Tip:</strong>');
 
-    btn.textContent = '🔍 Analyze Another Image';
-    btn.disabled = false;
+//     btn.textContent = '🔍 Analyze Another Image';
+//     btn.disabled = false;
 
-  }catch(e){
-    console.error(e);
-    fbt.innerHTML = '<span style="color:var(--red)">❌ Connection error. Try again.</span>';
-    btn.textContent = '🔍 Retry';
-    btn.disabled = false;
-  }
-}
+//   }catch(e){
+//     console.error(e);
+//     fbt.innerHTML = '<span style="color:var(--red)">❌ Connection error. Try again.</span>';
+//     btn.textContent = '🔍 Retry';
+//     btn.disabled = false;
+//   }
+// }
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  NAVIGATION                                                      ║
