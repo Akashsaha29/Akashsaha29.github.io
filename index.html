@@ -1201,9 +1201,9 @@ body {
 }
 .fixer-input:focus { outline:none; border-color:var(--primary); background:var(--white); }
 .fixer-input::placeholder { color:var(--light); font-size:13px; }
-.fixer-options { margin-top:14px; margin-bottom:14px; }
+/* .fixer-options { margin-top:14px; margin-bottom:14px; }
 .fixer-opts-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-bottom:8px; }
-.fixer-opts-row { display:flex; gap:8px; flex-wrap:wrap; }
+.fixer-opts-row { display:flex; gap:8px; flex-wrap:wrap; } */
 .fopt {
   padding:7px 14px; border-radius:99px;
   font-size:12px; font-weight:700;
@@ -1713,9 +1713,9 @@ body {
   .fixer-title { font-size:14px; }
   .fixer-sub { font-size:12px; }
   .fixer-input { min-height:100px; font-size:13px; padding:10px 12px; }
-  .fixer-options { margin-top:10px; margin-bottom:10px; }
+  /* .fixer-options { margin-top:10px; margin-bottom:10px; } */
   .fopt { font-size:11px; padding:6px 12px; }
-  .fixer-btn { font-size:13px; padding:12px; }
+  /* .fixer-btn { font-size:13px; padding:12px; } */
   .fixer-result-card { padding:16px 14px; border-radius:12px; }
   .fixer-result-head { gap:10px; margin-bottom:12px; }
   .fixer-upgraded-prompt { font-size:11.5px; padding:12px 14px; }
@@ -2285,7 +2285,7 @@ Example:
 A Black Headphone of Boat is up on the desert 15% of the headphone is inside the sand and the rest is above it. Background: Sand dunes. Camera should be closer and more cinematic. Professional photography. Inspired from the Mummy movie.
 
 The AI will rewrite this into a professional-grade prompt."></textarea>
-          <div class="fixer-options">
+          <!-- <div class="fixer-options">
             <div class="fixer-opts-label">Rewrite style:</div>
             <div class="fixer-opts-row">
               <button class="fopt active" data-style="Midjourney" onclick="setFixerStyle(this)">🎨 Midjourney</button>
@@ -2293,7 +2293,7 @@ The AI will rewrite this into a professional-grade prompt."></textarea>
               <button class="fopt" data-style="Ideogram poster" onclick="setFixerStyle(this)">🪧 Ideogram Poster</button>
               <button class="fopt" data-style="FLUX photorealism" onclick="setFixerStyle(this)">📸 FLUX Photo</button>
             </div>
-          </div>
+          </div> -->
           <button class="fixer-btn" id="fixer-btn" onclick="runPromptFixer()">🔧 Fix & Upgrade My Prompt</button>
         </div>
       </div>
