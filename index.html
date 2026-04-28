@@ -963,6 +963,37 @@ body {
 .tc-badge.both { background:var(--accent-light); color:#92400e; border:1px solid rgba(245,158,11,0.2); }
 .tc-day { font-size:11px; color:var(--muted); }
 
+   /* 🔥 TOOL TAG UPGRADE */
+
+.tool-tag {
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* 🟢 Start Free */
+.tag-start {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid rgba(34,197,94,0.2);
+}
+
+/* 🟡 Free to Try */
+.tag-try {
+  background: #fef3c7;
+  color: #d97706;
+  border: 1px solid rgba(245,158,11,0.2);
+}
+
+/* 🔴 Paid Tool */
+.tag-paid {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid rgba(239,68,68,0.2);
+}
+
 /* ════════════════════════════════
    PROJECTS VIEW
 ════════════════════════════════ */
@@ -4116,25 +4147,25 @@ const BUILDER_STEPS = [
 // ╚══════════════════════════════════════════════════════════════════╝
 window.TOOLS_DATA = [
   {emoji:'🎨',name:'Midjourney v7',cat:'Image',desc:'Unbeaten artistic quality. Primary tool for campaigns, editorial, brand visuals. Soulful lighting in v7.',cost:'Paid Tool',day:1},
-  {emoji:'✍️',name:'Ideogram 2.0',cat:'Image',desc:'Solves the text-in-image problem. Accurate typography for posters, ads, logos. Magic Prompt feature.',cost:'Free to Try',day:5},
+  {emoji:'✍️',name:'Ideogram 2.0',cat:'Image',desc:'Solves the text-in-image problem. Accurate typography for posters, ads, logos. Magic Prompt feature.',cost:'both',day:5},
   {emoji:'🔥',name:'Adobe Firefly',cat:'Image',desc:'Built from licensed content. Safe for client work. Integrates into Photoshop & Illustrator.',cost:'Paid Tool',day:9},
-  {emoji:'⚡',name:'FLUX 1.1 Pro',cat:'Image',desc:'Best for product shots, fashion, photorealistic outputs. Open weights available.',cost:'Free to Try',day:9},
-  {emoji:'🆓',name:'Google ImageFX',cat:'Image',desc:'Unlimited high-quality generation. Best free option for daily practice and concepting.',cost:'Start Free',day:1},
-  {emoji:'🌄',name:'Leonardo AI',cat:'Image',desc:'Fine-tune models, consistent characters, motion features. Great for game and concept art.',cost:'Free to Try',day:10},
-  {emoji:'🎬',name:'Kling 2.6',cat:'Video',desc:'4K output, native audio, 15s+ clips. Best dynamic motion. Top choice for cinematic ads 2026.',cost:'Free to Try',day:3},
-  {emoji:'🎥',name:'Runway Gen-4.5',cat:'Video',desc:'Motion brushes, Act One performance tool, background removal. Best creative control.',cost:'Paid Tool',day:22},
-  {emoji:'🌊',name:'Google Veo 3.1',cat:'Video',desc:'4K output, vertical video, enhanced audio. Exceptional for product demos.',cost:'Paid Tool',day:25},
-  {emoji:'🤖',name:'HeyGen',cat:'Video',desc:'Photorealistic AI presenters, multilingual, script-to-video. Dominates corporate video.',cost:'Free to Try',day:27},
-  {emoji:'✂️',name:'CapCut Pro',cat:'Video',desc:'Auto-captions, smart cut, music sync. Fastest editing for social content. Free.',cost:'Free to Try',day:6},
+  {emoji:'⚡',name:'FLUX 1.1 Pro',cat:'Image',desc:'Best for product shots, fashion, photorealistic outputs. Open weights available.',cost:'both',day:9},
+  {emoji:'🆓',name:'Google ImageFX',cat:'Image',desc:'Unlimited high-quality generation. Best free option for daily practice and concepting.',cost:'Free',day:1},
+  {emoji:'🌄',name:'Leonardo AI',cat:'Image',desc:'Fine-tune models, consistent characters, motion features. Great for game and concept art.',cost:'both',day:10},
+  {emoji:'🎬',name:'Kling 2.6',cat:'Video',desc:'4K output, native audio, 15s+ clips. Best dynamic motion. Top choice for cinematic ads 2026.',cost:'both',day:3},
+  {emoji:'🎥',name:'Runway Gen-4.5',cat:'Video',desc:'Motion brushes, Act One performance tool, background removal. Best creative control.',cost:'both',day:22},
+  {emoji:'🌊',name:'Google Veo 3.1',cat:'Video',desc:'4K output, vertical video, enhanced audio. Exceptional for product demos.',cost:'both',day:25},
+  {emoji:'🤖',name:'HeyGen',cat:'Video',desc:'Photorealistic AI presenters, multilingual, script-to-video. Dominates corporate video.',cost:'both',day:27},
+  {emoji:'✂️',name:'CapCut Pro',cat:'Video',desc:'Auto-captions, smart cut, music sync. Fastest editing for social content. Free.',cost:'both',day:6},
   {emoji:'🔭',name:'Topaz Video AI',cat:'Video',desc:'Upscale AI video to 4K. Makes video ad deliverables broadcast-ready.',cost:'Paid Tool',day:30},
-  {emoji:'🎙️',name:'ElevenLabs',cat:'Audio',desc:'Hyper-realistic voices. Clone your voice or 1000+ options. Industry standard for ad narration.',cost:'Free to Try',day:6},
-  {emoji:'🎵',name:'Suno v4',cat:'Audio',desc:'Full songs with vocals from text. Brand music, ad jingles, background tracks.',cost:'Free to Try',day:6},
+  {emoji:'🎙️',name:'ElevenLabs',cat:'Audio',desc:'Hyper-realistic voices. Clone your voice or 1000+ options. Industry standard for ad narration.',cost:'both',day:6},
+  {emoji:'🎵',name:'Suno v4',cat:'Audio',desc:'Full songs with vocals from text. Brand music, ad jingles, background tracks.',cost:'both',day:6},
   {emoji:'🅰️',name:'Adobe Photoshop',cat:'Design',desc:'Generative fill, AI masking, neural filters. Essential for final polish of AI outputs.',cost:'Paid Tool',day:10},
-  {emoji:'🎯',name:'Canva AI',cat:'Design',desc:'Magic Studio suite: AI text, backgrounds, resize. Best for quick social content at scale.',cost:'Free to Try',day:5},
-  {emoji:'📐',name:'Figma + Make',cat:'Design',desc:'Figma Make generates UI from prompts. Essential for app mockups and brand systems.',cost:'Free to Try',day:34},
-  {emoji:'🚀',name:'Framer',cat:'Design',desc:'AI-built portfolio websites. Best tool for AI designers to launch their portfolio fast.',cost:'Free to Try',day:41},
-  {emoji:'📊',name:'Gamma',cat:'Design',desc:'AI-generated pitch decks from text prompts. Slide design in minutes.',cost:'Free to Try',day:43},
-  {emoji:'🧊',name:'Meshy',cat:'Design',desc:'Text or image to 3D model. Growing demand for 3D product renders in ads.',cost:'Free to Try',day:36},
+  {emoji:'🎯',name:'Canva AI',cat:'Design',desc:'Magic Studio suite: AI text, backgrounds, resize. Best for quick social content at scale.',cost:'both',day:5},
+  {emoji:'📐',name:'Figma + Make',cat:'Design',desc:'Figma Make generates UI from prompts. Essential for app mockups and brand systems.',cost:'both',day:34},
+  {emoji:'🚀',name:'Framer',cat:'Design',desc:'AI-built portfolio websites. Best tool for AI designers to launch their portfolio fast.',cost:'both',day:41},
+  {emoji:'📊',name:'Gamma',cat:'Design',desc:'AI-generated pitch decks from text prompts. Slide design in minutes.',cost:'both',day:43},
+  {emoji:'🧊',name:'Meshy',cat:'Design',desc:'Text or image to 3D model. Growing demand for 3D product renders in ads.',cost:'both',day:36},
 ];
 
 // ╔══════════════════════════════════════════════════════════════════╗
