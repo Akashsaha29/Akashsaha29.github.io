@@ -2334,7 +2334,7 @@ The AI will rewrite this into a professional-grade prompt."></textarea>
             </div>
         </div>
 
-          <div class="drop-zone" id="imgp-dz" onclick="document.getElementById('imgp-fi').click()" ondragover="dzOver2(event)" ondragleave="dzLeave2()" ondrop="dzDrop2(event)">
+          <div class="drop-zone" id="imgp-dz" ondragover="dzOver2(event)" ondragleave="dzLeave2()" ondrop="dzDrop2(event)">
             <input type="file" id="imgp-fi" accept="image/*" onchange="imgpFile(event)" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;">
             <div class="drop-icon">📥</div>
             <div class="drop-title">Drop product/character image here</div>
@@ -4934,17 +4934,16 @@ If the user provides a refinement request, modify only the relevant part without
   btn.disabled = false;
 }
 
-async function generateImagePrompt() {
+async function generateImagePrompt(){
+
   const fileInput = document.getElementById("imgp-fi");
   const file = fileInput.files[0];
 
-  const activeMode = document.querySelector(".imgp-mode-card.active")?.dataset.mode || "both";
-  const context = document.getElementById("imgp-context").value.trim();
   const output = document.getElementById("imgp-result");
-  const placeholder = document.getElementById("imgp-placeholder");
   const btn = document.getElementById("imgp-btn");
+  const context = document.getElementById("imgp-context").value.trim();
 
-  if (!file) {
+  if(!file){
     alert("Please upload an image");
     return;
   }
@@ -4952,118 +4951,129 @@ async function generateImagePrompt() {
   btn.disabled = true;
   btn.textContent = "Analyzing image...";
 
-  placeholder.style.display = "none";
-
+  // 🔄 Loading UI
   output.innerHTML = `
     <div class="fixer-placeholder">
       <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
-        <div class="loading-dots">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="loading-dots"><span></span><span></span><span></span></div>
         <span style="color:var(--muted);font-size:13px;">
-          AI is analyzing your image...
+          Processing... Please wait, generating best result...
         </span>
       </div>
     </div>
   `;
 
-  try {
+  try{
+
     const base64 = await toBase64(file);
 
-    const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        // 🔥 FIXED MODEL (VISION SUPPORT)
-        model: "openrouter/free",
+    let result = null;
+    let attempts = 0;
+    const maxAttempts = 3;
 
-        messages: [
-          {
-            role: "system",
-            content: `You are an elite AI prompt engineer.
+    // 🔁 RETRY LOOP (MAIN FIX)
+    while(!result && attempts < maxAttempts){
 
-User selected mode: ${activeMode}
+      const res = await fetch("https://ai-proxy.akashsaha-rock666.workers.dev",{
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({
+          model:"openrouter/free",
+          messages:[
+            {
+              role:"system",
+              content:`You are a senior AI visual prompt engineer and commercial creative director.
 
-Your job is to generate a HIGH-QUALITY, concise AI image prompt.
+User selected mode: ${imgMode}
 
------------------------------------
+You MUST strictly follow the selected mode.
 
-RULES (VERY STRICT):
+-----------------------------
+MODE DEFINITIONS:
 
-- Always follow 5-layer structure:
-  Subject + Action/State + Environment + Lighting + Style/Camera
+1. recreate:
+- Recreate the exact same image
+- Focus on accuracy (subject, pose, lighting, composition, camera)
+- No creative changes
 
-- Keep output under 35 words
-- No titles
+2. adscene:
+- Keep subject identity
+- Transform into cinematic / commercial ad scene
+- Add dramatic lighting, atmosphere, storytelling
+
+3. both:
+- Keep original structure
+- Slightly enhance environment + lighting
+- Add subtle ad feel (not too dramatic)
+
+4. vocab:
+- DO NOT generate normal prompt
+- Extract 5-layer structure:
+
+Subject:
+Action:
+Environment:
+Lighting:
+Style & Camera:
+
+-----------------------------
+GLOBAL RULES:
+
 - No explanation
 - No extra text
-- Output must be production-ready (Midjourney / Flux)
+- Only output final result
+- Keep prompts clean, realistic, professional
 
------------------------------------
+-----------------------------
+User context:
+${context || "none"}`
+            },
+            {
+              role:"user",
+              content:[
+                { type:"text", text:"Analyze this image and generate output based on selected mode" },
+                { type:"image_url", image_url:{ url: base64 } }
+              ]
+            }
+          ]
+        })
+      });
 
-MODE BEHAVIOR:
+      const data = await res.json();
 
-1. If mode = "recreate":
-→ Recreate single prompt with the exact image faithfully
+      const text = data?.choices?.[0]?.message?.content;
 
-2. If mode = "adscene":
-→ Transform into cinematic advertising version with single prompt(premium, dramatic, stylized)
+      // ✅ VALID RESULT CHECK
+      if(text && text.trim().length > 10){
+        result = text.trim();
+      } else {
+        attempts++;
+        await new Promise(r => setTimeout(r, 800)); // small delay before retry
+      }
+    }
 
-3. If mode = "both":
-→ Create ONE enhanced prompt that combines realism + cinematic advertising feel
+    // ❌ If still no result
+    if(!result){
+      output.innerHTML = `
+        <span style="color:var(--red)">
+          ⚠️ AI is busy right now. Please try again in a moment.
+        </span>
+      `;
+      return;
+    }
 
-4. If mode = "vocab":
-→ Generate a MASTER PROMPT using full 5-layer structure in a slightly detailed but still clean format
-
------------------------------------
-
-IMPORTANT:
-
-- Strongly follow user context if provided
-- Do NOT output multiple prompts
-- Do NOT repeat same structure for all modes
-- Each mode must feel DIFFERENT`
-          },
-          {
-            role: "user",
-            content: [
-              {
-                type: "text",
-                text: `Analyze this image carefully.
-
-User context (high priority): ${context || "none"}
-
-Generate output strictly based on selected mode.`
-              },
-              {
-                type: "image_url",
-                image_url: {
-                  url: base64
-                }
-              }
-            ]
-          }
-        ]
-      })
-    });
-
-    const data = await res.json();
-    console.log("IMAGE RESPONSE:", data);
-
-    const prompt = data.choices?.[0]?.message?.content || "No result";
-
+    // ✅ SUCCESS OUTPUT
     output.innerHTML = `
-      <div class="imgp-output-label">Generated Prompt</div>
-      <div class="imgp-output-prompt">${prompt}</div>
+      <div class="imgp-output-label">
+        ${imgMode === "vocab" ? "Prompt Breakdown" : "Generated Prompt"}
+      </div>
+      <div class="imgp-output-prompt">${result}</div>
     `;
 
-  } catch (err) {
+  }catch(err){
     console.error(err);
-
     output.innerHTML = `
-      <span style="color:var(--red)">❌ Error analyzing image.</span>
+      <span style="color:var(--red)">❌ Error generating prompt</span>
     `;
   }
 
