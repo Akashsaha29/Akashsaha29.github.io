@@ -2066,7 +2066,7 @@ body {
 <div id="builder-view">
   <div class="page-header">
     <h1>⚡ AI Prompt Studio</h1>
-    <p>Three powerful tools in one place — build, fix, or generate prompts from an image reference.</p>
+    <p>Four powerful tools in one place — build, fix, or generate prompts from an image reference.</p>
   </div>
 
   <!-- BUILDER TOOL TABS -->
@@ -2154,6 +2154,8 @@ body {
             </a>
             <a href="https://firefly.adobe.com" target="_blank" rel="noopener" class="try-it-btn firefly">
               <span class="tib-icon">🔥</span><span class="tib-name">Adobe Firefly</span><span class="tib-tag">Free tier</span>
+            <a href="https://gemini.google.com" target="_blank" rel="noopener" class="try-it-btn gemini">
+               <span class="tib-icon">✦</span><span class="tib-name">Gemini</span><span class="tib-tag">Free tier</span></a>   
             </a>
           </div>
         </div>
@@ -2349,6 +2351,7 @@ body {
             <a href="https://kling.kuaishou.com" target="_blank" rel="noopener" class="try-it-btn kling"><span class="tib-icon">🎬</span><span class="tib-name">Kling 2.6</span><span class="tib-tag">Free tier</span></a>
             <a href="https://runwayml.com" target="_blank" rel="noopener" class="try-it-btn runway"><span class="tib-icon">🎥</span><span class="tib-name">Runway</span><span class="tib-tag">Free tier</span></a>
             <a href="https://www.capcut.com" target="_blank" rel="noopener" class="try-it-btn capcut"><span class="tib-icon">✂️</span><span class="tib-name">CapCut</span><span class="tib-tag">Free</span></a>
+            <a href="https://gemini.google.com" target="_blank" rel="noopener" class="try-it-btn gemini"><span class="tib-icon">✦</span><span class="tib-name">Gemini</span><span class="tib-tag">Free</span></a>
           </div>
         </div>
 
@@ -2379,15 +2382,6 @@ Example:
 A Black Headphone of Boat is up on the desert 15% of the headphone is inside the sand and the rest is above it. Background: Sand dunes. Camera should be closer and more cinematic. Professional photography. Inspired from the Mummy movie.
 
 The AI will rewrite this into a professional-grade prompt."></textarea>
-          <!-- <div class="fixer-options">
-            <div class="fixer-opts-label">Rewrite style:</div>
-            <div class="fixer-opts-row">
-              <button class="fopt active" data-style="Midjourney" onclick="setFixerStyle(this)">🎨 Midjourney</button>
-              <button class="fopt" data-style="Kling video" onclick="setFixerStyle(this)">🎬 Kling Video</button>
-              <button class="fopt" data-style="Ideogram poster" onclick="setFixerStyle(this)">🪧 Ideogram Poster</button>
-              <button class="fopt" data-style="FLUX photorealism" onclick="setFixerStyle(this)">📸 FLUX Photo</button>
-            </div>
-          </div> -->
           <button class="fixer-btn" id="fixer-btn" onclick="runPromptFixer()">🔧 Fix & Upgrade My Prompt</button>
         </div>
       </div>
@@ -2409,16 +2403,27 @@ The AI will rewrite this into a professional-grade prompt."></textarea>
             <div class="fixer-upgraded-prompt" id="fixer-upgraded-text"></div>
             <button class="ref-copy" style="margin-top:10px;width:100%;padding:10px;" id="fixer-copy-btn" onclick="copyFixedPrompt()">📋 Copy Upgraded Prompt</button>
             <div class="fixer-explanation" id="fixer-explanation"></div>
-            <div class="try-it-panel">
-              <div class="try-it-label">🚀 Use this upgraded prompt — free image AI</div>
-              <div class="try-it-links">
-                <a href="https://labs.google/fx/tools/image-fx" target="_blank" rel="noopener" class="try-it-btn imagefx"><span class="tib-icon">🆓</span><span class="tib-name">Google ImageFX</span><span class="tib-tag">Free</span></a>
-                <a href="https://ideogram.ai" target="_blank" rel="noopener" class="try-it-btn ideogram"><span class="tib-icon">✍️</span><span class="tib-name">Ideogram</span><span class="tib-tag">Free tier</span></a>
-                <a href="https://app.leonardo.ai" target="_blank" rel="noopener" class="try-it-btn leonardo"><span class="tib-icon">🌄</span><span class="tib-name">Leonardo AI</span><span class="tib-tag">Free tier</span></a>
-                <a href="https://gemini.google.com" target="_blank" rel="noopener" class="try-it-btn gemini"><span class="tib-icon">✦</span><span class="tib-name">Gemini</span><span class="tib-tag">Free</span></a>
               </div>
-            </div>
+         <!-- TRY IT PANEL -->
+        <div class="try-it-panel">
+          <div class="try-it-label">🚀 Test this prompt — free image AI tools</div>
+          <div class="try-it-links">
+            <a href="https://labs.google/fx/tools/image-fx" target="_blank" rel="noopener" class="try-it-btn imagefx">
+              <span class="tib-icon">🆓</span><span class="tib-name">Google ImageFX</span><span class="tib-tag">Free</span>
+            </a>
+            <a href="https://ideogram.ai" target="_blank" rel="noopener" class="try-it-btn ideogram">
+              <span class="tib-icon">✍️</span><span class="tib-name">Ideogram</span><span class="tib-tag">Free tier</span>
+            </a>
+            <a href="https://app.leonardo.ai" target="_blank" rel="noopener" class="try-it-btn leonardo">
+              <span class="tib-icon">🌄</span><span class="tib-name">Leonardo AI</span><span class="tib-tag">Free tier</span>
+            </a>
+            <a href="https://firefly.adobe.com" target="_blank" rel="noopener" class="try-it-btn firefly">
+              <span class="tib-icon">🔥</span><span class="tib-name">Adobe Firefly</span><span class="tib-tag">Free tier</span>
+            <a href="https://gemini.google.com" target="_blank" rel="noopener" class="try-it-btn gemini">
+               <span class="tib-icon">✦</span><span class="tib-name">Gemini</span><span class="tib-tag">Free tier</span></a>   
+            </a>
           </div>
+        </div>
         </div>
       </div>
     </div>
