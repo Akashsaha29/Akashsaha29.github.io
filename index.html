@@ -982,9 +982,37 @@ body {
 /* ── Try It panels ── */
 .try-it-panel { background:var(--bg2); border:1.5px solid var(--border); border-radius:10px; padding:12px 14px; margin-top:14px; }
 .try-it-label { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--muted); margin-bottom:10px; }
-.try-it-links { display:flex; flex-wrap:wrap; gap:8px; }
-.try-it-btn { display:flex; align-items:center; gap:6px; padding:8px 12px; border-radius:8px; text-decoration:none; font-size:12px; font-weight:700; border:1.5px solid var(--border); background:var(--white); transition:all 0.18s; white-space:nowrap; }
-.try-it-btn:hover { transform:translateY(-1px); box-shadow:0 3px 10px rgba(0,0,0,0.1); border-color:transparent; }
+.try-it-links { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; }
+.try-it-btn{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+
+  width:100%;
+  min-height:58px;
+
+  padding:10px 14px;
+
+  border-radius:10px;
+  text-decoration:none;
+
+  font-size:13px;
+  font-weight:700;
+
+  border:1.5px solid var(--border);
+  background:var(--white);
+
+  transition:all 0.18s ease;
+
+  box-sizing:border-box;
+}
+
+.try-it-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(0,0,0,0.08);
+  border-color:transparent;
+}
 .tib-icon { font-size:14px; }
 .tib-name { color:var(--text); }
 .tib-tag { font-size:10px; font-weight:600; color:var(--muted); background:var(--bg2); padding:1px 6px; border-radius:99px; }
@@ -1001,6 +1029,8 @@ body {
 .try-it-btn.kling:hover .tib-name { color:#e11d48; }
 .try-it-btn.runway:hover { background:#fafafa; border-color:#111; }
 .try-it-btn.runway:hover .tib-name { color:#111; }
+.try-it-btn.firefly:hover { background:#fff5e8; border-color:#ff6b00; }
+.try-it-btn.firefly:hover .tib-name { color:#ff6b00; }
 .try-it-btn.capcut:hover { background:#f0f7ff; border-color:#2563eb; }
 .try-it-btn.capcut:hover .tib-name { color:#2563eb; }
 
@@ -2143,20 +2173,50 @@ body {
         <div class="try-it-panel">
           <div class="try-it-label">🚀 Test this prompt — free image AI tools</div>
           <div class="try-it-links">
-            <a href="https://labs.google/fx/tools/image-fx" target="_blank" rel="noopener" class="try-it-btn imagefx">
-              <span class="tib-icon">🆓</span><span class="tib-name">Google ImageFX</span><span class="tib-tag">Free</span>
-            </a>
-            <a href="https://ideogram.ai" target="_blank" rel="noopener" class="try-it-btn ideogram">
-              <span class="tib-icon">✍️</span><span class="tib-name">Ideogram</span><span class="tib-tag">Free tier</span>
-            </a>
-            <a href="https://app.leonardo.ai" target="_blank" rel="noopener" class="try-it-btn leonardo">
-              <span class="tib-icon">🌄</span><span class="tib-name">Leonardo AI</span><span class="tib-tag">Free tier</span>
-            </a>
-            <a href="https://firefly.adobe.com" target="_blank" rel="noopener" class="try-it-btn firefly">
-              <span class="tib-icon">🔥</span><span class="tib-name">Adobe Firefly</span><span class="tib-tag">Free tier</span>
-            <a href="https://gemini.google.com" target="_blank" rel="noopener" class="try-it-btn gemini">
-               <span class="tib-icon">✦</span><span class="tib-name">Gemini</span><span class="tib-tag">Free tier</span></a>   
-            </a>
+            <a href="https://labs.google/fx/tools/image-fx"
+     target="_blank"
+     rel="noopener"
+     class="try-it-btn imagefx">
+    <span class="tib-icon">🆓</span>
+    <span class="tib-name">Google ImageFX</span>
+    <span class="tib-tag">Free</span>
+  </a>
+
+  <a href="https://ideogram.ai"
+     target="_blank"
+     rel="noopener"
+     class="try-it-btn ideogram">
+    <span class="tib-icon">✍️</span>
+    <span class="tib-name">Ideogram</span>
+    <span class="tib-tag">Free tier</span>
+  </a>
+
+  <a href="https://app.leonardo.ai"
+     target="_blank"
+     rel="noopener"
+     class="try-it-btn leonardo">
+    <span class="tib-icon">🌄</span>
+    <span class="tib-name">Leonardo AI</span>
+    <span class="tib-tag">Free tier</span>
+  </a>
+
+  <a href="https://firefly.adobe.com"
+     target="_blank"
+     rel="noopener"
+     class="try-it-btn firefly">
+    <span class="tib-icon">🔥</span>
+    <span class="tib-name">Adobe Firefly</span>
+    <span class="tib-tag">Free tier</span>
+  </a>
+
+  <a href="https://gemini.google.com"
+     target="_blank"
+     rel="noopener"
+     class="try-it-btn gemini">
+    <span class="tib-icon">✦</span>
+    <span class="tib-name">Gemini</span>
+    <span class="tib-tag">Free tier</span>
+  </a>
           </div>
         </div>
       </div>
