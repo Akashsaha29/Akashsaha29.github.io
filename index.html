@@ -894,18 +894,31 @@ body {
 .bp-prompt-live .token { transition:all 0.2s; }
 .bp-prompt-live .token.new { color:var(--primary); font-weight:700; }
 .bp-prompt-live .token.neg { color:var(--red); }
-.bp-actions { padding:14px 20px; display:flex; flex-direction:column; gap:8px; }
+.bp-actions { padding:14px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+
+  position:relative;
+  z-index:20;
+
+  isolation:isolate; }
 .bp-copy {
   width:100%; padding:11px; border-radius:8px;
   background:var(--primary); border:none; color:#fff;
   font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;
 }
 .bp-copy:hover { background:var(--primary-dark); }
-.bp-clear {
-  width:100%; padding:9px; border-radius:8px;
-  background:var(--bg); border:1.5px solid var(--border);
-  color:var(--muted); font-size:12px; font-weight:600;
-  cursor:pointer; transition:all 0.2s;
+.bp-clear{
+  position:relative;
+  z-index:30;
+
+  pointer-events:auto;
+
+  width:100%;
+  cursor:pointer;
+
+  -webkit-tap-highlight-color: transparent;
 }
 .bp-clear:hover { border-color:var(--red); color:var(--red); }
 .bp-score {
@@ -2402,8 +2415,8 @@ body {
         </div>
 
         <div class="bp-actions">
-          <button class="bp-copy" onclick="copyBuilderPrompt()">📋 Copy Video Prompt</button>
-          <button class="bp-clear" onclick="clearBuilder()">↺ Reset</button>
+          <button type="button" class="bp-copy" onclick="copyVideoPrompt(event)"> 📋 Copy Video Prompt </button>
+          <button type="button" class="bp-clear" onclick="clearVideoBuilder(event)"> ↺ Reset </button>
         </div>
         <div class="try-it-panel" style="margin-top:12px;">
           <div class="try-it-label">🎬 Test this prompt — free video AI tools</div>
@@ -4970,34 +4983,136 @@ function updateVideoPrompt(){
   if(scoreEl) scoreEl.textContent='Video Prompt Quality: '+scoreLabels[idx];
 }
 
-function copyVideoPrompt(){
-  const scene=(document.getElementById('vb-scene')||{}).value||'';
-  const endpoint=(document.getElementById('vb-endpoint')||{}).value||'';
-  const s=vbSelections;
-  const isI2V=vbMode==='i2v';
-  const parts=[];
-  if(!isI2V && scene.trim()) parts.push(scene.trim());
-  if(s.camera) parts.push((isI2V?'':'Camera: ')+s.camera);
-  if(s.motion) parts.push(s.motion+(endpoint.trim()?', '+endpoint.trim():''));
-  if(s.vlight) parts.push(s.vlight);
-  if(s.vstyle && !isI2V) parts.push(s.vstyle);
-  if(s.vformat) parts.push(s.vformat);
-  if(!parts.length){alert('Add a scene description and select at least camera movement!');return;}
-  const neg='Negative: blurry, static shot, distorted limbs, low quality, watermark';
-  const full=parts.join('. ')+'. '+neg;
-  navigator.clipboard.writeText(full).then(()=>{
-    const btn=document.querySelector('.bp-copy');
-    if(btn){btn.textContent='✅ Copied!';setTimeout(()=>{btn.textContent='📋 Copy Video Prompt';},2000);}
-  });
+async function copyVideoPrompt(e){
+
+  if(e){
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  const scene =
+    (document.getElementById('vb-scene') || {}).value || '';
+
+  const endpoint =
+    (document.getElementById('vb-endpoint') || {}).value || '';
+
+  const s = vbSelections || {};
+
+  const isI2V = vbMode === 'i2v';
+
+  const parts = [];
+
+  if(!isI2V && scene.trim()){
+    parts.push(scene.trim());
+  }
+
+  if(s.camera){
+    parts.push(
+      (isI2V ? '' : 'Camera: ') + s.camera
+    );
+  }
+
+  if(s.motion){
+
+    parts.push(
+      s.motion +
+      (endpoint.trim() ? ', ' + endpoint.trim() : '')
+    );
+
+  }
+
+  if(s.vlight){
+    parts.push(s.vlight);
+  }
+
+  if(s.vstyle && !isI2V){
+    parts.push(s.vstyle);
+  }
+
+  if(s.vformat){
+    parts.push(s.vformat);
+  }
+
+  if(!parts.length){
+
+    alert(
+      'Add a scene description and select at least one video option.'
+    );
+
+    return;
+  }
+
+  const neg =
+    'Negative: blurry, static shot, distorted limbs, low quality, watermark';
+
+  const full =
+    parts.join('. ') + '. ' + neg;
+
+  try{
+
+    await navigator.clipboard.writeText(full);
+
+    const btn =
+      document.querySelector('.bp-copy');
+
+    if(btn){
+
+      const original =
+        btn.innerHTML;
+
+      btn.innerHTML =
+        '✅ Copied Successfully';
+
+      btn.style.opacity = '0.92';
+
+      setTimeout(()=>{
+
+        btn.innerHTML = original;
+
+        btn.style.opacity = '1';
+
+      },2000);
+
+    }
+
+  }catch(err){
+
+    console.error(err);
+
+    alert(
+      'Clipboard copy failed. Browser blocked access.'
+    );
+
+  }
 }
 
-function clearVideoBuilder(){
-  vbSelections={};
-  document.querySelectorAll('.vbs-opt').forEach(o=>o.classList.remove('selected'));
-  const sceneEl=document.getElementById('vb-scene');
-  const epEl=document.getElementById('vb-endpoint');
-  if(sceneEl) sceneEl.value='';
-  if(epEl) epEl.value='';
+function clearVideoBuilder(e){
+
+  if(e){
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  vbSelections = {};
+
+  document
+    .querySelectorAll('.vbs-opt')
+    .forEach(o => o.classList.remove('selected'));
+
+  const sceneEl =
+    document.getElementById('vb-scene');
+
+  const epEl =
+    document.getElementById('vb-endpoint');
+
+  if(sceneEl){
+    sceneEl.value = '';
+  }
+
+  if(epEl){
+    epEl.value = '';
+  }
+
   updateVideoPrompt();
 }
 
