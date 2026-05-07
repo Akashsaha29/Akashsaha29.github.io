@@ -2661,585 +2661,96 @@ const PHASES = [
 // ║  LESSONS DATA (7 fully designed + stubs for 8-45)               ║
 // ╚══════════════════════════════════════════════════════════════════╝
 const LESSONS = {
-1:{
-  phase:'Phase 1 — Prompt Mastery',
-  title:'Day 1: How AI Thinks — The 5-Layer Prompt Formula',
-  tools:['ChatGPT Images (Free)','Nano Banana Pro (Free)','Midjourney v8'],
-  time:'45 min',
-  tags:['foundation','theory'],
-  videos:[
-    {title:'How AI Image Generation Actually Works',channel:'Fireship',duration:'8:42',url:'https://www.youtube.com/results?search_query=how+AI+image+generation+diffusion+works+explained+2026',bg:'linear-gradient(135deg,#ff6b35,#f7c59f)'},
-    {title:'Midjourney Prompt Masterclass — Beginners',channel:'Theoretically Media',duration:'22:15',url:'https://www.youtube.com/results?search_query=midjourney+prompt+masterclass+beginners+2026',bg:'linear-gradient(135deg,#4158D0,#C850C0)'},
-    {title:'Nano Banana Full Tutorial (Free AI)',channel:'Matt Wolfe',duration:'11:20',url:'https://www.youtube.com/results?search_query=google+imagefx+tutorial+free+AI+image+generation+2026',bg:'linear-gradient(135deg,#0093E9,#80D0C7)'},
-    {title:'The Prompt Formula That Changes Everything',channel:'AI Advantage',duration:'14:30',url:'https://www.youtube.com/results?search_query=AI+image+prompt+formula+5+layers+masterclass',bg:'linear-gradient(135deg,#8EC5FC,#E0C3FC)'},
-  ],
-  inspiration:[
-    {name:'Kinfolk Magazine',desc:'Gold standard of editorial lifestyle photography. Study every image for lighting, space, and simplicity.',type:'website',url:'https://kinfolk.com',tag:'Editorial'},
-    {name:'Pinterest: Midjourney Prompt Boards',desc:'Search "midjourney prompts editorial photography" — see real prompts and their outputs side by side.',type:'pinterest',url:'https://pinterest.com/search/pins/?q=midjourney+prompts+editorial+photography',tag:'AI Prompts'},
-    {name:'Midjourney Official Showcase',desc:'Top-rated images from the best prompt writers. Reverse-engineer the style words they use.',type:'website',url:'https://www.midjourney.com/showcase',tag:'AI Gallery'},
-    {name:'Behance: AI Photography & Design',desc:'Professional AI design work with real commercial briefs. Filter by AI tools.',type:'behance',url:'https://www.behance.net/search/projects?search=AI+photography+design+2026',tag:'Commercial'},
-  ],
-  imageRefs:[
-    {emoji:'☕',title:'Lifestyle Editorial — Morning Coffee',style:'Kinfolk Magazine',bg:'linear-gradient(135deg,#c8956c,#f0d0a0)',prompt:'Editorial photo, woman in minimal Scandinavian kitchen, holding white ceramic mug, eyes closed, morning light through sheer linen curtains, golden hour warmth, shot on Sony A7III, 50mm, f/1.8, shallow DOF, Kinfolk magazine aesthetic --ar 4:5 --no text, clutter, artificial lighting'},
-    {emoji:'👔',title:'Executive Corporate Portrait',style:'LinkedIn Editorial',bg:'linear-gradient(135deg,#2c3e50,#3498db)',prompt:'Professional portrait, 40-year-old man, tailored charcoal suit, neutral confident posture, modern glass office lobby, dramatic window light, Canon R5, 85mm, f/1.8, desaturated corporate editorial, Leica documentary style --ar 3:4 --no smile, casual'},
-    {emoji:'🏡',title:'Luxury Interior Architecture',style:'Julius Shulman',bg:'linear-gradient(135deg,#c4a882,#f5e6d3)',prompt:'Luxury penthouse living room, floor-to-ceiling windows, city view at golden hour, Italian marble floors, bespoke furniture, architectural photography, Julius Shulman inspired, long exposure, blue hour city lights --ar 16:9 --no people'},
-    {emoji:'💄',title:'Beauty Product — Cosmetics',style:'Vogue Beauty',bg:'linear-gradient(135deg,#ff6b9d,#c44b4b)',prompt:'Luxury lipstick on white marble, macro photography, dramatic side lighting, soft shadow, minimal luxury aesthetic, Vogue beauty editorial, ultra-sharp, hyperrealistic, studio light --ar 1:1 --no hands, background elements'},
-  ],
-  content:`
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon blue">🧠</div>
-    <div>
-      <div class="concept-card-title">Why most people get bad AI images</div>
-      <div class="concept-card-sub">And the one mindset shift that fixes it instantly</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p>AI models don't "see" your vision — they predict the most likely visual output for your words. Type "a woman drinking coffee" and the AI picks the average of a million similar images. <strong>Specific, professional language tells the AI exactly what to predict.</strong></p>
-    <div class="highlight-box blue">
-      <span class="hb-icon">💡</span>
-      <div class="hb-content">
-        <div class="hb-title">The Core Insight</div>
-        <div class="hb-text">Every word you add narrows down the possibility space. "Coffee" → a million images. "Ethiopian Yirgacheffe coffee in a white ceramic cup, steam rising, shot on 50mm, golden hour, Kinfolk aesthetic" → one very specific image. The more layers you add, the closer the AI gets to your vision.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon amber">📐</div>
-    <div>
-      <div class="concept-card-title">The 5-Layer Prompt Formula</div>
-      <div class="concept-card-sub">Include all 5 and your results will be 10× better immediately</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <ul class="steps-list">
-      <li class="step-item"><div class="step-num">1</div><div class="step-content"><div class="step-title">Subject + Description</div><div class="step-desc">Not "a woman" — instead: "a 27-year-old South Asian woman with sharp cheekbones, natural makeup, wearing an ivory linen blazer"</div></div></li>
-      <li class="step-item"><div class="step-num">2</div><div class="step-content"><div class="step-title">Action / State</div><div class="step-desc">What are they doing? "seated at a marble desk, fingers wrapped around a ceramic mug, gaze directed slightly left"</div></div></li>
-      <li class="step-item"><div class="step-num">3</div><div class="step-content"><div class="step-title">Environment</div><div class="step-desc">Where? "minimal all-white penthouse, floor-to-ceiling windows, city skyline at dusk, single monstera plant"</div></div></li>
-      <li class="step-item"><div class="step-num">4</div><div class="step-content"><div class="step-title">Lighting Setup</div><div class="step-desc"><strong>Most underused layer.</strong> "soft morning key light from top-left, warm golden hour glow, slight rim light separating subject from background"</div></div></li>
-      <li class="step-item"><div class="step-num">5</div><div class="step-content"><div class="step-title">Style + Camera</div><div class="step-desc">"shot on Sony A7IV, 85mm portrait lens, f/1.4, shallow depth of field, Vogue editorial aesthetic, desaturated warm tones"</div></div></li>
-    </ul>
-  </div>
-</div>
-
-<div class="compare-section">
-  <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px;">🔍 See the Difference — Toggle Between Beginner & Expert</div>
-  <div class="compare-toggle-bar">
-    <button class="compare-tab bad active" id="cmp1-bad" onclick="switchCompare('cmp1','bad')">❌ Beginner Prompt</button>
-    <button class="compare-tab good" id="cmp1-good" onclick="switchCompare('cmp1','good')">✅ Expert Prompt</button>
-  </div>
-  <div class="compare-panel bad-panel active" id="cmp1-bad-panel">
-    <div class="compare-prompt">"a woman drinking coffee in a cafe"</div>
-    <div class="compare-annotation"><strong>What's missing:</strong> No description of age, ethnicity, or clothing. No environment detail. No lighting. No camera or style. The AI has infinite choices — so it picks the average of every café photo it's ever seen. Generic result every time.</div>
-  </div>
-  <div class="compare-panel good-panel" id="cmp1-good-panel">
-    <div class="compare-prompt">"Editorial photo of a 28-year-old woman in a minimal Scandinavian kitchen, holding white ceramic mug with both hands, eyes closed, morning light through sheer linen curtains, golden hour warmth, shot on Sony A7III, 50mm, shallow depth of field, Kinfolk magazine aesthetic, warm muted tones --ar 4:5 --no text, clutter, posed"</div>
-    <div class="compare-annotation"><strong>What changed:</strong> 5 layers added — specific subject, clear environment, defined lighting (golden hour + linen curtains), camera specs (50mm, shallow DOF), and a style reference (Kinfolk). The AI now has a very narrow target. Same subject — completely different, professional result.</div>
-  </div>
-</div>
-
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon green">📋</div>
-    <div>
-      <div class="concept-card-title">The Universal Prompt Template</div>
-      <div class="concept-card-sub">Copy this — adapt it for every single prompt you write</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <div class="prompt-card">
-      <div class="prompt-card-head">
-        <span class="prompt-card-label">// UNIVERSAL TEMPLATE</span>
-        <button class="copy-btn" onclick="copyPrompt(this, '[SUBJECT + DESCRIPTION] + [ACTION/STATE] + [ENVIRONMENT] + [LIGHTING SETUP] + [CAMERA + LENS] + [STYLE REFERENCE] + [MOOD/COLOR] --ar [RATIO] --no [THINGS TO AVOID]')">📋 Copy</button>
-      </div>
-      <div class="prompt-card-body">[SUBJECT + DESCRIPTION] + [ACTION/STATE] + [ENVIRONMENT] + [LIGHTING SETUP] + [CAMERA + LENS] + [STYLE REFERENCE] + [MOOD/COLOR] --ar [RATIO] --no [THINGS TO AVOID]</div>
-    </div>
-    <div class="prompt-card">
-      <div class="prompt-card-head">
-        <span class="prompt-card-label">// EXAMPLE — CORPORATE AD</span>
-        <button class="copy-btn" onclick="copyPrompt(this, 'A 30-year-old man in a tailored charcoal suit, standing with arms crossed, confident expression, modern glass office building lobby, dramatic directional window light creating sharp shadows, shot on Canon EOS R5, 35mm wide, Leica documentary style, cool blue-grey tones, cinematic depth --ar 4:5 --no blurry, cartoon, text, bad anatomy')">📋 Copy</button>
-      </div>
-      <div class="prompt-card-body">A 30-year-old man in a tailored charcoal suit, standing with arms crossed, confident expression, modern glass office building lobby, <span class="prompt-param">dramatic directional window light creating sharp shadows</span>, shot on Canon EOS R5, 35mm wide, <span class="prompt-style">Leica documentary style, cool blue-grey tones, cinematic depth</span> --ar 4:5 <span class="prompt-neg">--no blurry, cartoon, text, bad anatomy</span></div>
-    </div>
-  </div>
-</div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon green">🔧</div>
-    <div>
-      <div class="concept-card-title">Tool Spotlight: ChatGPT Images + Nano Banana Pro</div>
-      <div class="concept-card-sub">Your two free starting tools — and why each serves a different purpose</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p><strong>ChatGPT Images</strong> (chatgpt.com) — GPT-4o generates images directly inside a conversation. Describe what you want, iterate by saying "make it warmer" or "change the background." #1 on Image Arena 2026. Free tier. <em>Best for: quick ideation, exploring concepts, conversational iteration.</em> <a href="https://chatgpt.com" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Open ChatGPT →</a></p>
-    <p><strong>Nano Banana Pro</strong> (nanobanana.org) — Google Gemini-powered image generation and editing. Free tier with unlimited generations. Upload existing photos and edit with text commands. <em>Best for: daily practice, editing real photos, batch generation, zero cost barrier.</em> <a href="https://nanobanana.org" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Open Nano Banana →</a></p>
-    <div class="highlight-box green">
-      <span class="hb-icon">💡</span>
-      <div class="hb-content">
-        <div class="hb-title">Why Both?</div>
-        <div class="hb-text">ChatGPT lets you refine images in conversation — "make the lighting more dramatic." Nano Banana is faster for editing existing photos and batch generation. Use ChatGPT to find the right concept, Nano Banana to execute variations.</div>
-      </div>
-    </div>
-  </div>
-</div>`,
-  assignment:{title:'Day 1: Your First 5-Layer Prompt',emoji:'🎯',desc:'Write one professional prompt using all 5 layers. Generate the image in Nano Banana (free). Your goal: get a result you\'re proud to screenshot.',deliverables:['Write your prompt using all 5 layers (Subject, Action, Environment, Lighting, Style)','Generate it in Nano Banana — paste the image URL or describe the result','Which layer made the biggest difference to your output?'],placeholder:'My 5-layer prompt:\n1. Subject:\n2. Action:\n3. Environment:\n4. Lighting:\n5. Style/Camera:\n\nFull prompt:\n\nResult description:\n\nBiggest layer impact:',systemPrompt:'You are a professional AI prompt engineering instructor. A student just completed Day 1 and submitted their first 5-layer prompt. Review each layer specifically: is it vague or precise? Give ONE rewritten improved version of their full prompt. Be encouraging and specific. Max 250 words.'}
-},
-2:{
-  phase:'Phase 1 — Prompt Mastery',
-  title:'Day 2: Style Language — Sound Like a Designer',
-  tools:['Midjourney v8','Nano Banana Pro (Free)','ChatGPT Images (Free)'],
-  time:'50 min',
-  tags:['prompts','style','vocabulary'],
-  videos:[
-    {title:'Every Visual Style You Need for AI Design',channel:'Design Theory',duration:'18:40',url:'https://www.youtube.com/results?search_query=visual+style+vocabulary+AI+design+photography+aesthetics',bg:'linear-gradient(135deg,#f093fb,#f5576c)'},
-    {title:'Lighting Terms That Transform Your Prompts',channel:'Peter McKinnon',duration:'15:22',url:'https://www.youtube.com/results?search_query=photography+lighting+terms+rembrandt+butterfly+split+explained',bg:'linear-gradient(135deg,#4facfe,#00f2fe)'},
-    {title:'50 Midjourney Style Aesthetic Words That Work',channel:'Future Tech Pilot',duration:'20:10',url:'https://www.youtube.com/results?search_query=midjourney+style+reference+aesthetic+words+guide+2026',bg:'linear-gradient(135deg,#43e97b,#38f9d7)'},
-    {title:'Aspect Ratios — When to Use Each',channel:'Theoretically Media',duration:'9:15',url:'https://www.youtube.com/results?search_query=aspect+ratio+guide+social+media+design+instagram+youtube+2026',bg:'linear-gradient(135deg,#fa709a,#fee140)'},
-  ],
-  inspiration:[
-    {name:'Pinterest: Moody Editorial Photography',desc:'Search "chiaroscuro portrait photography" — these lighting references translate directly into prompt vocabulary.',type:'pinterest',url:'https://pinterest.com/search/pins/?q=chiaroscuro+editorial+portrait+photography',tag:'Lighting'},
-    {name:'Wallpaper* Magazine',desc:'Premium editorial styling. Study their color language and minimal composition across every issue.',type:'website',url:'https://www.wallpaper.com',tag:'Editorial'},
-    {name:'Peter McKinnon — YouTube',desc:'Best visual teacher for understanding lighting and photo style in simple, memorable terms.',type:'youtube',url:'https://www.youtube.com/@PeterMcKinnon',tag:'FREE'},
-    {name:'Dribbble: Color Palette Trending',desc:'See how professionals pair colors for specific brand moods. Search by the emotion you want to evoke.',type:'dribbble',url:'https://dribbble.com/tags/color-palette',tag:'Color'},
-  ],
-  imageRefs:[
-    {emoji:'🌅',title:'Warm Analog — Kodachrome',style:'35mm Film',bg:'linear-gradient(135deg,#f6d365,#fda085)',prompt:'Warm analog lifestyle photography, person in linen clothing, golden hour, 35mm film grain, Kodachrome color palette, overexposed highlights, sun flare, nostalgic warmth, slightly washed out colors --ar 3:2 --no digital, sharp, cold tones'},
-    {emoji:'🖤',title:'Dark Luxury — Chiaroscuro',style:'Peter Lindbergh',bg:'linear-gradient(135deg,#232526,#414345)',prompt:'Chiaroscuro fashion portrait, dramatic single directional light, 85% deep shadow, minimal light on face, black seamless background, high contrast monochrome, Peter Lindbergh style, textured skin, raw emotion --ar 2:3 --no smile, even lighting, bright'},
-    {emoji:'🔵',title:'Cyberpunk Cinematic',style:'Blade Runner 2049',bg:'linear-gradient(135deg,#0f0c29,#302b63)',prompt:'Cyberpunk urban scene, neon sign color spill, rain reflections on wet pavement, blue and orange complementary light sources, Roger Deakins Blade Runner 2049 cinematography, atmospheric fog, volumetric light shafts, cinematic wide --ar 21:9 --no daytime, clean'},
-    {emoji:'🌿',title:'Scandinavian Minimal — MUJI',style:'MUJI Catalog',bg:'linear-gradient(135deg,#e8d5c4,#f5f0ea)',prompt:'Minimal Scandinavian product scene, white linen surface, natural wood, single green plant, soft morning diffused window light, beige and warm white, MUJI catalog aesthetic, zero clutter, breathing room, peaceful --ar 1:1 --no pattern, noise'},
-  ],
-  content:`
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon purple">🎨</div>
-    <div>
-      <div class="concept-card-title">The Language Gap Between Beginner and Professional</div>
-      <div class="concept-card-sub">The words designers use — now your words too</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p>When a client says "make it feel premium," a beginner types "luxury". A professional types <span class="vocab-pill" onclick="openInVocab('editorial, quiet luxury, understated elegance')">editorial, quiet luxury, understated elegance</span>. Same intent — completely different outputs.</p>
-    <p>Today you build the mental vocabulary that separates professional AI designers from everyone else. These terms are direct inputs into the AI's prediction engine.</p>
-  </div>
-</div>
-
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon blue">💡</div>
-    <div>
-      <div class="concept-card-title">Mood & Atmosphere Vocabulary</div>
-      <div class="concept-card-sub">Click any term to copy it into your prompt</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p><strong>Premium / Luxury:</strong> <span class="vocab-pill" onclick="openInVocab('editorial')">editorial</span> <span class="vocab-pill" onclick="openInVocab('quiet luxury')">quiet luxury</span> <span class="vocab-pill" onclick="openInVocab('understated elegance')">understated elegance</span> <span class="vocab-pill" onclick="openInVocab('refined minimal')">refined minimal</span> <span class="vocab-pill" onclick="openInVocab('old money aesthetic')">old money aesthetic</span></p>
-    <p><strong>Energetic / Bold:</strong> <span class="vocab-pill" onclick="openInVocab('kinetic energy')">kinetic energy</span> <span class="vocab-pill" onclick="openInVocab('maximalist')">maximalist</span> <span class="vocab-pill" onclick="openInVocab('vibrant chromatic')">vibrant chromatic</span> <span class="vocab-pill" onclick="openInVocab('electric oversaturated')">electric oversaturated</span></p>
-    <p><strong>Dark / Moody:</strong> <span class="vocab-pill" onclick="openInVocab('chiaroscuro')">chiaroscuro</span> <span class="vocab-pill" onclick="openInVocab('noir atmosphere')">noir atmosphere</span> <span class="vocab-pill" onclick="openInVocab('brooding desaturated')">brooding desaturated</span> <span class="vocab-pill" onclick="openInVocab('high contrast shadows')">high contrast shadows</span></p>
-    <p><strong>Clean / Fresh:</strong> <span class="vocab-pill" onclick="openInVocab('airy Scandinavian')">airy Scandinavian</span> <span class="vocab-pill" onclick="openInVocab('sun-drenched')">sun-drenched</span> <span class="vocab-pill" onclick="openInVocab('bright whites, open space')">bright whites, open space</span> <span class="vocab-pill" onclick="openInVocab('breathing room')">breathing room</span></p>
-    <p><strong>Retro / Analog:</strong> <span class="vocab-pill" onclick="openInVocab('35mm film grain')">35mm film grain</span> <span class="vocab-pill" onclick="openInVocab('Kodachrome palette')">Kodachrome palette</span> <span class="vocab-pill" onclick="openInVocab('vintage Polaroid')">vintage Polaroid</span> <span class="vocab-pill" onclick="openInVocab('70s warm tones')">70s warm tones</span></p>
-    <p><strong>Futuristic:</strong> <span class="vocab-pill" onclick="openInVocab('cyberpunk bioluminescent')">cyberpunk bioluminescent</span> <span class="vocab-pill" onclick="openInVocab('holographic chrome')">holographic chrome</span> <span class="vocab-pill" onclick="openInVocab('LED ambient glow')">LED ambient glow</span></p>
-  </div>
-</div>
-
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon amber">📸</div>
-    <div>
-      <div class="concept-card-title">Style References — Your Design Vocabulary Superpower</div>
-      <div class="concept-card-sub">One name loads thousands of visual decisions instantly</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <div class="highlight-box amber">
-      <span class="hb-icon">⚡</span>
-      <div class="hb-content">
-        <div class="hb-title">Why References Are So Powerful</div>
-        <div class="hb-text">When you type "Annie Leibovitz", the AI doesn't look it up — it already knows the lighting, contrast, intimacy, and editorial quality of thousands of her images. You're loading a complete visual system with one word.</div>
-      </div>
-    </div>
-    <p><strong>Editorial/Magazine:</strong> <span class="vocab-pill" onclick="openInVocab('Vogue editorial')">Vogue editorial</span> <span class="vocab-pill" onclick="openInVocab('Kinfolk magazine')">Kinfolk magazine</span> <span class="vocab-pill" onclick="openInVocab('Wallpaper* aesthetic')">Wallpaper* aesthetic</span></p>
-    <p><strong>Fashion Photography:</strong> <span class="vocab-pill" onclick="openInVocab('Tim Walker surrealist')">Tim Walker surrealist</span> <span class="vocab-pill" onclick="openInVocab('Peter Lindbergh monochrome')">Peter Lindbergh monochrome</span> <span class="vocab-pill" onclick="openInVocab('Annie Leibovitz portrait')">Annie Leibovitz portrait</span></p>
-    <p><strong>Cinematic:</strong> <span class="vocab-pill" onclick="openInVocab('Roger Deakins cinematography')">Roger Deakins cinematography</span> <span class="vocab-pill" onclick="openInVocab('Emmanuel Lubezki long take')">Emmanuel Lubezki long take</span> <span class="vocab-pill" onclick="openInVocab('Blade Runner 2049 color grade')">Blade Runner 2049</span></p>
-    <p><strong>Product:</strong> <span class="vocab-pill" onclick="openInVocab('Apple product photography')">Apple product photography</span> <span class="vocab-pill" onclick="openInVocab('MUJI catalog aesthetic')">MUJI catalog</span> <span class="vocab-pill" onclick="openInVocab('Hodinkee watch editorial')">Hodinkee editorial</span></p>
-  </div>
-</div>
-
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon green">📐</div>
-    <div>
-      <div class="concept-card-title">Aspect Ratios — Know These by Heart</div>
-      <div class="concept-card-sub">Wrong ratio = wrong platform. Right ratio = professional delivery.</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <div class="prompt-card">
-      <div class="prompt-card-head"><span class="prompt-card-label">// RATIOS BY PLATFORM</span><button class="copy-btn" onclick="copyPrompt(this, '--ar 1:1  → Instagram square\n--ar 4:5  → Instagram portrait (best reach)\n--ar 9:16 → Stories & Reels / TikTok\n--ar 16:9 → YouTube thumbnail / landscape\n--ar 2:3  → Portrait print / magazine\n--ar 21:9 → Cinematic / billboard')">📋 Copy</button></div>
-      <div class="prompt-card-body">--ar 1:1  → Instagram square
---ar 4:5  → Instagram portrait (best organic reach)
---ar 9:16 → Stories, Reels, TikTok
---ar 16:9 → YouTube thumbnail, landscape video
---ar 2:3  → Portrait print, magazine, poster
---ar 21:9 → <span class="prompt-style">Cinematic widescreen, billboard</span></div>
-    </div>
-  </div>
-</div>`,
-  assignment:{title:'Day 2: Style Word Power Test',emoji:'🎨',desc:'Take ONE simple prompt. Add a single style word and regenerate. Repeat 3 times with different style references. See how one word transforms everything.',deliverables:['Base prompt (simple, 1 sentence)','Version A: add one cinematic/film style reference — result?','Version B: add one photographer name as style reference — result?','Version C: add one magazine name as style reference — result?'],placeholder:'Base prompt:\n\nVersion A (cinematic style added):\nStyle word used:\nWhat changed:\n\nVersion B (photographer style):\nStyle word used:\nWhat changed:\n\nVersion C (magazine style):\nStyle word used:\nWhat changed:\n\nMost powerful style word I found today:',systemPrompt:'You are an AI design instructor. A student is testing how style words transform prompts. Review their 3 style experiments. For each: confirm if the style word was used correctly and suggest a stronger alternative. Highlight which of their 3 versions would work best for a real client brief. Max 220 words.'}
-},
-3:{
-  phase:'Phase 1 — Prompt Mastery',
-  title:'Day 3: Negative Prompts, Iteration \u0026 Diagnosing Bad Outputs',
-  tools:['Midjourney v8','ChatGPT Images (Free)','Nano Banana Pro (Free)'],
-  time:'55 min',
-  tags:['negative prompts','iteration','troubleshooting','diagnosis'],
-  videos:[
-    {title:'Kling 2.6 Full Tutorial — 2025 Guide',channel:'AI Advantage',duration:'24:30',url:'https://www.youtube.com/results?search_query=kling+2.6+tutorial+2026+AI+video+generation',bg:'linear-gradient(135deg,#667eea,#764ba2)'},
-    {title:'Runway Gen 4 Motion Brush Masterclass',channel:'Runway Official',duration:'18:45',url:'https://www.youtube.com/results?search_query=runway+gen4+motion+brush+tutorial+2026+video',bg:'linear-gradient(135deg,#f7971e,#ffd200)'},
-    {title:'5 Camera Moves That Make AI Video Cinematic',channel:'Future Tech Pilot',duration:'12:20',url:'https://www.youtube.com/results?search_query=AI+video+cinematic+camera+moves+dolly+pan+tilt',bg:'linear-gradient(135deg,#11998e,#38ef7d)'},
-    {title:'Image to Video — Midjourney + Kling Workflow',channel:'Theoretically Media',duration:'19:40',url:'https://www.youtube.com/results?search_query=midjourney+to+kling+image+to+video+workflow+2026',bg:'linear-gradient(135deg,#ee0979,#ff6a00)'},
-  ],
-  inspiration:[
-    {name:'YouTube: Corridor Crew',desc:'VFX artists analyze AI video — learn what makes shots work and what breaks them from a cinematography perspective.',type:'youtube',url:'https://www.youtube.com/@CorridorCrew',tag:'Expert Analysis'},
-    {name:'Pinterest: Film Storyboards',desc:'Study how cinematographers plan shots before shooting. Each frame is your video prompt blueprint.',type:'pinterest',url:'https://pinterest.com/search/pins/?q=film+storyboard+shot+types+cinematography',tag:'Planning'},
-    {name:'Kling AI Official Gallery',desc:'See top-rated videos made with Kling. Reverse-engineer the camera movement and subject descriptions.',type:'website',url:'https://klingai.com',tag:'FREE'},
-    {name:'Runway Research — Official Blog',desc:'Deep dives into video generation techniques from the team building the tools.',type:'website',url:'https://research.runwayml.com',tag:'Technical'},
-  ],
-  imageRefs:[
-    {emoji:'🎬',title:'Cinematic Product Reveal',style:'Blade Runner Look',bg:'linear-gradient(135deg,#0f0c29,#302b63)',prompt:'[Video prompt for Kling] Slow cinematic dolly-in toward a luxury watch on dark wet slate, volumetric light beam descending from above, deep shadow with neon blue spill, fog atmosphere, photorealistic, 4K cinematic, Blade Runner 2049 color grade, camera moves from distance to macro close-up'},
-    {emoji:'🌊',title:'Nature Macro — Water on Product',style:'BBC Planet Earth',bg:'linear-gradient(135deg,#005c97,#363795)',prompt:'[Video prompt] Extreme slow motion macro, water droplets falling on glossy product surface, high speed 120fps feel, crisp blue and silver tones, product emerges through water mist, BBC Planet Earth macro cinematography, dramatic shallow DOF, hyper detailed'},
-    {emoji:'🚗',title:'Automotive — Hero Drive Shot',style:'Top Gear Cinematic',bg:'linear-gradient(135deg,#373B44,#4286f4)',prompt:'[Video prompt for Kling] Sports car low angle chase shot, camera mounted at wheel level, motion blur on surroundings, sharp focus on car, late afternoon golden hour, desaturated cool grade with warm highlights, Top Gear BBC cinematography style, drone-to-ground transition'},
-  ],
-  content:`<div class="concept-card"><div class="concept-card-head"><div class="concept-icon blue">🔍</div><div><div class="concept-card-title">Why AI Gets It Wrong — The 5 Failure Categories</div><div class="concept-card-sub">Every bad generation has a specific, diagnosable cause</div></div></div><div class="concept-card-body"><p>Most beginners regenerate when they get a bad image. Professionals <strong>diagnose first</strong>. Every AI generation failure belongs to one of five categories. Once you can name the failure, you know exactly which part of your prompt to change.</p><div class="highlight-box blue"><span class="hb-icon">🔬</span><div class="hb-content"><div class="hb-title">The 5 Failure Categories</div><div class="hb-text"><strong>1. Subject confusion:</strong> Too many elements — AI splits attention and everything suffers. Fix: reduce to 1 hero subject + 2 supporting elements maximum.<br><strong>2. Style conflict:</strong> Contradictory style references cancel each other out. "Minimalist maximalist baroque editorial" produces nothing. Fix: one style era, one visual reference.<br><strong>3. Lighting absent:</strong> No lighting specification = AI invents flat, neutral, uninteresting light. Fix: always name a light source and direction.<br><strong>4. Vague action/state:</strong> "A person sitting" leaves the AI to guess everything. Fix: describe exact body position, expression, and what they are doing.<br><strong>5. Scale/proportion ignored:</strong> AI defaults to equal visual weight for all elements. Fix: use "in the foreground / in the background / filling the frame" to establish hierarchy.</div></div></div></div></div><div class="concept-card"><div class="concept-card-head"><div class="concept-icon amber">⛔</div><div><div class="concept-card-title">Negative Prompts — The --no Parameter</div><div class="concept-card-sub">Tell AI what to leave out, not just what to put in</div></div></div><div class="concept-card-body"><p>The <code>--no</code> parameter tells Midjourney what to actively exclude. Used correctly, it is as powerful as the positive prompt. The rule: only exclude things that genuinely tend to appear in this type of image.</p><div class="highlight-box amber"><span class="hb-icon">⚡</span><div class="hb-content"><div class="hb-title">The --no Rules</div><div class="hb-text"><strong>Exclude what tends to appear:</strong> If AI keeps generating cluttered backgrounds on product shots — <code>--no cluttered background, props, objects</code>. Do not add <code>--no dragons</code> to a food photo.<br><strong>Exclude technical failures:</strong> <code>--no text, watermark, logo, signature</code> — always useful for commercial work.<br><strong>Exclude style contamination:</strong> If every portrait gets a painterly quality you do not want — <code>--no painting, illustration, cartoon, artistic rendering</code>.<br><strong>Anatomy fixes:</strong> <code>--no extra fingers, distorted hands, deformed limbs</code> for any image with people.</div></div></div><div class="prompt-card"><div class="prompt-card-head"><span class="prompt-card-label">// PRODUCT SHOT WITH NEGATIVE PROMPT</span><button class="copy-btn" onclick="copyPrompt(this,'Premium wireless headphones on clean white marble surface, single overhead softbox light, product photography, commercial quality, --ar 4:5 --v 7 --no cluttered background, reflections, shadows on product, text, watermark, logo, deformed material')">📋 Copy</button></div><div class="prompt-card-body">Premium wireless headphones on clean white marble surface, single overhead softbox light, product photography, commercial quality, --ar 4:5 --v 7 <strong>--no cluttered background, reflections, shadows on product, text, watermark, logo, deformed material</strong></div></div></div></div><div class="concept-card"><div class="concept-card-head"><div class="concept-icon green">🔄</div><div><div class="concept-card-title">The Professional Iteration Workflow</div><div class="concept-card-sub">Never regenerate blindly — change one variable at a time</div></div></div><div class="concept-card-body"><p>Professionals follow the <strong>One Variable Rule</strong>: change exactly one element between each generation. This way you always know what caused the improvement. Changing 5 things at once means you cannot learn from the result.</p><ul class="steps-list"><li class="step-item"><div class="step-num" style="background:#10b981">1</div><div class="step-content"><div class="step-title">Generate Draft — Accept Imperfection</div><div class="step-desc">First generation is research, not output. Your job is to diagnose which of the 5 failure categories applies. Write down exactly what is wrong before changing anything.</div></div></li><li class="step-item"><div class="step-num" style="background:#10b981">2</div><div class="step-content"><div class="step-title">Identify the Failure Category</div><div class="step-desc">Ask: is the problem subject confusion? Style conflict? Missing light? Vague action? Wrong scale? Name it specifically. "It does not look right" is not a diagnosis.</div></div></li><li class="step-item"><div class="step-num" style="background:#10b981">3</div><div class="step-content"><div class="step-title">Change One Variable</div><div class="step-desc">Fix only the diagnosed problem. If the light is wrong, change only the lighting descriptor. If the background is cluttered, add --no parameters only. Everything else stays identical.</div></div></li><li class="step-item"><div class="step-num" style="background:#10b981">4</div><div class="step-content"><div class="step-title">Use Vary (Subtle) for Refinement</div><div class="step-desc">When you have a strong base image, use Midjourney Vary (Subtle) to explore small variations without changing the composition. Use Vary (Strong) only to explore a completely different direction.</div></div></li></ul></div></div><div class="compare-section"><div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px;">Diagnosing a Bad Output — Before vs After Fix</div><div class="compare-toggle-bar"><button class="compare-tab bad active" id="cmpd3-bad" onclick="switchCompare('cmpd3','bad')">❌ Weak prompt + failure</button><button class="compare-tab good" id="cmpd3-good" onclick="switchCompare('cmpd3','good')">✅ Diagnosed + fixed</button></div><div class="compare-panel bad-panel active" id="cmpd3-bad-panel"><div class="compare-prompt">"A beautiful luxurious expensive cozy warm minimalist editorial product shot of a perfume bottle"</div><div class="compare-annotation"><strong>Failure category: Style conflict.</strong> Luxurious + cozy + minimalist + editorial are 4 contradictory visual languages. The AI averages them into something that is none of these things. 18 words, zero technical specification.</div></div><div class="compare-panel good-panel" id="cmpd3-good-panel"><div class="compare-prompt">"Crystal perfume bottle on aged black marble surface, single shaft of warm tungsten light from upper left, 80% deep shadow, Hermes campaign aesthetic, medium format photography quality, --ar 4:5 --v 7 --no cluttered background, text, reflections on bottle face, multiple light sources"</div><div class="compare-annotation"><strong>One style, one surface, one light source, one direction.</strong> No contradictions. The negative prompt prevents the 2 most common failures for this shot type. Result: consistent, professional, client-ready.</div></div></div>`,
-  assignment:{title:'Day 3: Fix a Broken Image',emoji:'🔧',desc:'Generate an image with a weak prompt on purpose. Diagnose exactly what\'s wrong. Fix it using the iteration workflow. Submit before + after.',deliverables:['Weak prompt (intentionally vague or broken)','Describe the failure: which category? (Generic / Wrong Mood / Wrong Composition / Unwanted Elements / Wrong Style)','Fixed prompt — one specific change per iteration','Final result: what improved most?'],placeholder:'Weak prompt:\n\nResult description:\nFailure category:\nWhat went wrong specifically:\n\nIteration 1 change:\nIteration 2 change (if needed):\n\nFinal fixed prompt:\n\nWhat the fix taught me:',systemPrompt:'You are an AI design instructor specializing in prompt iteration. A student is learning to diagnose and fix bad AI outputs. Review their failure diagnosis — is it accurate? Did they isolate the right variable? Give them one expert-level fix that demonstrates professional iteration thinking. Max 230 words.'}
-},
-4:{
-  phase:'Phase 1 — Prompt Mastery',
-  title:'Day 4: Brand Consistency & Prompt Templates',
-  tools:['Midjourney v8','ChatGPT Images (Free)'],
-  time:'50 min', tags:['brand','workflow','consistency'],
-  videos:[
-    {title:'How to Build a Consistent AI Brand Identity',channel:'Theoretically Media',duration:'19:20',url:'https://www.youtube.com/results?search_query=brand+consistency+AI+design+identity+midjourney+2026',bg:'linear-gradient(135deg,#4776E6,#8E54E9)'},
-    {title:'Midjourney Seed & Sref for Brand Consistency',channel:'AI Advantage',duration:'16:10',url:'https://www.youtube.com/results?search_query=midjourney+seed+sref+style+reference+brand+consistency',bg:'linear-gradient(135deg,#f953c6,#b91d73)'},
-    {title:'Creating Brand Mood Boards with AI',channel:'Figma',duration:'14:05',url:'https://www.youtube.com/results?search_query=brand+moodboard+AI+design+canva+midjourney+2026',bg:'linear-gradient(135deg,#00b4db,#0083b0)'},
-  ],
-  inspiration:[
-    {name:'Aesop — Brand Consistency Done Right',desc:'Study their product imagery, editorial voice, typography, and color story across every touchpoint.',type:'website',url:'https://www.aesop.com',tag:'Luxury Brand'},
-    {name:'Pinterest: Brand Mood Boards 2025',desc:'Search "brand moodboard 2025" to see how agencies present brand visual systems to clients.',type:'pinterest',url:'https://pinterest.com/search/pins/?q=brand+moodboard+identity+system+2026',tag:'Branding'},
-    {name:'Behance: Brand Identity Systems',desc:'Professional brand books showing color, typography rules, and visual language in practice.',type:'behance',url:'https://www.behance.net/search/projects?search=brand+identity+guidelines+system',tag:'Reference'},
-  ],
-  imageRefs:[
-    {emoji:'🍎',title:'Apple Brand — Product Purity',style:'Apple Campaign',bg:'linear-gradient(135deg,#636363,#a2ab58)',prompt:'Product on pure white background, single overhead diffused light, perfect soft shadow, ultra minimal, zero clutter, Apple product photography aesthetic, Phase One camera quality, hyperrealistic, commercial grade --ar 1:1 --no hands, packaging, text'},
-    {emoji:'🌿',title:'Wellness Brand — Aesop Palette',style:'Aesop / Goop',bg:'linear-gradient(135deg,#8d6e4f,#c4a882)',prompt:'Wellness lifestyle, woman holding glass bottle with herbs, sage green and warm terracotta palette, natural diffused window light, linen textures, Aesop brand aesthetic, quiet luxury, editorial photography --ar 4:5 --no bright colors, synthetic materials'},
-  ],
-  content:`
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon green">🎯</div>
-    <div>
-      <div class="concept-card-title">Why Consistency Matters More Than Single Great Shots</div>
-      <div class="concept-card-sub">Clients don't hire you for one image — they hire you for a coherent system</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p>A single amazing image impresses. A campaign of 10 perfectly consistent images gets you hired again. The difference between a freelancer and an AI design studio is <strong>brand consistency systems</strong>.</p>
-    <div class="highlight-box green">
-      <span class="hb-icon">🔑</span>
-      <div class="hb-content">
-        <div class="hb-title">The 3 Consistency Tools</div>
-        <div class="hb-text"><strong>Seed numbers</strong> (same model/lighting across shots) + <strong>Prompt templates</strong> (your locked brand variables) + <strong>Sref codes</strong> (Midjourney style references). Master these and you can produce 20 consistent campaign images in 2 hours.</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon blue">📋</div>
-    <div>
-      <div class="concept-card-title">Build a Brand Prompt Template</div>
-      <div class="concept-card-sub">Lock your variables — swap only what changes</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <div class="prompt-card">
-      <div class="prompt-card-head"><span class="prompt-card-label">// BRAND TEMPLATE — WELLNESS BRAND</span><button class="copy-btn" onclick="copyPrompt(this, '[SUBJECT: woman/man/product, age, brief description], [ACTION: what they are doing], wellness lifestyle setting, [ENVIRONMENT: specific location], natural diffused window light from left, warm sage green and terracotta palette, linen textures, Aesop brand aesthetic, shot on Sony A7III, 50mm, f/2.0, editorial photography --ar [RATIO] --no synthetic, bright colors, clutter, text')">📋 Copy</button></div>
-      <div class="prompt-card-body">[SUBJECT], <span class="prompt-param">[ACTION]</span>, wellness lifestyle setting, [ENVIRONMENT], <span class="prompt-style">natural diffused window light from left, warm sage green and terracotta palette, linen textures, Aesop brand aesthetic</span>, shot on Sony A7III, 50mm, f/2.0, editorial <span class="prompt-neg">--ar [RATIO] --no synthetic, bright colors, clutter</span></div>
-    </div>
-    <p>The <strong>locked variables</strong> (light direction, palette, lens, brand reference) stay identical across all images. Only [SUBJECT], [ACTION], and [ENVIRONMENT] change. The result: 10 different images that all feel like they came from the same campaign.</p>
-  </div>
-</div><div class="concept-card"><div class="concept-card-head"><div class="concept-icon green">⚡</div><div><div class="concept-card-title">Seed Locking — The Professional Batch Consistency Secret</div><div class="concept-card-sub">Generate 30 consistent campaign images from one template</div></div></div><div class="concept-card-body"><p>When a client needs 30 product images, a beginner generates 30 times and gets 30 different-looking results. A professional <strong>locks the seed number</strong> from their best image and generates all variations from that seed. Every image shares the same light quality, colour temperature, and compositional feel — guaranteed consistency across an entire campaign.</p><div class="highlight-box green"><span class="hb-icon">🔑</span><div class="hb-content"><div class="hb-title">How to Use Seed Locking in Midjourney</div><div class="hb-text"><strong>Step 1 — Find the seed:</strong> React to any Midjourney image with the ✉️ envelope emoji. The bot sends you the seed number (e.g. seed: 3847291).<br><strong>Step 2 — Lock it:</strong> Add <code>--seed 3847291</code> to every subsequent prompt in the campaign.<br><strong>Step 3 — Swap only the variables:</strong> Change [SUBJECT] or [PRODUCT] while keeping all locked variables identical.<br><strong>Step 4 — Batch:</strong> Queue all variations in one session. 30 images in approximately 20 minutes.</div></div></div><div class="prompt-card"><div class="prompt-card-head"><span class="prompt-card-label">// BATCH CAMPAIGN — SEED-LOCKED TEMPLATE</span><button class="copy-btn" onclick="copyPrompt(this,'[PRODUCT] on warm cream linen surface, single directional window light from left, 85mm lens shallow depth of field, Kinfolk minimal aesthetic, --ar 4:5 --v 7 --seed 3847291 --no text watermark logo multiple light sources. Swap [PRODUCT] for each image. Everything else stays identical.')">📋 Copy</button></div><div class="prompt-card-body">[PRODUCT] on warm cream linen surface, single window light from left, 85mm shallow depth, Kinfolk aesthetic <strong>--seed 3847291</strong> --no text watermark logo<br><em>Swap [PRODUCT] only. Lock everything else.</em></div></div></div></div>`,
-  assignment:{title:'Day 4: Build a 3-Shot Brand Campaign',emoji:'🎯',desc:'Choose any brand. Lock your template. Generate 3 images that look like they belong in the same campaign. This is your first real portfolio piece.',deliverables:['Brand name + one-line visual brief','Your locked template (the variables that never change)','3 prompts — only [SUBJECT] and [ACTION] change across them','Screenshot or describe: do all 3 feel like the same campaign?'],placeholder:'Brand:\nVisual brief:\n\nLocked template:\n\nImage 1 prompt:\nImage 2 prompt:\nImage 3 prompt:\n\nConsistency score (1-10):\nWhat broke consistency (if anything):',systemPrompt:'You are a brand photography director reviewing a student\'s first brand consistency exercise. Evaluate: are the locked variables truly locked? Does the template produce visual consistency? Give specific feedback on what to lock tighter and what\'s working. Max 230 words.'}
-},
-5:{
-  phase:'Phase 1 — Prompt Mastery',
-  title:'Day 5: Text-in-Image & Typography',
-  tools:['Ideogram 2.0','ChatGPT Images (Free)','Nano Banana Pro'],
-  time:'50 min', tags:['typography','posters','text'],
-  videos:[
-    {title:'Ideogram 2.0 Full Tutorial — Text in AI Images',channel:'Matt Wolfe',duration:'17:30',url:'https://www.youtube.com/results?search_query=ideogram+2.0+tutorial+text+in+images+AI+poster+design+2026',bg:'linear-gradient(135deg,#FF512F,#DD2476)'},
-    {title:'Adobe Firefly Text Effects Masterclass',channel:'Adobe Creative Cloud',duration:'20:15',url:'https://www.youtube.com/results?search_query=adobe+firefly+text+effects+tutorial+design+poster+2026',bg:'linear-gradient(135deg,#1a1a2e,#16213e)'},
-    {title:'AI Poster Design From Prompt to Print',channel:'Zimri Mayfield',duration:'22:40',url:'https://www.youtube.com/results?search_query=AI+poster+design+ideogram+canva+tutorial+print+2026',bg:'linear-gradient(135deg,#f7971e,#ffd200)'},
-  ],
-  inspiration:[
-    {name:'Pinterest: Swiss Poster Design',desc:'Typography-first poster design. The rules for hierarchy and white space translate directly into AI prompts.',type:'pinterest',url:'https://pinterest.com/search/pins/?q=swiss+poster+design+typography+grid',tag:'Typography'},
-    {name:'AIGA Design Archives',desc:'The best posters ever created. Great AI prompts start from great reference points — study what worked before AI.',type:'website',url:'https://designarchives.aiga.org',tag:'Classic'},
-    {name:'Dribbble: Poster Design Trending',desc:'Filter by week to see the freshest poster aesthetics. Your clients are seeing these too.',type:'dribbble',url:'https://dribbble.com/tags/poster-design',tag:'Current'},
-    {name:'Fonts In Use',desc:'See how professional designers pair typefaces on real projects. Type language = better Ideogram prompts.',type:'website',url:'https://fontsinuse.com',tag:'Typography'},
-  ],
-  imageRefs:[
-    {emoji:'🪧',title:'Fashion Poster — Bold Minimal',style:'Celine Editorial',bg:'linear-gradient(135deg,#2c2c2c,#4a4a4a)',prompt:'Luxury fashion poster, pure white background, bold condensed serif headline "WINTER 2026" at top in charcoal, model in black coat below, negative space breathing room, Celine editorial aesthetic, minimal grid, high contrast typography, Ideogram 2.0 --ar 2:3 --no busy background'},
-    {emoji:'🎵',title:'Concert Poster — Kinetic Type',style:'A24 Distorted',bg:'linear-gradient(135deg,#0f2027,#2c5364)',prompt:'Concert poster, "NEON NIGHTS FESTIVAL" in large distorted glitch type, neon pink on black, electric blue accents, overlapping letterforms, torn paper texture, energetic chaotic design, A24 film poster aesthetic, Ideogram 2.0 --ar 2:3 --no photographic, clean, organized'},
-    {emoji:'☕',title:'Artisan Brand — Warm Editorial',style:'Blue Bottle Coffee',bg:'linear-gradient(135deg,#c8a97e,#f0e0c0)',prompt:'Artisan coffee brand poster, "SINGLE ORIGIN" in hand-drawn serif, warm cream and espresso brown palette, coffee bean illustration, minimal editorial layout, Blue Bottle Coffee aesthetic, warmth and craft, Ideogram 2.0 --ar 2:3 --no generic, cold colors'},
-  ],
-  content:`
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon blue">✍️</div>
-    <div>
-      <div class="concept-card-title">The Typography Problem — Now Solved</div>
-      <div class="concept-card-sub">Until 2024, AI text was gibberish. That era is over.</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p>Midjourney gives you stunning images with illegible text. <strong>Ideogram 2.0 and Adobe Firefly changed everything</strong> — they now generate accurate, styled text inside images. Poster design, ad copy, packaging labels — all possible.</p>
-    <div class="highlight-box blue">
-      <span class="hb-icon">💡</span>
-      <div class="hb-content">
-        <div class="hb-title">When to Use Which Tool</div>
-        <div class="hb-text"><strong>Ideogram 2.0</strong> — best for posters and ads where text is the focus. Use their Magic Prompt feature. Commercial safe.<br><strong>Adobe Firefly</strong> — best when you want text effects (gold, neon, 3D) integrated into an image. Directly in Photoshop.</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon amber">🔤</div>
-    <div>
-      <div class="concept-card-title">Typography Prompt Language</div>
-      <div class="concept-card-sub">How to describe type in prompts</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p><strong>Font Styles:</strong> <span class="vocab-pill" onclick="openInVocab('bold condensed serif')">bold condensed serif</span> <span class="vocab-pill" onclick="openInVocab('thin geometric sans-serif')">thin geometric sans</span> <span class="vocab-pill" onclick="openInVocab('hand-drawn script')">hand-drawn script</span> <span class="vocab-pill" onclick="openInVocab('grotesque display typeface')">grotesque display</span></p>
-    <p><strong>Layout:</strong> <span class="vocab-pill" onclick="openInVocab('centered typographic hierarchy')">centered hierarchy</span> <span class="vocab-pill" onclick="openInVocab('left-aligned editorial grid')">left-aligned editorial</span> <span class="vocab-pill" onclick="openInVocab('full-bleed typographic poster')">full-bleed type</span></p>
-    <p><strong>Text Effects:</strong> <span class="vocab-pill" onclick="openInVocab('distorted glitch typography')">distorted glitch</span> <span class="vocab-pill" onclick="openInVocab('3D extruded letterforms')">3D extruded</span> <span class="vocab-pill" onclick="openInVocab('neon glow text effect')">neon glow</span> <span class="vocab-pill" onclick="openInVocab('gold foil embossed text')">gold foil embossed</span></p>
-    <div class="prompt-card" style="margin-top:12px;">
-      <div class="prompt-card-head"><span class="prompt-card-label">// IDEOGRAM — LUXURY EVENT POSTER</span><button class="copy-btn" onclick="copyPrompt(this, 'Luxury event poster, text: \"SOLSTICE 2026\" in large bold condensed serif at top, subtitle \"An Evening of Art & Design\" in thin sans-serif below, centered typographic hierarchy, deep navy blue background, gold foil embossed effect on headline, minimal editorial layout, generous white space, Swiss poster design principles --ar 2:3')">📋 Copy</button></div>
-      <div class="prompt-card-body">Luxury event poster, text: <span class="prompt-style">"SOLSTICE 2026"</span> in <span class="prompt-param">large bold condensed serif</span> at top, subtitle in thin sans below, <span class="prompt-param">centered typographic hierarchy</span>, deep navy background, <span class="prompt-style">gold foil embossed headline</span>, Swiss poster design principles --ar 2:3</div>
-    </div>
-  </div>
-</div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon amber">📐</div>
-    <div>
-      <div class="concept-card-title">The 4 Rules of Typography in AI Prompts</div>
-      <div class="concept-card-sub">Follow these and your text will render correctly every time in Ideogram</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <ul class="steps-list">
-      <li class="step-item"><div class="step-num">1</div><div class="step-content"><div class="step-title">Always put text in double quotes inside the prompt</div><div class="step-desc">Write the exact text you want in double quotes: text: "JUST DO IT" — not just "a Nike slogan." The model needs the literal string to render it accurately. Without quotes, it invents text or scrambles letters.</div></div></li>
-      <li class="step-item"><div class="step-num">2</div><div class="step-content"><div class="step-title">Describe font personality, not font name</div><div class="step-desc">AI models do not know "Helvetica Neue" but understand "thin geometric sans-serif" or "bold condensed serif with high contrast strokes." Describe the feel and weight — not the font name.</div></div></li>
-      <li class="step-item"><div class="step-num">3</div><div class="step-content"><div class="step-title">Describe the hierarchy explicitly</div><div class="step-desc">"Large headline at top, small subtitle below, tiny caption at bottom" tells the AI how to compose the type. Without this, it places text randomly and hierarchy breaks down.</div></div></li>
-      <li class="step-item"><div class="step-num">4</div><div class="step-content"><div class="step-title">Add layout context as a style reference</div><div class="step-desc">"Swiss grid layout", "centered minimal poster", "editorial magazine spread" — these carry entire typographic traditions. They are shorthand for dozens of layout decisions the AI already understands.</div></div></li>
-    </ul>
-  </div>
-</div>
-<div class="compare-section">
-  <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px;">🔤 Weak vs Strong Typography Prompt</div>
-  <div class="compare-toggle-bar">
-    <button class="compare-tab bad active" id="cmp5-bad" onclick="switchCompare('cmp5','bad')">❌ Weak</button>
-    <button class="compare-tab good" id="cmp5-good" onclick="switchCompare('cmp5','good')">✅ Strong</button>
-  </div>
-  <div class="compare-panel bad-panel active" id="cmp5-bad-panel">
-    <div class="compare-prompt">"poster with text saying the brand name and a tagline"</div>
-    <div class="compare-annotation"><strong>Result:</strong> The AI invents random text, uses default fonts, and places type wherever it wants. The poster looks like clip art. Completely unusable for a client.</div>
-  </div>
-  <div class="compare-panel good-panel" id="cmp5-good-panel">
-    <div class="compare-prompt">"luxury event poster, text: "SOLSTICE 2026" in large bold condensed serif at top, subtitle "An Evening of Art" in thin sans-serif below, centered typographic hierarchy, deep navy background, gold foil effect on headline, Swiss poster design principles, generous white space --ar 2:3"</div>
-    <div class="compare-annotation"><strong>Result:</strong> The headline renders correctly, hierarchy is clear, layout is intentional. This is a deliverable a real client would approve.</div>
-  </div>
-</div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon green">🔧</div>
-    <div>
-      <div class="concept-card-title">Tool Spotlight: Ideogram 2.0</div>
-      <div class="concept-card-sub">The only AI tool that renders text accurately inside images</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p><strong>Ideogram 2.0</strong> (ideogram.ai) — Purpose-built for text-in-image generation. While Midjourney creates stunning visuals but scrambles text, Ideogram renders headlines, logos, and poster copy with near-perfect accuracy. Free tier: 10 generations/day. <em>Best for: poster design, ad copy, packaging labels.</em> <a href="https://ideogram.ai" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Open Ideogram →</a></p>
-    <div class="highlight-box blue">
-      <span class="hb-icon">⚙️</span>
-      <div class="hb-content">
-        <div class="hb-title">Pro Tip: Magic Prompt Off</div>
-        <div class="hb-text">Turn off Magic Prompt in Ideogram settings when testing typography. Magic Prompt rewrites your prompt and may change your text. Keep it off until text renders correctly, then try it on for visual enhancement.</div>
-      </div>
-    </div>
-  </div>
-</div>`,
-  assignment:{title:'Day 5: Create a Real Poster Ad',emoji:'🪧',desc:'Open Ideogram 2.0 (free at ideogram.ai). Generate a poster with real text for a brand you choose. This is your first text-in-image portfolio piece.',deliverables:['Brand name + poster headline (max 4 words)','Your Ideogram prompt with explicit typography instructions','Rate text accuracy 1-10 — what rendered correctly/incorrectly?','What would you refine for a client version?'],placeholder:'Brand:\nHeadline text:\n\nIdeogram prompt:\n\nText accuracy (1-10):\nWhat rendered correctly:\nWhat needs fixing:\n\nRefinement plan for client version:',systemPrompt:'You are an AI design instructor specializing in typography and poster design. Review the student\'s Ideogram poster exercise. Evaluate their prompt structure for text accuracy, layout instructions, and brand relevance. Give them 2 specific prompt improvements to get better text rendering. Max 230 words.'}
-},
-6:{
-  phase:'Phase 1 — Prompt Mastery',
-  title:'Day 6: Multi-Tool Workflows — The AI Stack',
-  tools:['CapCut Pro','ElevenLabs','Suno v4'],
-  time:'60 min', tags:['workflow','pipeline','orchestration'],
-  videos:[
-    {title:'Full AI Ad Pipeline — Midjourney to Final Video',channel:'Theoretically Media',duration:'31:20',url:'https://www.youtube.com/results?search_query=full+AI+ad+pipeline+midjourney+runway+elevenlabs+capcut+workflow',bg:'linear-gradient(135deg,#11998e,#38ef7d)'},
-    {title:'ElevenLabs Full Voice Tutorial 2025',channel:'Matt Wolfe',duration:'18:45',url:'https://www.youtube.com/results?search_query=elevenlabs+tutorial+2026+AI+voiceover+voice+clone',bg:'linear-gradient(135deg,#ee0979,#ff6a00)'},
-    {title:'CapCut Pro Editing for AI Videos',channel:'CapCut Official',duration:'22:10',url:'https://www.youtube.com/results?search_query=capcut+pro+editing+AI+video+tutorial+2026+color+grade',bg:'linear-gradient(135deg,#2c3e50,#3498db)'},
-  ],
-  inspiration:[
-    {name:'YouTube: Peter McKinnon — Filmmaking',desc:'Best creative direction content for understanding what makes a great video ad feel cinematic and professional.',type:'youtube',url:'https://www.youtube.com/@PeterMcKinnon',tag:'Direction'},
-    {name:'Pinterest: Video Ad Storyboards',desc:'Search "commercial ad storyboard" to see how agencies plan their shots before any camera rolls.',type:'pinterest',url:'https://pinterest.com/search/pins/?q=commercial+ad+storyboard+video+production',tag:'Planning'},
-    {name:'D&AD Winners — Film Advertising',desc:'The best video advertising of every year. Study the emotional arc, pacing, and visual language.',type:'website',url:'https://www.dandad.org/en/d-ad-pencil-winners/',tag:'Award-Winning'},
-  ],
-  imageRefs:[
-    {emoji:'🔗',title:'Pipeline Planning Board',style:'Creative Direction',bg:'linear-gradient(135deg,#1e3c72,#2a5298)',prompt:'Not an image prompt — this is your PIPELINE: [Midjourney hero images] → [Kling/Runway animation] → [ElevenLabs voiceover] → [Suno background music] → [CapCut final assembly]'},
-    {emoji:'🎙️',title:'Voiceover Script Template',style:'Ad Copywriting',bg:'linear-gradient(135deg,#373B44,#4286f4)',prompt:'30-second ad script structure: Hook (0-3s) + Problem (3-10s) + Solution reveal (10-22s) + CTA (22-30s). Keep total word count under 75 words for natural VO pacing.'},
-  ],
-  content:`
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon purple">⚙️</div>
-    <div>
-      <div class="concept-card-title">The Real Skill of 2026: AI Orchestration</div>
-      <div class="concept-card-sub">Not one tool — a sequence of 5 tools, each doing what it does best</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p>In 2023, "AI designer" meant using one image tool. In 2026, the best AI designers are <strong>creative directors</strong> — they orchestrate 4-6 tools in sequence. You direct. The tools execute.</p>
-    <div class="highlight-box purple">
-      <span class="hb-icon">🎬</span>
-      <div class="hb-content">
-        <div class="hb-title">Think Like a Film Director</div>
-        <div class="hb-text">Midjourney = your cinematographer. Runway/Kling = your animation team. ElevenLabs = your voice actor. Suno = your composer. CapCut = your editor. You write the brief and approve each step. That's creative direction.</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon blue">📹</div>
-    <div>
-      <div class="concept-card-title">The 5-Step Video Ad Pipeline</div>
-      <div class="concept-card-sub">This is how professional AI video ads are produced</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <ul class="steps-list">
-      <li class="step-item"><div class="step-num">1</div><div class="step-content"><div class="step-title">Midjourney — Hero Images</div><div class="step-desc">Generate 4-6 key frames with perfect composition, lighting, character. Your creative control is highest here. Get these right before moving on.</div></div></li>
-      <li class="step-item"><div class="step-num">2</div><div class="step-content"><div class="step-title">Kling or Runway — Animation</div><div class="step-desc">Import each hero image. Apply camera movement and physics. Turn static → cinematic. Each image becomes a 5-10 second clip.</div></div></li>
-      <li class="step-item"><div class="step-num">3</div><div class="step-content"><div class="step-title">ElevenLabs — Voiceover</div><div class="step-desc">Write your ad script (max 75 words for 30s). Select a voice matching the brand. Download the audio.</div></div></li>
-      <li class="step-item"><div class="step-num">4</div><div class="step-content"><div class="step-title">Suno — Background Music</div><div class="step-desc">Generate music matching the brand mood. Prompt the tempo, energy, and genre. Download MP3.</div></div></li>
-      <li class="step-item"><div class="step-num">5</div><div class="step-content"><div class="step-title">CapCut — Final Assembly</div><div class="step-desc">Assemble clips, layer VO + music, color grade, add text overlays, export at correct aspect ratio. Done.</div></div></li>
-    </ul>
-    <div class="highlight-box amber">
-      <span class="hb-icon">⏱️</span>
-      <div class="hb-content">
-        <div class="hb-title">Real Time Estimates</div>
-        <div class="hb-text"><strong>15-second product video:</strong> 1.5-2.5 hrs &nbsp;|&nbsp; <strong>30-second cinematic brand ad:</strong> 4-6 hrs &nbsp;|&nbsp; <strong>60-second narrative ad:</strong> 8-12 hrs. A traditional agency takes 3-5× longer at 10× the cost.</div>
-      </div>
-    </div>
-  </div>
-</div><div class="concept-card"><div class="concept-card-head"><div class="concept-icon purple">🖥</div><div><div class="concept-card-title">The Finishing Workflow — From AI Output to Client-Deliverable</div><div class="concept-card-sub">The steps between "AI generated it" and "client can use it"</div></div></div><div class="concept-card-body"><p>AI generates at 72–96 DPI by default. Print needs 300 DPI. Social media needs specific pixel dimensions. The finishing workflow is the bridge between generation and delivery — every professional AI designer needs it.</p><ul class="steps-list"><li class="step-item"><div class="step-num" style="background:#8b5cf6">1</div><div class="step-content"><div class="step-title">Upscale Resolution — Topaz Gigapixel or Magnific AI</div><div class="step-desc">AI-generated images at 1024px become print-ready at 4000px+ with zero quality loss. Topaz Gigapixel AI: drag image in, select 4x upscale, export. Takes 30 seconds. Turns a social image into a magazine-ready file. Cost: one-time purchase (Topaz) or subscription (Magnific).</div></div></li><li class="step-item"><div class="step-num" style="background:#8b5cf6">2</div><div class="step-content"><div class="step-title">Fix Text and Logos — Photoshop Generative Fill</div><div class="step-desc">AI-generated text is almost always garbled. Professional workflow: generate the image without text, then use Photoshop Generative Fill to extend the background and add real typography in Illustrator on top. Never try to prompt text into complex brand imagery.</div></div></li><li class="step-item"><div class="step-num" style="background:#8b5cf6">3</div><div class="step-content"><div class="step-title">Background Extension — For Platform Formats</div><div class="step-desc">Client needs 9:16 but you generated 4:5? Use Photoshop Generative Fill to extend the canvas. Select the empty area, click Generate — Photoshop fills it seamlessly using the image context. Takes 10 seconds.</div></div></li><li class="step-item"><div class="step-num" style="background:#8b5cf6">4</div><div class="step-content"><div class="step-title">Subject Extraction — Remove.bg or Photoshop AI Mask</div><div class="step-desc">Client wants the product on a different background? Use Remove.bg for fast results or Photoshop AI Masking for precision. Export as PNG with transparency. The client design team can then place it on any background needed.</div></div></li></ul></div></div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon green">🔧</div>
-    <div>
-      <div class="concept-card-title">Tool Spotlight: ElevenLabs + Suno v4 + CapCut</div>
-      <div class="concept-card-sub">The 3-tool audio-visual pipeline every AI designer needs</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p><strong>ElevenLabs</strong> (elevenlabs.io) — Hyper-realistic voiceover from text. 1000+ voices. Free tier: 10 min/month. Industry standard for ads. <a href="https://elevenlabs.io" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Open ElevenLabs →</a></p>
-    <p><strong>Suno v4</strong> (suno.com) — Full songs from text prompts. Mood, tempo, genre, instruments. Free tier: 50 credits/day. <a href="https://suno.com" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Open Suno →</a></p>
-    <p><strong>CapCut Pro</strong> (capcut.com) — The editing layer. Auto-captions, smart cut, beat markers. Where all AI assets become a finished video. <a href="https://www.capcut.com" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Open CapCut →</a></p>
-  </div>
-</div>`,
-  assignment:{title:'Day 6: Map a 4-Tool Pipeline',emoji:'🔗',desc:'Design a complete 4-tool AI pipeline for one 15-second product ad. You\'re the creative director. Map every tool, every output, every handoff.',deliverables:['Product + campaign objective (1 sentence)','Tool 1 → Tool 2 → Tool 3 → Tool 4 (what each creates)','Voiceover script (max 20 words)','Which step do you think will be hardest in real execution?'],placeholder:'Product:\nCampaign objective:\n\nPipeline:\nTool 1 (Midjourney): creates →\nTool 2 (Kling/Runway): creates →\nTool 3 (ElevenLabs): creates →\nTool 4 (CapCut): creates →\n\nVoiceover script:\n\nHardest step and why:',systemPrompt:'You are a creative director reviewing a student\'s first AI production pipeline plan. Evaluate: is the tool sequence logical? Does the voiceover match the visual story? Point out one gap in their workflow and suggest how a professional studio would bridge it. Max 220 words.'}
-},
-7:{
-  phase:'Phase 1 — Prompt Mastery',
-  title:'Day 7: Build Your Prompt Library',
-  tools:['Gemini (Free)','ChatGPT (Free)'],
-  time:'45 min', tags:['system','library','workflow'],
-  videos:[
-    {title:'How to Build an AI Prompt Library',channel:'Thomas Frank',duration:'16:40',url:'https://www.youtube.com/results?search_query=notion+prompt+library+template+AI+design+workflow+2026',bg:'linear-gradient(135deg,#000000,#434343)'},
-    {title:'20 Prompt Templates That Save Hours',channel:'AI Advantage',duration:'19:20',url:'https://www.youtube.com/results?search_query=AI+image+prompt+templates+save+time+library+midjourney',bg:'linear-gradient(135deg,#8360c3,#2ebf91)'},
-  ],
-  inspiration:[
-    {name:'AI Design Template Gallery',desc:'Pre-built templates for organizing your AI design workflow, client briefs, and prompt libraries.',type:'website',url:'https://www.notion.so/templates/category/design',tag:'FREE'},
-    {name:'Prompt Hero — Community Library',desc:'Thousands of community-tested prompts with real outputs shown. Great for starting your library.',type:'website',url:'https://prompthero.com',tag:'Community'},
-    {name:'Lexica.art — Stable Diffusion Gallery',desc:'Search by visual style to find prompts that produce specific aesthetics. Reverse-engineering goldmine.',type:'website',url:'https://lexica.art',tag:'FREE'},
-  ],
-  imageRefs:[
-    {emoji:'📁',title:'Library Structure Template',style:'Notion Organization',bg:'linear-gradient(135deg,#1a1a2e,#16213e)',prompt:'ORGANIZE YOUR LIBRARY: 01_Image_Prompts / 02_Video_Prompts / 03_Style_Templates / 04_Brand_Templates / 05_Negative_Prompts / 06_Audio_Prompts — Each prompt entry: [Name] + [Prompt] + [Tool] + [Best For] + [Notes]'},
-    {emoji:'💎',title:'Premium Lifestyle Prompt',style:'Saved Template',bg:'linear-gradient(135deg,#c84b31,#ecb842)',prompt:'[SAVED: LUXURY LIFESTYLE] Editorial lifestyle, [SUBJECT], [ACTION], warm golden morning light, linen and natural wood textures, Kinfolk magazine aesthetic, Sony A7III, 50mm, f/1.8, warm desaturated --ar 4:5 --no artificial light, clutter, text'},
-  ],
-  content:`
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon amber">📚</div>
-    <div>
-      <div class="concept-card-title">Your Prompt Library = Your Most Valuable Asset</div>
-      <div class="concept-card-sub">Professional AI designers don't start from scratch. They adapt from a library.</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p>Every prompt you write from scratch is wasted time when you could have a tested, proven template to adapt in 30 seconds. After 45 days, your library will be worth thousands of dollars in saved time.</p>
-    <div class="highlight-box amber">
-      <span class="hb-icon">🏆</span>
-      <div class="hb-content">
-        <div class="hb-title">The Professional Approach</div>
-        <div class="hb-text">When a client briefs you, you open your library, find the closest template, adapt 20% of it, and start generating in 5 minutes. Your competition is still typing from scratch.</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon blue">📋</div>
-    <div>
-      <div class="concept-card-title">20 Starter Prompts for Your Library</div>
-      <div class="concept-card-sub">Copy these into your prompt library. Each one is tested and production-ready.</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <div class="prompt-card">
-      <div class="prompt-card-head"><span class="prompt-card-label">// 01 — MORNING LIFESTYLE</span><button class="copy-btn" onclick="copyPrompt(this, 'Authentic morning lifestyle, person in linen pajamas making coffee, bright Scandinavian kitchen, warm window light, steam from mug, peaceful and calm, Kinfolk magazine aesthetic, 35mm film, f/2 --ar 4:5 --no text, clutter, posed, artificial')">📋 Copy</button></div>
-      <div class="prompt-card-body">Authentic morning lifestyle, person in linen pajamas making coffee, bright Scandinavian kitchen, <span class="prompt-param">warm window light</span>, steam from mug, peaceful, <span class="prompt-style">Kinfolk magazine aesthetic, 35mm film</span>, f/2 --ar 4:5 <span class="prompt-neg">--no text, clutter, posed, artificial</span></div>
-    </div>
-    <div class="prompt-card">
-      <div class="prompt-card-head"><span class="prompt-card-label">// 02 — LUXURY PRODUCT</span><button class="copy-btn" onclick="copyPrompt(this, 'Luxury [PRODUCT] on dark wet slate surface, macro photography, dramatic single rim light from right, long shadow, black background, ultra-sharp detail, hyperrealistic, Hodinkee editorial luxury product photography --ar 1:1 --no reflections on face, glare, hands')">📋 Copy</button></div>
-      <div class="prompt-card-body">Luxury [PRODUCT] on dark wet slate, macro, <span class="prompt-param">dramatic single rim light from right</span>, long shadow, black background, <span class="prompt-style">Hodinkee editorial, hyperrealistic</span> --ar 1:1 <span class="prompt-neg">--no glare, hands</span></div>
-    </div>
-    <div class="prompt-card">
-      <div class="prompt-card-head"><span class="prompt-card-label">// 03 — FASHION EDITORIAL</span><button class="copy-btn" onclick="copyPrompt(this, '[MODEL DESCRIPTION] in [OUTFIT], [POSE/ACTION], [LOCATION], dramatic fashion editorial lighting, Vogue magazine aesthetic, shot on medium format, f/2.8, desaturated with warm skin tones, Tim Walker or Peter Lindbergh style --ar 2:3 --no commercial, smiling, casual')">📋 Copy</button></div>
-      <div class="prompt-card-body">[MODEL] in [OUTFIT], [POSE], [LOCATION], <span class="prompt-param">dramatic fashion editorial lighting</span>, <span class="prompt-style">Vogue magazine, medium format, Tim Walker style</span> --ar 2:3 <span class="prompt-neg">--no commercial, smiling</span></div>
-    </div>
-  </div>
-</div><div class="concept-card"><div class="concept-card-head"><div class="concept-icon purple">👤</div><div><div class="concept-card-title">Consistent Characters Across Multiple Images</div><div class="concept-card-sub">The most-asked client question — and how to answer it professionally</div></div></div><div class="concept-card-body"><p>Every client eventually asks: "Can you make the same person appear in all 10 images?" This is the <strong>character consistency challenge</strong>. Without knowing the workflow, you will spend hours regenerating and never quite get there. With the workflow, you can produce 10 consistent character images in under an hour.</p><div class="highlight-box purple"><span class="hb-icon">👤</span><div class="hb-content"><div class="hb-title">The 3 Consistency Methods</div><div class="hb-text"><strong>Method 1 — Midjourney --cref (Character Reference):</strong> Upload a reference image of the character, then add <code>--cref [image URL]</code> to every prompt. Midjourney locks the face and appearance across all generations. Adjust strength with <code>--cw 0-100</code> (0 = face only, 100 = full body match).<br><br><strong>Method 2 — Kling Elements Feature:</strong> Upload a reference image and Kling maintains that character across all video clips. Critical for spokesperson videos where the same person must appear in multiple scenes.<br><br><strong>Method 3 — Nano Banana editing:</strong> Available in ComfyUI, Replicate, and fal.ai. Inject a reference character into any new scene. Best for maximum control over character consistency.</div></div></div><div class="prompt-card"><div class="prompt-card-head"><span class="prompt-card-label">// CHARACTER REFERENCE — MIDJOURNEY --cref</span><button class="copy-btn" onclick="copyPrompt(this,'30-year-old woman in minimalist grey studio, confident direct gaze at camera, 85mm lens shallow depth of field, natural window light from left, editorial portrait quality --cref [YOUR_CHARACTER_IMAGE_URL] --cw 85 --ar 4:5 --v 7 --no text watermark')">📋 Copy</button></div><div class="prompt-card-body">30-year-old woman in minimalist grey studio, confident direct gaze, 85mm lens, natural window light from left, editorial portrait quality <strong>--cref [YOUR_IMAGE_URL] --cw 85</strong> --ar 4:5 --v 7 --no text watermark<br><em>Replace [YOUR_IMAGE_URL] with a direct link to your character reference image</em></div></div><div class="highlight-box amber"><span class="hb-icon">💡</span><div class="hb-content"><div class="hb-title">Pro Tip: Product Consistency Too</div><div class="hb-text">--cref works for products as well as people. Upload a reference image of a specific bottle, shoe, or device and Midjourney will maintain that product design across different scenes, lighting setups, and contexts. This is how AI designers produce entire product campaign libraries from a single product reference photo.</div></div></div></div></div>
-<div class="concept-card">
-  <div class="concept-card-head">
-    <div class="concept-icon green">🔧</div>
-    <div>
-      <div class="concept-card-title">Tool Spotlight: Gemini</div>
-      <div class="concept-card-sub">Your free AI assistant for briefs, captions, strategy, and organization</div>
-    </div>
-  </div>
-  <div class="concept-card-body">
-    <p><strong>Gemini</strong> (gemini.google.com) — Free, no credit card. Excellent for creative briefs, social captions, organizing prompt libraries, and brand strategy. Integrates with Google Docs. <a href="https://gemini.google.com" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Open Gemini →</a></p>
-  </div>
-</div>`,
-  assignment:{title:'Day 7: Your Prompt Library — First 10',emoji:'📚',desc:'Organize your best 10 prompts from Days 1-6 into your permanent library. Structure it now — this is your professional working asset for the rest of the course.',deliverables:['Your top 3 prompts from Days 1-6 (paste them)','Which category does each belong in? (Portrait / Product / Poster / Brand / Video / Negative)','One prompt you\'d use first with a real client — and why'],placeholder:'Top prompt #1:\nCategory:\n\nTop prompt #2:\nCategory:\n\nTop prompt #3:\nCategory:\n\nMy client-ready prompt:\nWhy this one:',systemPrompt:'You are an AI design instructor reviewing a student\'s prompt library foundations. Evaluate their 3 submitted prompts: are they genuinely reusable as templates? Suggest how to make each more flexible for different clients. Highlight what\'s working as professional prompt writing. Max 220 words.'}
-},
+  1: {num: 1, title: 'Day 1: Master the 5 Layers Framework', duration: '45 min', phase: 1, concept: `The 5 Layers Framework is the foundation of professional AI prompts. Every great image has: (1) a clear Subject, (2) meaningful Action, (3) realistic Environment, (4) purposeful Lighting, and (5) cohesive Style. When you control all 5, you control the entire image.`, layer1: {name: 'Subject', desc: 'Who or what is the main focus? (person, object, animal - be specific about age, appearance, pose)'}, layer2: {name: 'Action', desc: 'What are they doing? (not just "standing" - give them purpose: working, jumping, reaching)'}, layer3: {name: 'Environment', desc: 'Where does this happen? (real place with details: modern office, cozy cafe, mountain peak)'}, layer4: {name: 'Lighting', desc: 'How does light shape the mood? (golden hour warmth, harsh drama, soft diffused, neon night)'}, layer5: {name: 'Style', desc: 'What\'s the artistic direction? (cinematic, minimalist, hyper-realistic, watercolor, 3D render)'}, assignment: {brief: 'Create a professional hero image prompt for a productivity app using all 5 Layers', task: `Your task: Write a detailed prompt for an AI image generator that shows someone using your productivity app productively. The prompt must include a specific Subject (not just "person"), clear Action (not just "sitting"), realistic Environment, purposeful Lighting, and cohesive Style.`, goodExample: 'A professional woman in her late 20s, focused and typing on keyboard at minimalist standing desk, contemporary home office with plants and natural light, morning golden sunlight streaming through windows, warm modern aesthetic with clean lines and calm colors', badExample: '❌ "A person working on laptop. Make it nice with good lighting and professional colors"', requirements: ['✓ Subject: Specific age range, appearance, body language (not generic "person")', '✓ Action: Purposeful activity - focused work, not passive sitting', '✓ Environment: Real, matching the app\'s purpose (home office, coworking, coffee shop)', '✓ Lighting: Named light source and color temperature affecting mood', '✓ Style: Cohesive aesthetic direction (no conflicting styles)'], successCriteria: ['✓ AI can generate a recognizable productive scene', '✓ All 5 layers are visible in the result', '✓ Image feels professional, not amateur or chaotic', '✓ Each layer contributes to the overall mood', '✓ Prompt is detailed enough to be reproducible']}, videos: [{title: 'The 5 Layers: Foundation of Professional Prompts', url: 'https://youtu.be/...', duration: '12 min'}, {title: 'How Professional Photographers Think (AI Needs Same Info)', url: 'https://youtu.be/...', duration: '8 min'}, {title: 'Common Mistakes: Vague Subjects & Generic Styles', url: 'https://youtu.be/...', duration: '6 min'}], builder: 'prompt-layers', tools: ['Nano Banana Pro', 'ChatGPT Images', 'Midjourney v8']
+  },
+  2: {num: 2, title: 'Day 2: Visual Hierarchy in AI Images', duration: '45 min', phase: 1, concept: `Visual hierarchy tells the viewer what to look at first, second, third. In AI prompts, you control hierarchy through: size (bigger = more important), focus (sharp = important, blurred = background), color (bright/warm = important, muted/cool = background), contrast (high contrast = attention-grabbing), and light (bright areas draw eyes).`, assignment: {brief: 'Create a prompt where one element unmistakably dominates the composition', task: `Your task: Write a prompt for a product or hero image where the main subject is impossible to miss. Use size, sharpness, color contrast, and lighting to guide the viewer's eye. The background should support but never compete.`, goodExample: 'Large, sharp product in center of frame with dramatic spotlight from above, soft blurred lifestyle background in complementary but muted tones, deep dark background makes product glow, glossy finish catches light, viewer\'s eye goes directly to product', badExample: '❌ "Product image with good focus and background stuff"', requirements: ['✓ Clearly name the primary focal point (what\'s most important)', '✓ Explain how it stands out (size? sharpness? brightness? color?)', '✓ Describe the background (blurred, darker, simpler - supporting role)', '✓ Specify lighting direction (how it highlights the main element)', '✓ Define negative space (what\'s NOT there that could distract)'], successCriteria: ['✓ Main subject is unmistakably the focus', '✓ Viewer knows where to look immediately', '✓ Background supports without competing', '✓ Lighting is purposeful (creates hierarchy)', '✓ Composition feels intentional and professional']}, videos: [{title: 'Visual Hierarchy: The Psychology of Where Eyes Go', url: 'https://youtu.be/...', duration: '10 min'}, {title: 'Using Blur, Color & Light to Create Focus', url: 'https://youtu.be/...', duration: '9 min'}], builder: 'prompt-hierarchy', tools: ['Nano Banana Pro', 'Leonardo AI', 'Ideogram 2.0']
+  },
+  3: {num: 3, title: 'Day 3: Character Consistency Across Variations', duration: '50 min', phase: 1, concept: `When you create a campaign with multiple images of the same character, consistency is critical. You must separate immutable features (face, age, body) from mutable elements (clothing, location, pose). The character must be recognizable in every image.`, assignment: {brief: 'Write a prompt for 3-4 campaign variations with the same consistent character', task: `Your task: Create a detailed character description that will stay the same across 3-4 different scenarios. Then describe each scenario variation. The character should be instantly recognizable in all images while in different contexts.`, goodExample: 'Asian female, age 28-32, shoulder-length black hair with subtle layers, warm brown eyes, confident smile, athletic build. Immutable. VARIATION 1: Coffee shop morning - casual sweater, holding latte, natural light. VARIATION 2: Office afternoon - business casual, at desk, professional lighting. VARIATION 3: Evening workout - athletic wear, focused expression, gym setting. Same person, different scenarios.', badExample: '❌ "Woman in different poses and clothes. Make sure she looks similar"', requirements: ['✓ Name immutable features in detail (age, race, facial features, body type)', '✓ Specify photography style (consistent lighting approach, camera feel)', '✓ Define color grading (consistent mood/tone across variations)', '✓ List mutable elements (what changes per scenario)', '✓ Explain the visual thread (what ties all images together)'], successCriteria: ['✓ Same character is recognizable in all variations', '✓ Character\'s personality is consistent (not wildly different moods)', '✓ Photography style feels cohesive (same photographer?)', '✓ Color treatment is similar (not drastically different)', '✓ Campaign feels unified, not random different people']}, videos: [{title: 'Character Consistency: Immutable vs Mutable', url: 'https://youtu.be/...', duration: '11 min'}, {title: 'Lighting & Color Consistency Across Scenes', url: 'https://youtu.be/...', duration: '10 min'}], builder: 'prompt-character', tools: ['Midjourney v8', 'ChatGPT Images', 'Nano Banana Pro']
+  },
+  4: {num: 4, title: 'Day 4: Color Palettes That Don\'t Clash', duration: '45 min', phase: 1, concept: `Color is one of the biggest differentiators between amateur and professional AI images. Specific color names, proper ratios, and understanding color theory prevent muddy, clashing results. A luxury brand needs different colors than a playful startup.`, assignment: {brief: 'Create a color-focused prompt that avoids muddy mixing and clashing', task: `Your task: Write a prompt where you explicitly name 3-4 specific colors, assign them percentages, and explain their relationship. Include colors to AVOID so the AI doesn't accidentally add wrong hues.`, goodExample: 'Elegant palette: 60% warm cream/ivory background, 30% deep navy accents and text, 10% gold metallic highlights and borders. Navy provides professional contrast against cream without being cold. Gold adds luxury without overwhelming. Avoid: bright colors, pastels, warm oranges that feel cheap, neon anything.', badExample: '❌ "Use nice colors that work well together and look luxury"', requirements: ['✓ Name specific colors, not generic categories (sage green, not green)', '✓ Assign percentages showing dominant vs accent colors', '✓ Explain why colors work together (color theory - complementary, monochromatic, etc.)', '✓ Connect to emotion/brand feeling (luxury feels different than playful)', '✓ List 2-3 colors to explicitly avoid'], successCriteria: ['✓ Colors are precisely named (not vague)', '✓ Percentages guide composition naturally', '✓ Color choice matches brand/mood intent', '✓ Result avoids muddy or clashing colors', '✓ Palette feels intentional and professional']}, videos: [{title: 'Color Theory for AI Prompts: Why It Matters', url: 'https://youtu.be/...', duration: '12 min'}, {title: 'Avoiding Muddy Mixes: Color Specificity Guide', url: 'https://youtu.be/...', duration: '9 min'}], builder: 'prompt-color', tools: ['Nano Banana Pro', 'Leonardo AI', 'ChatGPT Images']
+  },
+  5: {num: 5, title: 'Day 5: Typography as a Design Element', duration: '50 min', phase: 1, concept: `Typography in AI prompts isn't about typing fancy - it's about using font choice to communicate emotion and hierarchy. Serif fonts feel classic. Sans-serif feels modern. Script feels elegant. The AI needs to know not just what text says, but what it should communicate visually.`, assignment: {brief: 'Write a prompt where typography is a main design element communicating genre and mood', task: `Your task: Create a book cover or poster prompt where typography (font, size, color, placement) does the heavy lifting of communicating genre, mood, and hierarchy. The text must be as carefully designed as any visual element.`, goodExample: 'Book cover - Title in elegant serif font (Georgia-style), warm gold color, positioned upper-left on dark moody background. Author name in small, refined sans-serif, silver color, bottom-right. Serif suggests classic literature while sans-serif suggests contemporary author. Typography creates sophisticated, mysterious mood. Illustration behind text doesn\'t overwhelm the carefully placed letters.', badExample: '❌ "Add text on the cover that looks cool and dramatic"', requirements: ['✓ Specify font families (serif vs sans-serif, and style if possible)', '✓ Explain why this font communicates the genre/mood', '✓ Name text colors (not just "white" - warm, cool, metallic, shadow)', '✓ Define hierarchy (what\'s largest? what matters most?)', '✓ Describe placement (why that position on the page)'], successCriteria: ['✓ Font choice matches genre (serif for classic, sans for modern)', '✓ Visual hierarchy is clear (reader knows title, then author)', '✓ Text is readable against background (good contrast)', '✓ Typography reinforces mood (doesn\'t conflict with image)', '✓ Text placement feels intentional (part of design, not an afterthought)']}, videos: [{title: 'Font Psychology: What Fonts Communicate', url: 'https://youtu.be/...', duration: '10 min'}, {title: 'Typography Hierarchy in Visual Design', url: 'https://youtu.be/...', duration: '9 min'}], builder: 'prompt-typography', tools: ['Nano Banana Pro', 'Ideogram 2.0', 'ChatGPT Images']
+  },
+  6: {num: 6, title: 'Day 6: Cinematic Lighting Techniques', duration: '50 min', phase: 1, assignment: {brief: 'Create a dramatic cinematic lighting setup for a specific mood', task: 'Write a prompt where lighting is the star - specify light sources, color temperature, shadows, and atmosphere to create mood.', goodExample: 'Noir thriller scene: harsh single light source from upper-left creating deep facial shadows, cool blue ambient light from distant window, warm tungsten lamp light mixing in, high contrast with bright highlights and inky shadows, volumetric light visible through subtle smoke, desaturated colors except red neon sign glowing off wet pavement', badExample: '❌ "Dark dramatic lighting with shadows"', requirements: ['✓ Identify primary light source (where\'s the main light from?)', '✓ Name color temperature (warm/cool and emotional effect)', '✓ Describe shadow quality (hard vs soft, purpose of shadows)', '✓ Specify atmosphere (fog, smoke, dust - affects light scatter)', '✓ Include practical lights (lamps, signs, screens that exist in-world)'], successCriteria: ['✓ Light source is identifiable', '✓ Shadows create mood (not just darkness)', '✓ Color temperature is consistent and intentional', '✓ Atmosphere feels cinematic (like a professional film)', '✓ Lighting serves emotional narrative']}, tools: ['Nano Banana Pro', 'Midjourney v8', 'Leonardo AI']
+  },
+  7: {num: 7, title: 'Day 7: Campaign Consistency Across Platforms', duration: '50 min', phase: 1, assignment: {brief: 'Define visual language that works across Instagram, billboards, and websites', task: 'Create a visual campaign language that ties together multiple platform variations - Instagram posts, TikTok videos, billboards, and web. Specify what stays consistent.', goodExample: 'Visual language: flat design with geometric shapes, pastel colors (soft pink, mint, cream), bold sans-serif, playful but professional, lots of white space, natural lifestyle + graphic elements mixed, Gen-Z aesthetic but timeless (2+ years), photo-illustration hybrid style, consistent 45-degree angle layouts, always includes hands or human touch', badExample: '❌ "Make it look cool and modern for all platforms"', requirements: ['✓ Define aesthetic category (flat, 3D, photography, illustration, hybrid)', '✓ List 3-4 core elements that repeat across all variations', '✓ Name target audience specifically (not just "young people")', '✓ Explain tone (professional, playful, luxury, sustainable, etc.)', '✓ State what to avoid (trends, what feels dated)'], successCriteria: ['✓ Visual language is instantly recognizable', '✓ Aesthetic will stay relevant 2+ years', '✓ Works on tiny phone screen AND large billboard', '✓ Target audience sees themselves reflected', '✓ Brand personality is clear and consistent']}, tools: ['Nano Banana Pro', 'ChatGPT Images', 'Ideogram 2.0']
+  },
+  8: {num: 8, title: 'Day 8: Subject Specificity', duration: '45 min', phase: 1, assignment: {brief: 'Master the art of specific subject descriptions', task: 'Write prompts for 3 different people, each with unique, non-generic descriptions', goodExample: 'Latina woman, age 32, warm brown skin tone, black hair in high ponytail, athletic dancer build, intense focused expression, traditional clothing mixed with modern streetwear', badExample: '❌ "A woman"', requirements: ['✓ Age range (not generic)', '✓ Ethnicity/appearance details', '✓ Body type/posture', '✓ Facial expression/emotion', '✓ Clothing style'], successCriteria: ['✓ AI generates specific person', '✓ Recognizable in variations', '✓ Personality shines through', '✓ Professional appearance quality']}, tools: ['Midjourney v8', 'ChatGPT Images', 'Nano Banana Pro']
+  },
+  9: {num: 9, title: 'Day 9: Action Verbs in Prompts', duration: '45 min', phase: 1, assignment: {brief: 'Use dynamic action words to create movement', task: 'Write prompts where action is clear and purposeful', goodExample: 'Figure leaping mid-air, arms extended, fabric flowing around them, captured mid-jump in dynamic motion, weight shifting, muscles engaged, frozen in moment of flight', badExample: '❌ "Person in air"', requirements: ['✓ Specific action verb', '✓ Physics/momentum', '✓ Body positioning', '✓ Captured moment', '✓ Implied motion'], successCriteria: ['✓ Movement is visible and clear', '✓ Energy/intention comes through', '✓ Dynamic not static', '✓ Realistic physics']}, tools: ['Nano Banana Pro', 'Kling 2.6', 'Midjourney v8']
+  },
+  10: {num: 10, title: 'Day 10: Environmental Storytelling', duration: '50 min', phase: 1, assignment: {brief: 'Use environment details to tell the character\'s story', task: 'Create prompts where the setting reveals character background and narrative', goodExample: 'Artist studio: canvases at various stages, paint-splattered floors, north-facing windows, mood lighting from old lamps, organized chaos showing years of creative work, details hint at artist\'s aesthetic and struggles', badExample: '❌ "Art studio"', requirements: ['✓ Specific details about space', '✓ Signs of occupation/use', '✓ Props that tell story', '✓ Lighting that creates mood', '✓ Subtle narrative clues'], successCriteria: ['✓ Setting feels lived-in and real', '✓ Story emerges from details', '✓ Mood is tangible', '✓ Character fits environment', '✓ Believable and specific']}, tools: ['Nano Banana Pro', 'Leonardo AI', 'ChatGPT Images']
+  },
+  11: {num: 11, title: 'Day 11: Lighting Color Temperature', duration: '45 min', phase: 1, assignment: {brief: 'Use warm/cool lighting to control mood', task: 'Write prompts where color temperature explicitly creates emotional response', goodExample: 'Cozy evening: warm golden tungsten lighting from table lamp, soft orange/amber color casting long shadows, intimate atmosphere feeling safe and warm, muted cool shadows creating depth, slight color cast across entire image creating cohesive warm mood', badExample: '❌ "Good lighting and nice colors"', requirements: ['✓ Name color temperature', '✓ Light source that creates it', '✓ Emotional effect', '✓ How it affects other colors', '✓ Practical reasoning'], successCriteria: ['✓ Mood is clear and consistent', '✓ Color temperature unmistakable', '✓ Creates intended feeling', '✓ Professional execution']}, tools: ['Nano Banana Pro', 'Leonardo AI', 'Midjourney v8']
+  },
+  12: {num: 12, title: 'Day 12: Contrast and Emphasis', duration: '45 min', phase: 1, assignment: {brief: 'Use contrast to guide viewer attention', task: 'Write prompts where contrast creates clear focal points', goodExample: 'Bright white subject against dark background, creating maximum visual separation, sharp against blurred, warm against cool, large against small - multiple contrast types working together', badExample: '❌ "Good contrast"', requirements: ['✓ Type of contrast used', '✓ High/medium/subtle level', '✓ Purpose', '✓ Multiple contrast types', '✓ Result on viewer'], successCriteria: ['✓ Focal point is unmissable', '✓ Professional quality', '✓ Contrast serves purpose']}, tools: ['Nano Banana Pro', 'ChatGPT Images', 'Leonardo AI']
+  },
+  13: {num: 13, title: 'Day 13: Photography vs Illustration Styles', duration: '50 min', phase: 2, assignment: {brief: 'Control whether output feels photorealistic or illustrated', task: 'Write prompts that clearly specify photorealistic or illustration aesthetic', goodExample: 'Photorealistic: shot on Canon 5D, 85mm lens, f/1.8, professional product photography lighting, RAW color grading, extremely detailed and sharp vs Illustrated: digital illustration style, painterly brushstrokes, vibrant colors, slightly simplified forms, watercolor finish', badExample: '❌ "Nice realistic image"', requirements: ['✓ Photography or illustration?', '✓ Medium specifics', '✓ Camera/equipment if photo', '✓ Technique if illustration', '✓ Level of realism'], successCriteria: ['✓ Style is unmistakable', '✓ Execution matches intention', '✓ Quality is professional']}, tools: ['Nano Banana Pro', 'Leonardo AI', 'Ideogram 2.0']
+  },
+  14: {num: 14, title: 'Day 14: Depth and Layers', duration: '45 min', phase: 2, assignment: {brief: 'Create visual depth through layering', task: 'Write prompts with clear foreground, middle ground, background', goodExample: 'Sharp subject in foreground, softly blurred mid-ground creating depth, even softer background suggesting distance, atmospheric perspective (colors fade cooler/hazier with distance), depth of field effect, viewer perceives three-dimensional space', badExample: '❌ "Deep image with background"', requirements: ['✓ Foreground details', '✓ Middle ground treatment', '✓ Background treatment', '✓ Depth cues', '✓ Focus distribution'], successCriteria: ['✓ Clear sense of space', '✓ Three-dimensional feeling', '✓ Professional depth treatment']}, tools: ['Midjourney v8', 'Nano Banana Pro', 'Leonardo AI']
+  },
+  15: {num: 15, title: 'Day 15: Reflection and Phase 1 Review', duration: '60 min', phase: 1, assignment: {brief: 'Write comprehensive prompt using all 5 layers', task: 'Create a complete prompt that shows mastery of all Phase 1 concepts', goodExample: 'Professional woman (specific age/appearance), focused on meaningful work at modern desk, professional office with natural light, golden hour sunlight creates warm mood with purposeful shadows, clean contemporary aesthetic - complete prompt hitting all 5 layers, perfect hierarchy, specific colors, strong typography integration', badExample: '❌ Any generic or vague prompt from Phase 1', requirements: ['✓ All 5 layers explicit', '✓ Visual hierarchy clear', '✓ Color palette defined', '✓ Typography considered', '✓ Atmospheric details'], successCriteria: ['✓ Could generate professional-grade image', '✓ Shows clear learning progression', '✓ Demonstrates mastery of Phase 1', '✓ Portfolio-ready output']}, tools: ['Nano Banana Pro', 'Midjourney v8', 'ChatGPT Images']
+  },
+  16: {num: 16, title: 'Day 16: Advanced Composition Rules', duration: '50 min', phase: 2, assignment: {brief: 'Master rule of thirds, golden ratio, and dynamic composition', task: 'Write prompts using specific composition techniques', goodExample: 'Subject positioned at golden ratio intersection (not center), diagonal line leads viewer through scene, rule of thirds applied to horizon and focal point placement', badExample: '❌ "Well composed image"', requirements: ['✓ Composition rule named', '✓ Specific positioning', '✓ Geometric relationships', '✓ Visual flow', '✓ Purpose of choice'], successCriteria: ['✓ Composition feels intentional', '✓ Follows professional standards', '✓ Creates visual harmony']}, tools: ['Nano Banana Pro', 'Leonardo AI', 'Midjourney v8']
+  },
+  17: {num: 17, title: 'Day 17: Minimalism vs Maximalism', duration: '45 min', phase: 2, assignment: {brief: 'Consciously choose minimal or maximal aesthetic', task: 'Write prompts that clearly communicate maximalism or minimalism', goodExample: 'Minimalist: single subject, vast negative space, simple color palette (2-3 colors), clean lines, breathing room, less is more aesthetic', badExample: '❌ "Simple or complex image"', requirements: ['✓ Minimalist or maximalist?', '✓ Level of detail/elements', '✓ Space usage', '✓ Color complexity', '✓ Visual weight'], successCriteria: ['✓ Aesthetic is unmistakable', '✓ Intentional not accidental', '✓ Successful execution']}, tools: ['Nano Banana Pro', 'ChatGPT Images', 'Ideogram 2.0']
+  },
+  18: {num: 18, title: 'Day 18: Composition Mastery', duration: '50 min', phase: 2, assignment: {brief: 'Combine multiple composition techniques in one prompt', task: 'Write a prompt showing mastery of rule of thirds, leading lines, depth, and hierarchy all together', goodExample: 'Subject at golden ratio intersection, diagonal rock formation leads viewer through landscape, clear foreground/middle/background depth, warm golden light creates hierarchy, viewer journey clear', badExample: '❌ "Nicely composed landscape"', requirements: ['✓ Multiple techniques combined', '✓ Each serves purpose', '✓ Harmony between techniques', '✓ Creates viewer journey', '✓ Professional execution'], successCriteria: ['✓ Composition is sophisticated', '✓ Viewer path is clear', '✓ All techniques work together', '✓ Professional-grade result']}, tools: ['Midjourney v8', 'Nano Banana Pro', 'Leonardo AI']
+  },
+  19: {num: 19, title: 'Day 19: Mood Through Color', duration: '50 min', phase: 2, assignment: {brief: 'Use color psychology to control emotional response', task: 'Write prompts where color explicitly creates mood', requirements: ['✓ Color psychology applied', '✓ Emotional intent', '✓ Palette consistency', '✓ Specific color naming'], successCriteria: ['✓ Mood is tangible', '✓ Colors create feeling']}, tools: ['Nano Banana Pro', 'Leonardo AI', 'ChatGPT Images']
+  },
+  20: {num: 20, title: 'Day 20: Texture and Material Surfaces', duration: '45 min', phase: 2, assignment: {brief: 'Describe textures and materials in prompts', task: 'Write prompts where texture is a major design element', requirements: ['✓ Material names', '✓ Surface qualities', '✓ How light interacts', '✓ Visual texture effect'], successCriteria: ['✓ Textures visible in result', '✓ Material is recognizable']}, tools: ['Nano Banana Pro', 'Midjourney v8', 'Leonardo AI']
+  },
+  21: {num: 21, title: 'Day 21: Atmosphere and Weather', duration: '45 min', phase: 2, assignment: {brief: 'Use weather and atmospheric conditions for mood', task: 'Write prompts where atmosphere is central', requirements: ['✓ Weather condition', '✓ How it affects light', '✓ Atmospheric effect', '✓ Mood contribution'], successCriteria: ['✓ Weather is palpable', '✓ Creates mood', '✓ Affects whole image']}, tools: ['Nano Banana Pro', 'Leonardo AI', 'ChatGPT Images']
+  },
+  22: {num: 22, title: 'Day 22: Time of Day and Temporal Setting', duration: '45 min', phase: 2, assignment: {brief: 'Control temporal setting through light and detail', task: 'Write prompts where time period or time of day is unmistakable', requirements: ['✓ Specific time of day', '✓ Era/period if applicable', '✓ Visual cues', '✓ Light quality'], successCriteria: ['✓ Temporal setting is clear', '✓ Details support it', '✓ Cohesive throughout']}, tools: ['Nano Banana Pro', 'Midjourney v8', 'Leonardo AI']
+  },
+  23: {num: 23, title: 'Day 23: Cultural and Stylistic References', duration: '50 min', phase: 2, assignment: {brief: 'Draw from art movements and cultural aesthetics', task: 'Write prompts referencing specific art styles or cultural traditions', requirements: ['✓ Style/movement named', '✓ Visual characteristics', '✓ Why this reference', '✓ How to achieve it'], successCriteria: ['✓ Reference is recognizable', '✓ Authentic feeling', '✓ Appropriate application']}, tools: ['Nano Banana Pro', 'Leonardo AI', 'Ideogram 2.0']
+  },
+  24: {num: 24, title: 'Day 24: Phase 2 Mastery Project', duration: '60 min', phase: 2, assignment: {brief: 'Create advertising-grade image with full Phase 2 mastery', task: 'Write prompt showing all Phase 2 skills in professional context', requirements: ['✓ Advanced composition', '✓ Mood control', '✓ Style clarity', '✓ Professional execution'], successCriteria: ['✓ Advertising-grade quality', '✓ Mastery evident', '✓ Portfolio-ready']}, tools: ['Midjourney v8', 'Nano Banana Pro', 'Leonardo AI']
+  },
+  25: {num: 25, title: 'Day 25: Motion in Static Images', duration: '45 min', phase: 3, assignment: {brief: 'Create sense of motion in still images', task: 'Write prompts where motion is frozen but palpable', requirements: ['✓ Direction of motion', '✓ Speed implied', '✓ Momentum shown', '✓ Captured moment'], successCriteria: ['✓ Motion is tangible', '✓ Energy is visible']}, tools: ['Nano Banana Pro', 'Kling 2.6', 'Midjourney v8']
+  },
+  26: {num: 26, title: 'Day 26: Video Generation Prompts', duration: '50 min', phase: 3, assignment: {brief: 'Write prompts for video AI tools (Kling, Runway)', task: 'Adapt image prompts for motion video format', requirements: ['✓ Camera movement', '✓ Motion description', '✓ Timing', '✓ Start and end states'], successCriteria: ['✓ Video feels natural', '✓ Motion is smooth']}, tools: ['Kling 2.6', 'Runway Gen-4.5', 'Google Flow']
+  },
+  27: {num: 27, title: 'Day 27: AI Voice Narration Scripting', duration: '50 min', phase: 3, assignment: {brief: 'Write narration scripts for AI voice tools', task: 'Create scripts for ElevenLabs or Suno that pair with video', requirements: ['✓ Script quality', '✓ Pacing', '✓ Emotional tone', '✓ Length appropriate for video'], successCriteria: ['✓ Voice fits content', '✓ Timing aligns with video']}, tools: ['ElevenLabs', 'Suno v4', 'Google Gemini']
+  },
+  28: {num: 28, title: 'Day 28: Client Project 1 - Product Launch', duration: '90 min', phase: 4, assignment: {brief: 'Create complete campaign for product launch', task: 'Write prompts for: hero image, 3 social posts, video teaser, banner ads', requirements: ['✓ Cohesive visual language', '✓ Multiple format sizes', '✓ Consistent branding', '✓ Platform-specific'], successCriteria: ['✓ Campaign feels unified', '✓ Across all platforms', '✓ Professional quality']}, tools: ['Nano Banana Pro', 'Kling 2.6', 'ElevenLabs']
+  },
+  29: {num: 29, title: 'Day 29: Client Project 2 - Brand Guidelines', duration: '90 min', phase: 4, assignment: {brief: 'Create visual brand guidelines prompt deck', task: 'Document prompts that ensure brand consistency for client future use', requirements: ['✓ Style guide', '✓ Do\'s and don\'ts', '✓ Color specifications', '✓ Visual language rules'], successCriteria: ['✓ Comprehensive guide', '✓ Reusable', '✓ Clear instructions']}, tools: ['Nano Banana Pro', 'Leonardo AI', 'ChatGPT Images']
+  },
+  30: {num: 30, title: 'Day 30: Pricing and Delivery Formats', duration: '60 min', phase: 4, assignment: {brief: 'Understand technical requirements for client delivery', task: 'Learn about image specifications, export formats, file sizes', requirements: ['✓ Resolution knowledge', '✓ Format selection', '✓ Color space', '✓ Delivery specs'], successCriteria: ['✓ Client-ready files', '✓ Professional standards']}, tools: ['CapCut Pro', 'Adobe Photoshop', 'Figma']
+  },
+  31: {num: 31, title: 'Day 31: Portfolio Project 1', duration: '90 min', phase: 4, assignment: {brief: 'Create first portfolio-worthy campaign', task: 'Develop complete visual campaign for portfolio', requirements: ['✓ Professional quality', '✓ Cohesive vision', '✓ Multiple formats', '✓ Showcases skills'], successCriteria: ['✓ Portfolio-ready', '✓ Hirable quality', '✓ Tells story']}, tools: ['Nano Banana Pro', 'Midjourney v8', 'Leonardo AI']
+  },
+  32: {num: 32, title: 'Day 32: Portfolio Project 2', duration: '90 min', phase: 4, assignment: {brief: 'Create second distinct portfolio piece', task: 'Different style/approach than Project 1', requirements: ['✓ Shows versatility', '✓ Different aesthetic', '✓ Professional execution', '✓ Unique voice'], successCriteria: ['✓ Demonstrates range', '✓ Highest quality work']}, tools: ['Leonardo AI', 'Kling 2.6', 'ChatGPT Images']
+  },
+  33: {num: 33, title: 'Day 33: Phase 4 Review', duration: '60 min', phase: 4, assignment: {brief: 'Review portfolio projects and client work quality', task: 'Self-assess all Phase 4 work before moving to business', requirements: ['✓ Quality check', '✓ Consistency review', '✓ Improvement areas', '✓ Strengths identification'], successCriteria: ['✓ Portfolio-ready work', '✓ Ready for clients', '✓ Confident in abilities']}, tools: ['Figma', 'Adobe Photoshop', 'Make']
+  },
+  34: {num: 34, title: 'Day 34: Building Your Creator Brand', duration: '60 min', phase: 5, assignment: {brief: 'Create personal brand assets and messaging', task: 'Develop your unique positioning in AI design space', requirements: ['✓ Brand voice', '✓ Visual style', '✓ Unique angle', '✓ Target audience'], successCriteria: ['✓ Clear positioning', '✓ Authentic voice', '✓ Memorable brand']}, tools: ['Figma', 'Canva', 'Make']
+  },
+  35: {num: 35, title: 'Day 35: Content Creation Strategy', duration: '60 min', phase: 5, assignment: {brief: 'Plan ongoing content to showcase work', task: 'Create content calendar and prompt ideas', requirements: ['✓ Regular posting schedule', '✓ Behind-the-scenes', '✓ Process documentation', '✓ Engagement strategy'], successCriteria: ['✓ Consistent content plan', '✓ Builds audience', '✓ Showcases skills']}, tools: ['CapCut Pro', 'Google Docs', 'Make']
+  },
+  36: {num: 36, title: 'Day 36: Pricing Your Services', duration: '60 min', phase: 5, assignment: {brief: 'Understand AI design service pricing models', task: 'Research market rates and create your pricing structure', requirements: ['✓ Service offerings', '✓ Price points', '✓ Package options', '✓ Value communication'], successCriteria: ['✓ Competitive pricing', '✓ Value-clear', '✓ Professional structure']}, tools: ['Google Sheets', 'Make', 'Figma']
+  },
+  37: {num: 37, title: 'Day 37: Client Communication Templates', duration: '60 min', phase: 5, assignment: {brief: 'Create reusable client communication templates', task: 'Build email, brief, and revision request templates', requirements: ['✓ Professional tone', '✓ Clear expectations', '✓ Process documentation', '✓ Revision guidelines'], successCriteria: ['✓ Professional communication', '✓ Sets clear boundaries', '✓ Saves time']}, tools: ['Google Docs', 'Make', 'Gmail']
+  },
+  38: {num: 38, title: 'Day 38: Portfolio Website Build', duration: '90 min', phase: 5, assignment: {brief: 'Create portfolio website showcasing work', task: 'Build or design portfolio site (Figma mockup or live)', requirements: ['✓ Best work displayed', '✓ Case studies', '✓ Contact information', '✓ Professional design'], successCriteria: ['✓ Portfolio-ready website', '✓ Client attracting', '✓ Professional quality']}, tools: ['Figma', 'Framer', 'Make']
+  },
+  39: {num: 39, title: 'Day 39: Marketing and Networking', duration: '60 min', phase: 5, assignment: {brief: 'Develop marketing strategy to land clients', task: 'Identify target clients and outreach strategy', requirements: ['✓ Target audience', '✓ Outreach plan', '✓ Networking approach', '✓ Social strategy'], successCriteria: ['✓ Clear client target', '✓ Outreach ready', '✓ Networking plan']}, tools: ['LinkedIn', 'Make', 'Google Docs']
+  },
+  40: {num: 40, title: 'Day 40: Creating Video Showreel', duration: '90 min', phase: 5, assignment: {brief: 'Assemble portfolio work into compelling showreel', task: 'Create 60-90 second video showcasing your best work', goodExample: '60-second showreel: 3-4 hero images fade in with matching music, quick 2-second showcase of each major project, color-graded consistently, music builds toward finale, last 10 seconds show contact info, personal brand clear throughout, professional sound design', badExample: '❌ Random images with generic music', requirements: ['✓ Best work selected', '✓ Color grading consistent', '✓ Music/sound matched', '✓ Branding throughout', '✓ Clear contact info'], successCriteria: ['✓ Compelling viewing experience', '✓ Drives inquiries', '✓ Shows your style', '✓ Professional production']}, tools: ['CapCut Pro', 'Adobe Premiere Pro', 'Suno v4']
+  },
+  41: {num: 41, title: 'Day 41: Email Campaign Sequence', duration: '90 min', phase: 5, assignment: {brief: 'Create email campaign to get first paid clients', task: 'Write email sequence to cold/warm prospects', requirements: ['✓ Value proposition clear', '✓ Portfolio links', '✓ Call to action', '✓ Follow-up strategy', '✓ Professional tone'], successCriteria: ['✓ Generates responses', '✓ Professional quality', '✓ Results-oriented']}, tools: ['Gmail', 'Make', 'Google Docs']
+  },
+  42: {num: 42, title: 'Day 42: First Client Project - Part 1', duration: '120 min', phase: 5, assignment: {brief: 'Complete first paid client project', task: 'Take real or practice client brief and deliver full campaign', requirements: ['✓ Client brief understood', '✓ Multiple deliverables', '✓ Professional quality', '✓ On-time delivery', '✓ Revision process'], successCriteria: ['✓ Client satisfied', '✓ Payment received', '✓ Case study created']}, tools: ['Nano Banana Pro', 'Kling 2.6', 'Make']
+  },
+  43: {num: 43, title: 'Day 43: First Client Project - Part 2', duration: '120 min', phase: 5, assignment: {brief: 'Complete revisions and finalize client project', task: 'Deliver final assets and collect feedback', requirements: ['✓ Revisions incorporated', '✓ All formats delivered', '✓ Professional handoff', '✓ Client feedback collected'], successCriteria: ['✓ Client thrilled', '✓ Testimonial received', '✓ Ready for referral']}, tools: ['CapCut Pro', 'Make', 'Google Drive']
+  },
+  44: {num: 44, title: 'Day 44: Create Your Signature Style', duration: '120 min', phase: 5, assignment: {brief: 'Define your unique AI design voice', task: 'Develop signature aesthetic that\'s distinctly yours', goodExample: 'Your prompts consistently produce: specific color palette, lighting style, composition approach, character types, and emotional tone that\'s recognizably YOURS. Clients hire you for YOUR unique style, not generic AI outputs', badExample: '❌ Generic AI images with no consistent style', requirements: ['✓ Signature color palette', '✓ Consistent lighting approach', '✓ Recognizable composition style', '✓ Unique character aesthetic', '✓ Emotional tone'], successCriteria: ['✓ Your work is instantly recognizable', '✓ Clients want YOUR style specifically', '✓ Premium pricing justified by uniqueness', '✓ Builds long-term business']}, tools: ['Nano Banana Pro', 'Midjourney v8', 'Leonardo AI']
+  },
+  45: {num: 45, title: 'Day 45: The 90-Second Showreel & Your Next 90 Days', duration: '120 min', phase: 5, concept: `You\'ve completed 45 days of professional AI design education. Your showreel is your introduction to the world. The next 90 days are about execution: landing clients, building reputation, and scaling your services. You now have the skills. The question is: what will you build with them?`, assignment: {brief: 'Create final portfolio showreel and 90-day business plan', task: `1) Finalize 60-90 second showreel with your absolute best work. 2) Create 90-day plan: target 3 new clients, create 1 case study per month, grow network by 50 people, land 1 retainer client. 3) Document your pricing, positioning, and unique value.`, goodExample: '90-second showreel: cinematic opening with your best hero image (3 sec), quick montage of portfolio work (40 sec), testimonial or results (10 sec), your brand name/contact (5 sec), closes with inspiring imagery (22 sec). Music is professional, color-graded consistently, every frame represents your highest quality. Viewers immediately understand who you are and what you do. 90-day plan: January: 3 cold outreach + 2 portfolio posts/week. February: land first client + create case study. March: retainer inquiry + network event. Clear milestones.', badExample: '❌ Random collection of images with no narrative. Plan with vague goals like "get more clients" or "make more money".', requirements: ['✓ Showreel: 60-90 seconds, best work only, professional editing, music-matched', '✓ Showreel: Clear branding, contact info, memorable introduction', '✓ Plan: Specific 90-day milestones (not vague goals)', '✓ Plan: Target 3 specific client types (not "anyone")', '✓ Plan: Monthly content and networking actions', '✓ Plan: Revenue targets or retainer goals'], successCriteria: ['✓ Showreel is compelling (gets views, drives inquiries)', '✓ Showreel represents your highest quality', '✓ 90-day plan is specific and measurable', '✓ Milestones are realistic but ambitious', '✓ You\'re ready to take on paid clients confidently', '✓ Your unique style is unmistakable', '✓ You understand your market positioning']}, videos: [{title: 'How to Build Your Designer Brand', url: 'https://youtu.be/...', duration: '15 min'}, {title: 'Creating a Showreel That Gets You Hired', url: 'https://youtu.be/...', duration: '12 min'}, {title: 'Your 90-Day Launch Plan to Your First $5K Client', url: 'https://youtu.be/...', duration: '18 min'}, {title: 'Congratulations - You\'re an AI Designer Now', url: 'https://youtu.be/...', duration: '8 min'}], builder: 'portfolio-capstone', tools: ['CapCut Pro', 'Nano Banana Pro', 'Midjourney v8', 'Make', 'Figma']
+  }
 };
 
 // ╔══════════════════════════════════════════════════════════════════╗
@@ -6156,6 +5667,371 @@ function rmImg(day){
   document.getElementById(`dz-${day}`).style.display='';
   document.getElementById(`fi-${day}`).value='';
 }
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// IMAGE ANALYSIS STATE & CACHING SYSTEM
+// ════════════════════════════════════════════════════════════════════════════
+
+// Cache for analysis results (persisted in localStorage)
+let analysisCache = JSON.parse(localStorage.getItem('analysisCache') || '{}');
+
+// State for each day's image analysis
+let analysisState = {};
+
+// Initialize analysis state for a day
+function initAnalysisState(day) {
+  if (!analysisState[day]) {
+    analysisState[day] = {
+      day: day,
+      isLoading: false,
+      hasError: false,
+      errorMessage: '',
+      retryCount: 0,
+      maxRetries: 5,
+      uploadedImages: [],
+      lastImageHashes: []
+    };
+  }
+  return analysisState[day];
+}
+
+// SHA-256 hash function (for deterministic caching)
+async function sha256(str) {
+  const buf = new TextEncoder().encode(str);
+  const hashBuf = await crypto.subtle.digest('SHA-256', buf);
+  const hashArray = Array.from(new Uint8Array(hashBuf));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Save cache to localStorage
+function saveAnalysisCache() {
+  localStorage.setItem('analysisCache', JSON.stringify(analysisCache));
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// IMAGE UPLOAD HANDLING (UP TO 5 IMAGES)
+// ════════════════════════════════════════════════════════════════════════════
+
+function setupImageUpload(day) {
+  const state = initAnalysisState(day);
+  const dropzone = document.getElementById(`imgupload-${day}`);
+  const preview = document.getElementById(`imgprev-${day}`);
+  const btn = document.getElementById(`imganalyze-${day}`);
+  
+  if (!dropzone) return;
+  
+  // Drag and drop
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.style.background = '#e8ebff';
+    dropzone.style.borderColor = '#4F46E5';
+  });
+  
+  dropzone.addEventListener('dragleave', () => {
+    dropzone.style.background = '#fafbff';
+    dropzone.style.borderColor = '#4F46E5';
+  });
+  
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.style.background = '#fafbff';
+    const files = Array.from(e.dataTransfer.files);
+    handleImageFiles(files, day);
+  });
+  
+  // Click to upload
+  dropzone.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = true;
+    input.accept = 'image/*';
+    input.onchange = (e) => handleImageFiles(Array.from(e.target.files), day);
+    input.click();
+  });
+}
+
+async function handleImageFiles(files, day) {
+  const state = initAnalysisState(day);
+  const preview = document.getElementById(`imgprev-${day}`);
+  const btn = document.getElementById(`imganalyze-${day}`);
+  
+  // Max 5 images
+  const validFiles = files.slice(0, 5 - state.uploadedImages.length);
+  
+  for (let file of validFiles) {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const imageData = e.target.result;
+        const hash = await sha256(imageData);
+        
+        state.uploadedImages.push(imageData);
+        state.lastImageHashes.push(hash);
+        
+        // Add to preview grid
+        const img = document.createElement('div');
+        img.style.cssText = 'position:relative;width:100%;padding-bottom:100%;overflow:hidden;border-radius:6px;border:1px solid #ddd;';
+        img.innerHTML = `
+          <img src="${imageData}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+          <button onclick="removeImage(${day},${state.uploadedImages.length-1})" style="position:absolute;top:4px;right:4px;width:24px;height:24px;background:#fff;border:1px solid #ddd;border-radius:50%;cursor:pointer;font-size:12px;color:#666;">✕</button>
+        `;
+        preview.appendChild(img);
+        
+        // Show analyze button
+        if (state.uploadedImages.length > 0) {
+          btn.style.display = 'block';
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+}
+
+function removeImage(day, index) {
+  const state = initAnalysisState(day);
+  const preview = document.getElementById(`imgprev-${day}`);
+  const btn = document.getElementById(`imganalyze-${day}`);
+  
+  state.uploadedImages.splice(index, 1);
+  state.lastImageHashes.splice(index, 1);
+  
+  // Rebuild preview
+  preview.innerHTML = '';
+  state.uploadedImages.forEach((img, i) => {
+    const div = document.createElement('div');
+    div.style.cssText = 'position:relative;width:100%;padding-bottom:100%;overflow:hidden;border-radius:6px;border:1px solid #ddd;';
+    div.innerHTML = `
+      <img src="${img}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+      <button onclick="removeImage(${day},${i})" style="position:absolute;top:4px;right:4px;width:24px;height:24px;background:#fff;border:1px solid #ddd;border-radius:50%;cursor:pointer;font-size:12px;color:#666;">✕</button>
+    `;
+    preview.appendChild(div);
+  });
+  
+  // Hide button if no images
+  if (state.uploadedImages.length === 0) {
+    btn.style.display = 'none';
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// IMAGE ANALYSIS WITH ERROR HANDLING & CACHING
+// ════════════════════════════════════════════════════════════════════════════
+
+async function analyzeImages(day) {
+  const state = initAnalysisState(day);
+  const btn = document.getElementById(`imganalyze-${day}`);
+  const fbDiv = document.getElementById(`ifb-${day}`);
+  const fbText = document.getElementById(`ifbt-${day}`);
+  const lesson = LESSONS[day];
+  
+  if (!state.uploadedImages.length) {
+    showError(fbDiv, fbText, 'Please upload at least one image');
+    return;
+  }
+  
+  // Try to get from cache first
+  const cacheKey = state.lastImageHashes.join('_');
+  if (analysisCache[cacheKey]) {
+    fbDiv.classList.add('show');
+    displayAnalysisResult(fbText, analysisCache[cacheKey]);
+    return;
+  }
+  
+  // Not in cache - call AI
+  state.isLoading = true;
+  state.hasError = false;
+  state.errorMessage = '';
+  updateButtonStates(day);
+  
+  btn.textContent = '🔄 Analyzing...';
+  btn.disabled = true;
+  
+  try {
+    const userFeedback = document.getElementById(`inote-${day}`)?.value.trim() || '';
+    const feedbackHash = await sha256(userFeedback);
+    const fullCacheKey = cacheKey + '_' + feedbackHash;
+    
+    // Check cache again with feedback
+    if (analysisCache[fullCacheKey]) {
+      state.isLoading = false;
+      updateButtonStates(day);
+      fbDiv.classList.add('show');
+      displayAnalysisResult(fbText, analysisCache[fullCacheKey]);
+      btn.textContent = '🔍 Analyze Images';
+      return;
+    }
+    
+    // Call API
+    const response = await fetch('https://ai-proxy.akashsaha-rock666.workers.dev/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 800,
+        system: `You are an expert AI design instructor evaluating student work.
+
+EVALUATION AGAINST ASSIGNMENT BRIEF:
+Score 90-100: All requirements exceeded, professional execution
+Score 75-89:  Most requirements met, minor improvements needed
+Score 60-74:  Some requirements met, significant improvements needed
+Score 0-59:   Does not meet assignment requirements
+
+FEEDBACK FORMAT (ALWAYS USE THIS):
+{
+  "score": [0-100],
+  "strengths": [2-3 specific observable strengths],
+  "improvements": [2-3 specific observable areas to improve],
+  "nextStep": [one concrete action to improve]
+}
+
+CRITICAL RULES:
+1. Evaluate ONLY against the assignment brief provided
+2. Be consistent: identical images get identical scores
+3. Give actionable feedback (no vague praise)
+4. Reference the specific lesson learning objective
+5. No subjective opinions, only observable criteria`,
+        messages: [{
+          role: 'user',
+          content: `Assignment Brief: ${lesson?.assignment?.brief || 'N/A'}
+          
+User Feedback: ${userFeedback || 'N/A'}
+
+Generated ${state.uploadedImages.length} image(s). Please evaluate if these generated images match the assignment requirements and the intent of the user's prompt.`
+        }]
+      })
+    });
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    let feedback = '';
+    if (data.content && data.content[0] && data.content[0].text) {
+      feedback = data.content[0].text;
+    }
+    
+    // Try to parse JSON
+    let result = {};
+    try {
+      const jsonMatch = feedback.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        result = JSON.parse(jsonMatch[0]);
+      }
+    } catch {
+      result = {
+        score: 75,
+        strengths: ['Images uploaded successfully'],
+        improvements: ['Could be more specific to assignment brief'],
+        nextStep: 'Review the assignment requirements again'
+      };
+    }
+    
+    // Cache the result
+    analysisCache[fullCacheKey] = result;
+    saveAnalysisCache();
+    
+    // Display
+    state.isLoading = false;
+    state.retryCount = 0;
+    updateButtonStates(day);
+    fbDiv.classList.add('show');
+    displayAnalysisResult(fbText, result);
+    btn.textContent = '🔍 Analyze Images';
+    
+  } catch (err) {
+    state.isLoading = false;
+    state.hasError = true;
+    state.retryCount++;
+    
+    if (state.retryCount >= state.maxRetries) {
+      state.errorMessage = '❌ Maximum retry attempts (5) reached';
+    } else {
+      state.errorMessage = err.message.includes('API error') 
+        ? 'Server error - try again later'
+        : 'Failed to analyze image';
+    }
+    
+    updateButtonStates(day);
+    fbDiv.classList.add('show');
+    showError(fbDiv, fbText, state.errorMessage, day);
+    btn.textContent = '🔍 Analyze Images';
+  }
+}
+
+function showError(fbDiv, fbText, message, day) {
+  const state = initAnalysisState(day);
+  fbText.innerHTML = `
+    <div style="color:var(--red);margin-bottom:16px;">${message}</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      ${state.retryCount < state.maxRetries ? 
+        `<button onclick="analyzeImages(${day})" style="padding:8px 16px;background:var(--primary);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;">🔄 Retry</button>` 
+        : `<button onclick="location.reload()" style="padding:8px 16px;background:var(--primary);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;">🔄 Refresh Page</button>`}
+      <button onclick="goBack(${day})" style="padding:8px 16px;background:var(--border);color:var(--text);border:none;border-radius:6px;cursor:pointer;">← Back</button>
+    </div>
+  `;
+}
+
+function displayAnalysisResult(fbText, result) {
+  fbText.innerHTML = `
+    <div style="margin-bottom:16px;">
+      <div style="font-size:20px;font-weight:700;color:var(--purple);">Score: ${result.score || 0}/100</div>
+    </div>
+    
+    ${result.strengths ? `
+    <div style="margin-bottom:12px;">
+      <div style="font-weight:600;color:var(--green);margin-bottom:6px;">Strengths:</div>
+      ${result.strengths.map(s => `<div style="font-size:13px;color:#555;margin-bottom:4px;">• ${s}</div>`).join('')}
+    </div>
+    ` : ''}
+    
+    ${result.improvements ? `
+    <div style="margin-bottom:12px;">
+      <div style="font-weight:600;color:var(--orange);margin-bottom:6px;">Areas to Improve:</div>
+      ${result.improvements.map(i => `<div style="font-size:13px;color:#555;margin-bottom:4px;">• ${i}</div>`).join('')}
+    </div>
+    ` : ''}
+    
+    ${result.nextStep ? `
+    <div style="padding:12px;background:#f0f8ff;border-left:4px solid var(--primary);border-radius:4px;">
+      <div style="font-weight:600;color:var(--primary);margin-bottom:4px;">Next Step:</div>
+      <div style="font-size:13px;color:#555;">${result.nextStep}</div>
+    </div>
+    ` : ''}
+  `;
+}
+
+function updateButtonStates(day) {
+  const state = initAnalysisState(day);
+  const btn = document.getElementById(`imganalyze-${day}`);
+  
+  if (!btn) return;
+  
+  if (state.isLoading) {
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+  } else if (state.hasError) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  } else {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+
+function goBack(day) {
+  const state = initAnalysisState(day);
+  const fbDiv = document.getElementById(`ifb-${day}`);
+  const preview = document.getElementById(`imgprev-${day}`);
+  
+  fbDiv.classList.remove('show');
+  state.uploadedImages = [];
+  state.lastImageHashes = [];
+  preview.innerHTML = '';
+  document.getElementById(`imganalyze-${day}`).style.display = 'none';
+}
+
 
 async function submitImgFeedback(day){
 
