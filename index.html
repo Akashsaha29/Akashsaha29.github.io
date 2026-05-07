@@ -596,6 +596,24 @@ body {
 }
 .assign-title { font-size:18px; font-weight:800; color:var(--text); }
 .assign-desc { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:20px; }
+.assign-intro { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:16px; }
+.assign-example {
+  border-radius:10px; padding:14px 18px; margin-bottom:12px; font-size:13.5px; line-height:1.75;
+}
+.good-example {
+  background:#f0fdf4; border:1.5px solid #bbf7d0; color:#14532d;
+}
+.bad-example {
+  background:#fff1f2; border:1.5px solid #fecdd3; color:#7f1d1d;
+}
+.example-label {
+  font-size:12px; font-weight:800; letter-spacing:0.04em;
+  text-transform:uppercase; margin-bottom:8px;
+  display:flex; align-items:center; gap:6px;
+}
+.good-example .example-label { color:#16a34a; }
+.bad-example .example-label  { color:#dc2626; }
+.example-body { font-size:13.5px; line-height:1.75; }
 
 .deliverables-grid { display:flex; flex-direction:column; gap:8px; margin-bottom:24px; }
 .deliverable-row {
@@ -676,6 +694,57 @@ body {
 .drop-icon { font-size:36px; margin-bottom:8px; }
 .drop-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:4px; }
 .drop-sub { font-size:12px; color:var(--muted); }
+/* ─── MULTI-IMAGE UPLOAD UI ──────────────────────────────────── */
+.multi-upload-zone {
+  border:2px dashed var(--border2); border-radius:var(--radius);
+  background:var(--bg); transition:all 0.2s; overflow:hidden;
+}
+.multi-upload-zone.over { border-color:var(--primary); background:var(--primary-light); }
+.multi-upload-zone.has-images { border-style:solid; border-color:var(--border); }
+.multi-imgs-grid {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:8px;
+  padding:12px;
+}
+.multi-img-cell {
+  position:relative; padding-bottom:100%; border-radius:8px; overflow:hidden;
+  border:1.5px solid var(--border); background:var(--bg2);
+  cursor:pointer; transition:border-color 0.2s;
+}
+.multi-img-cell:hover { border-color:var(--primary); }
+.multi-img-cell img {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+}
+.multi-img-cell .cell-remove {
+  position:absolute; top:4px; right:4px; width:22px; height:22px;
+  background:rgba(0,0,0,0.65); color:#fff; border:none; border-radius:50%;
+  cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity 0.15s; z-index:2;
+}
+.multi-img-cell:hover .cell-remove { opacity:1; }
+.multi-img-cell .cell-add {
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:4px;
+  color:var(--muted); font-size:10px; font-weight:600;
+}
+.multi-img-cell .cell-add span { font-size:22px; color:var(--border2); line-height:1; }
+.multi-upload-empty {
+  padding:28px 20px; text-align:center;
+}
+.multi-upload-footer {
+  border-top:1px solid var(--border); padding:8px 14px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg2); font-size:12px; color:var(--muted);
+}
+.multi-upload-footer .add-more-btn {
+  display:flex; align-items:center; gap:5px;
+  background:var(--primary); color:#fff; border:none;
+  border-radius:6px; padding:5px 12px; font-size:12px; font-weight:700;
+  cursor:pointer; position:relative; overflow:hidden;
+}
+.multi-upload-footer .add-more-btn input {
+  position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;
+}
+
 
 .img-preview-box {
   display:none; border-radius:var(--radius); overflow:hidden;
@@ -4827,6 +4896,27 @@ function buildDashboard(){
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  LESSON BUILD                                                    ║
 // ╚══════════════════════════════════════════════════════════════════╝
+
+// ─── FORMAT ASSIGNMENT DESCRIPTION INTO RICH HTML ─────────────────
+function formatAssignDesc(raw){
+  if(!raw) return '';
+  // Split on good/bad markers
+  const goodSplit = raw.split(/\n\n✅/);
+  const intro = goodSplit[0].replace(/\n/g,'<br>');
+  let goodHtml = '', badHtml = '';
+  if(goodSplit.length > 1){
+    const rest = goodSplit[1]; // everything after ✅
+    const badSplit = rest.split(/\n\n❌/);
+    const goodText = badSplit[0].replace(/\n/g,'<br>');
+    goodHtml = '<div class="assign-example good-example"><div class="example-label">✅ Good Example</div><div class="example-body">'+goodText+'</div></div>';
+    if(badSplit.length > 1){
+      const badText = badSplit[1].replace(/\n/g,'<br>');
+      badHtml = '<div class="assign-example bad-example"><div class="example-label">❌ Common Mistake</div><div class="example-body">'+badText+'</div></div>';
+    }
+  }
+  return '<div class="assign-intro">'+intro+'</div>'+goodHtml+badHtml;
+}
+
 function buildLesson(day){
   const lesson=LESSONS[day];
   if(!lesson)return;
@@ -4904,7 +4994,13 @@ function buildLesson(day){
       </a>`;}).join('')}</div>`:'<p style="color:var(--muted)">Inspiration links for this day will be added soon.</p>';
 
   // Build deliverables
-  const delivs=lesson.assignment.deliverables.map(d=>`<div class="deliverable-row"><span class="chk">▸</span><span>${d}</span></div>`).join('');
+  const delivs=lesson.assignment.deliverables.map((d,i)=>{
+    // Make first deliverable reference 'the assignment details above' instead of repeating them
+    const text = i===0 ? d.replace(/using all 5 layers/g,'using all 5 layers from the brief above')
+                          .replace(/Write a full prompt/g,'Write your prompt')
+                        : d;
+    return `<div class="deliverable-row"><span class="chk">▸</span><span>${text}</span></div>`;
+  }).join('');
 
   const toolChips=lesson.tools.map(t=>`<span class="meta-chip tool">🛠 ${t}</span>`).join('');
   const tagChips=(lesson.tags||[]).map(t=>`<span class="meta-chip">${t}</span>`).join('');
@@ -4931,7 +5027,7 @@ function buildLesson(day){
           <div class="assign-icon">${lesson.assignment.emoji}</div>
           <div><div class="assign-label">📌 Day ${day} Assignment</div><div class="assign-title">${lesson.assignment.title}</div></div>
         </div>
-        <div class="assign-desc">${lesson.assignment.desc}</div>
+        <div class="assign-desc">${formatAssignDesc(lesson.assignment.desc)}</div>
         <div class="deliverables-grid">${delivs}</div>
         <div class="submit-label">Your Written Submission</div>
         <textarea class="submit-textarea" id="sub-${day}" placeholder="${lesson.assignment.placeholder}"></textarea>
@@ -4949,19 +5045,30 @@ function buildLesson(day){
     Upload the image made for this assignment. AI will check if it matches the brief, score it, and tell you exactly what to fix.
   </div>
 
-  <div class="drop-zone" id="dz-${day}" ondragover="dzOver(event,${day})" ondragleave="dzLeave(${day})" ondrop="dzDrop(event,${day})">
-    <input type="file" id="fi-${day}" accept="image/*" onchange="dzFile(event,${day})" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;">
-    <div class="drop-icon">📥</div>
-    <div class="drop-title">Drop your image here</div>
-    <div class="drop-sub">PNG, JPG, WEBP supported · Click or drag & drop</div>
+  <div class="multi-upload-zone" id="dz-${day}"
+       ondragover="muDragOver(event,'${day}')"
+       ondragleave="muDragLeave('${day}')"
+       ondrop="muDrop(event,'${day}')">
+    <!-- EMPTY STATE -->
+    <div class="multi-upload-empty" id="mu-empty-${day}">
+      <div class="drop-icon">📥</div>
+      <div class="drop-title">Drop images here or click + to add</div>
+      <div class="drop-sub">PNG, JPG, WEBP · Up to 5 images</div>
+      <input type="file" accept="image/*" multiple
+             onchange="muAdd(event,'${day}')"
+             style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;">
+    </div>
+    <!-- IMAGES GRID (shown when images added) -->
+    <div class="multi-imgs-grid" id="mu-grid-${day}" style="display:none;"></div>
+    <!-- FOOTER -->
+    <div class="multi-upload-footer" id="mu-footer-${day}" style="display:none;">
+      <span id="mu-count-${day}">0 / 5 images</span>
+      <button class="add-more-btn" id="mu-addbtn-${day}">
+        <input type="file" accept="image/*" multiple onchange="muAdd(event,'${day}')">
+        ＋ Add More
+      </button>
+    </div>
   </div>
-
-  <div class="img-preview-box" id="ipb-${day}">
-    <img id="ipr-${day}" src="" alt="Preview">
-    <button class="remove-img" onclick="rmImg(${day})">✕ Remove</button>
-  </div>
-
-  <div id="multi-prev-${day}" style="display:none;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px;"></div>
 
   <div class="img-note">
     <div class="submit-label">What do you want feedback on? (optional)</div>
@@ -5813,8 +5920,8 @@ function setImgpMode(btn){
   const submitBtn=document.getElementById('imgp-btn');
   if(submitBtn) submitBtn.textContent=`${labels[imgpMode] || '🖼 Generate Prompt from Image'}`;
 }
-function dzOver2(e){e.preventDefault();document.getElementById('imgp-dz').classList.add('over');}
-function dzLeave2(){document.getElementById('imgp-dz').classList.remove('over');}
+function dzOver2(e){e.preventDefault();const z=document.getElementById('imgp-dz');if(z){z.classList.add('over');z.querySelector('.drop-title').textContent='Drop to upload';}}
+function dzLeave2(){const z=document.getElementById('imgp-dz');if(z){z.classList.remove('over');const t=z.querySelector('.drop-title');if(t)t.textContent='Drop product/character image here';}}
 function dzDrop2(e){e.preventDefault();dzLeave2();const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))loadImgP(f);}
 function imgpFile(e){const f=e.target.files[0];if(f)loadImgP(f);}
 function loadImgP(file){
@@ -6048,80 +6155,99 @@ function buildSavedView(){
 // ║  ASSIGNMENT SUBMISSION                                           ║
 // ╚══════════════════════════════════════════════════════════════════╝
 async function submitAssignment(day){
-  const input = document.getElementById(`sub-${day}`);
-  const btn   = document.getElementById(`sbtn-${day}`);
-  const fb    = document.getElementById(`fb-${day}`);
-  const fbt   = document.getElementById(`fbt-${day}`);
+  const input  = document.getElementById('sub-'+day);
+  const btn    = document.getElementById('sbtn-'+day);
+  const fb     = document.getElementById('fb-'+day);
+  const fbt    = document.getElementById('fbt-'+day);
+  const lesson = LESSONS?.[day];
 
   const submission = input.value.trim();
 
-  if (!submission || submission.length < 20) {
-    fbt.innerHTML = '<span style="color:var(--red)">Please write a more detailed submission.</span>';
+  if(!submission || submission.length < 20){
+    fbt.innerHTML = '<span style="color:var(--red)">Please write a more detailed submission before getting feedback.</span>';
+    fb.classList.add('show');
+    return;
+  }
+
+  if(!lesson || !lesson.assignment){
+    fbt.innerHTML = '<span style="color:var(--red)">Assignment data missing for this day.</span>';
     fb.classList.add('show');
     return;
   }
 
   btn.disabled = true;
   btn.textContent = 'Getting feedback...';
-
   fb.classList.add('show');
+  fbt.innerHTML = '<div style="display:flex;align-items:center;gap:10px;"><div class="loading-dots"><span></span><span></span><span></span></div><span style="color:var(--muted);font-size:13px;">AI instructor is reviewing your prompt...</span></div>';
 
-  fbt.innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div class="loading-dots">
-        <span></span><span></span><span></span>
-      </div>
-      <span style="color:var(--muted);font-size:13px;">
-        AI instructor is reviewing your work...
-      </span>
-    </div>
-  `;
+  // Build strict assignment-specific system prompt
+  const systemPrompt = lesson.assignment.systemPrompt ||
+    'You are a strict senior AI prompt engineering instructor. Review the student submission against the specific assignment requirements. Be direct, specific, and actionable.';
 
-  try {
+  const assignContext = `ASSIGNMENT: ${lesson.assignment.title}
+
+WHAT WAS REQUIRED:
+${lesson.assignment.desc.replace(/✅[\s\S]*?(?=❌|$)/,'').replace(/❌[\s\S]*/,'').trim()}
+
+SPECIFIC DELIVERABLES REQUIRED:
+${lesson.assignment.deliverables.map((d,i)=>(i+1)+'. '+d).join('\n')}`;
+
+  try{
     const res = await aiCall({
-        model: "openrouter/auto",
-        messages: [
-    {
-      role: "system",
-      content: `You are a senior AI design instructor.
+      model:'openrouter/auto',
+      messages:[
+        {
+          role:'system',
+          content: systemPrompt + `
 
-Give sharp, structured, no-fluff feedback.
+CRITICAL RULES:
+- Evaluate ONLY against this specific assignment — not general design quality
+- Reference the specific deliverables the student was asked to complete
+- Be strict: if a deliverable is missing, call it out by name
+- If the student pasted a prompt, evaluate it layer by layer
+- Keep feedback under 200 words total
+- End with a score X/10 based on how many deliverables were completed
 
-STRICT FORMAT:
+OUTPUT FORMAT:
+Assignment Match: [percentage of deliverables completed]
 
-Strengths:
-- ...
+What you did well:
+- [specific to this assignment]
 
-Weaknesses:
-- ...
+What is missing or weak:
+- [reference specific deliverables they missed]
 
-Improvements:
-- ...
+How to improve:
+- [actionable, specific to this prompt/assignment]
 
-Score: X/10
+Score: X/10`
+        },
+        {
+          role:'user',
+          content: assignContext + '\n\nSTUDENT SUBMISSION:\n' + submission
+        }
+      ]
+    });
 
-Be practical, honest, and actionable.`
-    },
-    {
-      role: "user",
-      content: `Student Submission:
-
-${submission}`}]});
-     
     const data = res;
-
     const text = data?.choices?.[0]?.message?.content || data?.content?.[0]?.text || '';
+    if(!text) throw new Error('Empty response');
 
-    if (!text) throw new Error("Invalid AI response");
-
-    fbt.innerHTML = text.replace(/\n/g, '<br>');
+    fbt.innerHTML = '<div style="line-height:1.8;font-size:13.5px;">'
+      + text.replace(/\n/g,'<br>')
+            .replace(/Assignment Match:/g,'<strong style="color:var(--primary);">Assignment Match:</strong>')
+            .replace(/What you did well:/g,'<br><strong style="color:#16a34a;">What you did well:</strong>')
+            .replace(/What is missing or weak:/g,'<br><strong style="color:#dc2626;">What is missing or weak:</strong>')
+            .replace(/How to improve:/g,'<br><strong style="color:#7c3aed;">How to improve:</strong>')
+            .replace(/Score:/g,'<br><strong style="font-size:15px;">Score:</strong>')
+      + '</div>';
 
     btn.textContent = '✦ Resubmit for More Feedback';
     btn.disabled = false;
 
-  } catch (e) {
+  }catch(e){
     console.error(e);
-    fbt.innerHTML = '<span style="color:var(--red)">❌ AI error. Check console.</span>';
+    fbt.innerHTML = '<span style="color:var(--red)">❌ Could not get feedback. Try again.</span>';
     btn.textContent = '✦ Retry';
     btn.disabled = false;
   }
@@ -6152,25 +6278,17 @@ function getAnalysisState(day){
   return analysisState[day];
 }
 
-// ─── MULTI-IMAGE UPLOAD HANDLERS (added v7) ───────────────────────────────
-function setupMultiImageUpload(day){
-  const dz = document.getElementById('dz-'+day);
-  if(!dz || dz.dataset.multiSetup) return;
-  dz.dataset.multiSetup = '1';
-  dz.addEventListener('dragover', e=>{e.preventDefault();dz.classList.add('over');});
-  dz.addEventListener('dragleave', ()=>dz.classList.remove('over'));
-  dz.addEventListener('drop', e=>{
-    e.preventDefault(); dz.classList.remove('over');
-    addImagesToDay(Array.from(e.dataTransfer.files), day);
-  });
-}
+// ─── MULTI-IMAGE UPLOAD HANDLERS v8 ─────────────────────────────────────────
+function muDragOver(e, day){ e.preventDefault(); const z=document.getElementById('dz-'+day); if(z) z.classList.add('over'); }
+function muDragLeave(day){ const z=document.getElementById('dz-'+day); if(z) z.classList.remove('over'); }
+function muDrop(e, day){ e.preventDefault(); muDragLeave(day); muAdd({target:{files:e.dataTransfer.files}}, day); }
 
-async function addImagesToDay(files, day){
+async function muAdd(e, day){
   const st = getAnalysisState(day);
-  const preview = document.getElementById('multi-prev-'+day);
-  const btn = document.getElementById('isbtn-'+day);
-  const validFiles = files.filter(f=>f.type.startsWith('image/')).slice(0, 5 - st.uploadedImages.length);
-  for(const file of validFiles){
+  const files = Array.from(e.target.files||[]).filter(f=>f.type.startsWith('image/'));
+  const slots = 5 - st.uploadedImages.length;
+  const toAdd = files.slice(0, slots);
+  for(const file of toAdd){
     await new Promise(res=>{
       const r = new FileReader();
       r.onload = async ev=>{
@@ -6178,52 +6296,58 @@ async function addImagesToDay(files, day){
         const hash = await sha256Hash(data);
         st.uploadedImages.push(data);
         st.imageHashes.push(hash);
-        renderMultiPreview(day);
         res();
       };
       r.readAsDataURL(file);
     });
   }
-  if(st.uploadedImages.length > 0 && btn){
-    // Also keep legacy single-image support working
-    imgData[day] = st.uploadedImages[0];
-    const ipr = document.getElementById('ipr-'+day);
-    const ipb = document.getElementById('ipb-'+day);
-    if(ipr) ipr.src = st.uploadedImages[0];
-    if(ipb) ipb.classList.add('show');
-  }
+  // Also keep legacy imgData in sync
+  if(st.uploadedImages.length > 0) imgData[day] = st.uploadedImages[0];
+  muRender(day);
+  // reset file input so same file can be re-added after remove
+  if(e.target) e.target.value='';
 }
 
-function renderMultiPreview(day){
+function muRender(day){
   const st = getAnalysisState(day);
-  const container = document.getElementById('multi-prev-'+day);
-  if(!container) return;
-  container.innerHTML = '';
-  if(st.uploadedImages.length === 0){ container.style.display='none'; return; }
-  container.style.display = 'grid';
-  st.uploadedImages.forEach((img,i)=>{
-    const cell = document.createElement('div');
-    cell.style.cssText = 'position:relative;width:100%;padding-bottom:100%;border-radius:6px;overflow:hidden;border:1px solid var(--border)';
-    cell.innerHTML = '<img src="'+img+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">'
-      +'<button onclick="removeMultiImage('+day+','+i+')" style="position:absolute;top:3px;right:3px;width:20px;height:20px;background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;cursor:pointer;font-size:10px;line-height:20px;text-align:center;">✕</button>';
-    container.appendChild(cell);
-  });
+  const empty = document.getElementById('mu-empty-'+day);
+  const grid  = document.getElementById('mu-grid-'+day);
+  const footer= document.getElementById('mu-footer-'+day);
+  const count = document.getElementById('mu-count-'+day);
+  const zone  = document.getElementById('dz-'+day);
+  const n = st.uploadedImages.length;
+  if(!grid) return;
+  if(n === 0){
+    if(empty) empty.style.display='';
+    grid.style.display = 'none';
+    if(footer) footer.style.display = 'none';
+    if(zone) zone.classList.remove('has-images');
+    return;
+  }
+  if(empty) empty.style.display = 'none';
+  grid.style.display = '';
+  if(footer){ footer.style.display=''; }
+  if(count) count.textContent = n+' / 5 image'+(n!==1?'s':'');
+  if(zone) zone.classList.add('has-images');
+  // Hide add-more button if at limit
+  const addBtn = document.getElementById('mu-addbtn-'+day);
+  if(addBtn) addBtn.style.display = n >= 5 ? 'none' : '';
+  // Render grid cells
+  grid.innerHTML = st.uploadedImages.map((img,i)=>`
+    <div class="multi-img-cell" onclick="void(0)">
+      <img src="${img}" alt="Image ${i+1}">
+      <button class="cell-remove" onclick="muRemove('${day}',${i})" title="Remove">✕</button>
+    </div>
+  `).join('');
 }
 
-function removeMultiImage(day, index){
+function muRemove(day, index){
   const st = getAnalysisState(day);
   st.uploadedImages.splice(index,1);
   st.imageHashes.splice(index,1);
-  if(st.uploadedImages.length > 0){
-    imgData[day] = st.uploadedImages[0];
-  } else {
-    delete imgData[day];
-    const ipb = document.getElementById('ipb-'+day);
-    if(ipb) ipb.classList.remove('show');
-    const dz = document.getElementById('dz-'+day);
-    if(dz) dz.style.display='';
-  }
-  renderMultiPreview(day);
+  if(st.uploadedImages.length > 0){ imgData[day]=st.uploadedImages[0]; }
+  else { delete imgData[day]; }
+  muRender(day);
 }
 let imgMode='overall composition, visual balance, and professional quality';
 
@@ -6236,12 +6360,10 @@ function dzOver(e,day){e.preventDefault();document.getElementById(`dz-${day}`).c
 function dzLeave(day){document.getElementById(`dz-${day}`).classList.remove('over');}
 function dzDrop(e,day){
   e.preventDefault(); dzLeave(day);
-  const files=Array.from(e.dataTransfer.files).filter(f=>f.type.startsWith('image/'));
-  if(files.length>0){ loadImg(files[0],day); addImagesToDay(files,day); }
+  muAdd({target:{files:e.dataTransfer.files}}, day);
 }
 function dzFile(e,day){
-  const files=Array.from(e.target.files);
-  if(files.length>0){ loadImg(files[0],day); addImagesToDay(files,day); }
+  muAdd(e, day);
 }
 function loadImg(file,day){
   const r=new FileReader();
