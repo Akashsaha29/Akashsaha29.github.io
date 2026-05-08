@@ -597,6 +597,7 @@ body {
 .assign-title { font-size:18px; font-weight:800; color:var(--text); }
 .assign-desc { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:20px; }
 .assign-intro { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:16px; }
+.assign-examples-block { margin-bottom:20px; }
 .assign-example {
   border-radius:10px; padding:14px 18px; margin-bottom:12px; font-size:13.5px; line-height:1.75;
 }
@@ -698,6 +699,7 @@ body {
 .multi-upload-zone {
   border:2px dashed var(--border2); border-radius:var(--radius);
   background:var(--bg); transition:all 0.2s; overflow:hidden;
+  position:relative;
 }
 .multi-upload-zone.over { border-color:var(--primary); background:var(--primary-light); }
 .multi-upload-zone.has-images { border-style:solid; border-color:var(--border); }
@@ -727,8 +729,17 @@ body {
   color:var(--muted); font-size:10px; font-weight:600;
 }
 .multi-img-cell .cell-add span { font-size:22px; color:var(--border2); line-height:1; }
+.multi-img-cell.add-slot {
+  border:2px dashed var(--border2); background:var(--bg);
+  cursor:pointer; transition:all 0.2s;
+}
+.multi-img-cell.add-slot:hover {
+  border-color:var(--primary); background:var(--primary-light);
+}
+.multi-img-cell.add-slot:hover .cell-add { color:var(--primary); }
+.multi-img-cell.add-slot:hover .cell-add span { color:var(--primary); }
 .multi-upload-empty {
-  padding:28px 20px; text-align:center;
+  padding:28px 20px; text-align:center; position:relative; cursor:pointer;
 }
 .multi-upload-footer {
   border-top:1px solid var(--border); padding:8px 14px;
@@ -743,6 +754,7 @@ body {
 }
 .multi-upload-footer .add-more-btn input {
   position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;
+  z-index:2;
 }
 
 
@@ -4900,21 +4912,27 @@ function buildDashboard(){
 // ─── FORMAT ASSIGNMENT DESCRIPTION INTO RICH HTML ─────────────────
 function formatAssignDesc(raw){
   if(!raw) return '';
-  // Split on good/bad markers
+  // Only return the intro paragraph (before the first ✅)
   const goodSplit = raw.split(/\n\n✅/);
   const intro = goodSplit[0].replace(/\n/g,'<br>');
-  let goodHtml = '', badHtml = '';
-  if(goodSplit.length > 1){
-    const rest = goodSplit[1]; // everything after ✅
-    const badSplit = rest.split(/\n\n❌/);
-    const goodText = badSplit[0].replace(/\n/g,'<br>');
-    goodHtml = '<div class="assign-example good-example"><div class="example-label">✅ Good Example</div><div class="example-body">'+goodText+'</div></div>';
-    if(badSplit.length > 1){
-      const badText = badSplit[1].replace(/\n/g,'<br>');
-      badHtml = '<div class="assign-example bad-example"><div class="example-label">❌ Common Mistake</div><div class="example-body">'+badText+'</div></div>';
-    }
+  return '<div class="assign-intro">'+intro+'</div>';
+}
+
+// Returns the good/bad example blocks to show AFTER deliverables
+function formatAssignExamples(raw){
+  if(!raw) return '';
+  const goodSplit = raw.split(/\n\n✅/);
+  if(goodSplit.length < 2) return '';
+  const rest = goodSplit[1];
+  const badSplit = rest.split(/\n\n❌/);
+  const goodText = badSplit[0].replace(/\n/g,'<br>');
+  const goodHtml = '<div class="assign-example good-example"><div class="example-label">✅ Good Example</div><div class="example-body">'+goodText+'</div></div>';
+  let badHtml = '';
+  if(badSplit.length > 1){
+    const badText = badSplit[1].replace(/\n/g,'<br>');
+    badHtml = '<div class="assign-example bad-example"><div class="example-label">❌ Common Mistake</div><div class="example-body">'+badText+'</div></div>';
   }
-  return '<div class="assign-intro">'+intro+'</div>'+goodHtml+badHtml;
+  return goodHtml + badHtml;
 }
 
 function buildLesson(day){
@@ -5029,6 +5047,7 @@ function buildLesson(day){
         </div>
         <div class="assign-desc">${formatAssignDesc(lesson.assignment.desc)}</div>
         <div class="deliverables-grid">${delivs}</div>
+        <div class="assign-examples-block">${formatAssignExamples(lesson.assignment.desc)}</div>
         <div class="submit-label">Your Written Submission</div>
         <textarea class="submit-textarea" id="sub-${day}" placeholder="${lesson.assignment.placeholder}"></textarea>
         <button class="submit-btn" id="sbtn-${day}" onclick="submitAssignment(${day})">✦ Submit for AI Instructor Feedback</button>
@@ -5050,23 +5069,22 @@ function buildLesson(day){
        ondragleave="muDragLeave('${day}')"
        ondrop="muDrop(event,'${day}')">
     <!-- EMPTY STATE -->
-    <div class="multi-upload-empty" id="mu-empty-${day}">
+    <label class="multi-upload-empty" id="mu-empty-${day}" for="mu-fi-${day}">
       <div class="drop-icon">📥</div>
-      <div class="drop-title">Drop images here or click + to add</div>
+      <div class="drop-title">Drop images here or click to add</div>
       <div class="drop-sub">PNG, JPG, WEBP · Up to 5 images</div>
-      <input type="file" accept="image/*" multiple
-             onchange="muAdd(event,'${day}')"
-             style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;">
-    </div>
+    </label>
+    <input type="file" id="mu-fi-${day}" accept="image/*" multiple
+           onchange="muAdd(event,'${day}')"
+           style="display:none;">
     <!-- IMAGES GRID (shown when images added) -->
     <div class="multi-imgs-grid" id="mu-grid-${day}" style="display:none;"></div>
     <!-- FOOTER -->
     <div class="multi-upload-footer" id="mu-footer-${day}" style="display:none;">
       <span id="mu-count-${day}">0 / 5 images</span>
-      <button class="add-more-btn" id="mu-addbtn-${day}">
-        <input type="file" accept="image/*" multiple onchange="muAdd(event,'${day}')">
+      <label class="add-more-btn" id="mu-addbtn-${day}" for="mu-fi-${day}">
         ＋ Add More
-      </button>
+      </label>
     </div>
   </div>
 
@@ -6332,13 +6350,18 @@ function muRender(day){
   // Hide add-more button if at limit
   const addBtn = document.getElementById('mu-addbtn-'+day);
   if(addBtn) addBtn.style.display = n >= 5 ? 'none' : '';
-  // Render grid cells
+  // Render grid cells + add-more slot
+  const addSlot = n < 5
+    ? `<label class="multi-img-cell add-slot" for="mu-fi-${day}" title="Add more images">
+        <div class="cell-add"><span>＋</span>Add</div>
+       </label>`
+    : '';
   grid.innerHTML = st.uploadedImages.map((img,i)=>`
-    <div class="multi-img-cell" onclick="void(0)">
+    <div class="multi-img-cell">
       <img src="${img}" alt="Image ${i+1}">
       <button class="cell-remove" onclick="muRemove('${day}',${i})" title="Remove">✕</button>
     </div>
-  `).join('');
+  `).join('') + addSlot;
 }
 
 function muRemove(day, index){
