@@ -5122,31 +5122,17 @@ function buildLesson(day){
   updateTopbar(); window.scrollTo(0,0);
 }
 
-function switchLearnTab(btn, panelId){
+function switchLearnTab(btn,panelId){
+  document.querySelectorAll('#lesson-tabs-bar .ltab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.lesson-panel').forEach(p=>p.style.display='none');
 
-  // remove active state
-  document.querySelectorAll('#lesson-tabs-bar .ltab')
-    .forEach(t => t.classList.remove('active'));
-
-  // hide all panels
-  document.querySelectorAll('.lesson-panel')
-    .forEach(p => p.style.display = 'none');
-
-  // activate clicked tab
   btn.classList.add('active');
 
-  // show target panel
   const el = document.getElementById(`panel-${panelId}`);
-
   if(el){
     el.style.display = 'block';
-
-    // smooth correct reposition
     requestAnimationFrame(() => {
-      el.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 }
