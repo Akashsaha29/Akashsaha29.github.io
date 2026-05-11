@@ -5042,7 +5042,7 @@ function buildLesson(day){
       </div>
     </div>
 
-    <div id="panel-lesson-${day}" class="lesson-panel">${lesson.content}</div>
+    <div id="panel-lesson-${day}" class="lesson-panel"></div>
     <div id="panel-refs-${day}" class="lesson-panel" style="display:none;">${refsHtml}</div>
     <div id="panel-videos-${day}" class="lesson-panel" style="display:none;">${videosHtml}</div>
     <div id="panel-inspo-${day}" class="lesson-panel" style="display:none;">${inspoHtml}</div>
@@ -5112,6 +5112,11 @@ function buildLesson(day){
       ${done?`<div style="text-align:center;padding:12px 16px;color:var(--green);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px;">✅ Day ${day} complete <button onclick="unmarkDone(${day})" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;border:1px solid #ef4444;background:none;color:#ef4444;cursor:pointer;margin-left:4px;">↩ Undo</button></div>`:''}
     </div>`;
 
+  // Inject lesson HTML into the lesson panel after scaffold render.
+  // This prevents malformed lesson markup from escaping into sibling panels.
+  const lessonPanelEl=document.getElementById(`panel-lesson-${day}`);
+  if(lessonPanelEl) lessonPanelEl.innerHTML=lesson.content;
+
   // Nav bar
   document.getElementById('lesson-nav-bar').innerHTML=`
     <button class="nav-btn" onclick="goToDay(${prevDay})" ${!prevDay?'disabled':''}>← Day ${prevDay||'-'}</button>
@@ -5124,16 +5129,13 @@ function buildLesson(day){
 
 function switchLearnTab(btn,panelId){
   document.querySelectorAll('#lesson-tabs-bar .ltab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.lesson-panel').forEach(p=>p.style.display='none');
-
+  const contentArea=document.getElementById('lesson-content-area');
+  if(contentArea) contentArea.querySelectorAll('.lesson-panel').forEach(p=>p.style.display='none');
   btn.classList.add('active');
-
-  const el = document.getElementById(`panel-${panelId}`);
+  const el=document.getElementById(`panel-${panelId}`);
   if(el){
-    el.style.display = 'block';
-    requestAnimationFrame(() => {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    el.style.display='block';
+    el.scrollIntoView({behavior:'smooth',block:'start'});
   }
 }
 
